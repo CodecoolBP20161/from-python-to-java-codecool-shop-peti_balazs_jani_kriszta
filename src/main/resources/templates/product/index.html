@@ -36,6 +36,10 @@
 <div class="container">
     <div class="well well-sm">
         <strong th:text="${category.name}">Category Title</strong>
+        <a th:href="${'/category/2'}">Hey</a>
+        <select>
+            <option th:each="supp,iterStat : ${supplier}" th:id="${supp.id}" th:text="${supp.name}">Supplier name</option>
+        </select>
     </div>
 
     <div id="products" class="row list-group">
