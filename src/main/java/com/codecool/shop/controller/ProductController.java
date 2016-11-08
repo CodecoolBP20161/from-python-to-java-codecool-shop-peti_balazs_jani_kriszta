@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     public static ModelAndView renderByCategory(Request req, Response res){
-        String id = req.params("id");
+        int id = Integer.parseInt(req.params("id"));
         String type = req.params("type");
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -38,9 +38,12 @@ public class ProductController {
         Map params = new HashMap();
         params.put("categories", productCategoryDataStore.getAll());
         if (type.equals("category")){
-            params.put("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(id))));
+            params.put("products", productDataStore.getBy(productCategoryDataStore.find(id)));
+            params.put("title", productCategoryDataStore.find(id).getName());
+
         }else if(type.equals("supplier")){
-            params.put("products", productDataStore.getBy(supplierDataStore.find(Integer.parseInt(id))));
+            params.put("products", productDataStore.getBy(supplierDataStore.find(id)));
+            params.put("title", supplierDataStore.find(id).getName());
         }
         params.put("supplier", supplierDataStore.getAll());
         return new ModelAndView(params, "product/index");

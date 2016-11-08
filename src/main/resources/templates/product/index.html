@@ -30,10 +30,11 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1 id="codecool"><a th:href="${'/'}">Codecool Shop</a></h1>
 </div>
 
 <div class="container">
+    <h1 th:text="${title}"></h1>
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by
             <span class="caret"></span></button>
@@ -41,6 +42,7 @@
             <li class="dropdown-header">Categories</li>
             <li><a th:each="cat,iterStat : ${categories}" th:href="${'/category/'+cat.id}" th:text="${cat.name}"></a>
             </li>
+           <hr/>
             <li class="dropdown-header">Supplier</li>
             <li><a th:each="sup,iterStat : ${supplier}" th:href="${'/supplier/'+sup.id}" th:text="${sup.name}"></a></li>
         </ul>
@@ -69,9 +71,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 </body>
 </html>
