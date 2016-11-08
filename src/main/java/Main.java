@@ -59,7 +59,7 @@ public class Main {
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Przewalski 2.0", 1500, "USD", "A rare and endangered subspecies of wild horse (Equus ferus) native to the steppes of central Asia", horse, rohan));
-        productDataStore.add(new Product("Samsung Note7", 450, "USD", "Samsung's fiercest smartphone so far. Samsung designed with that intrepid spirit in mind", smartphone, samsung));
+        productDataStore.add(new Product("Samsung Note7", 450, "USD", "Samsung's fiercest smartphone so far. Designed with that intrepid spirit in mind", smartphone, samsung));
         productDataStore.add(new Product("Sony LED TV", 250, "USD", "Lose yourself in ultra contrast. It will take your breath away.", tv, sony));
         productDataStore.add(new Product("Amazon Kindle", 79.9f, "USD", "High Resolution Display with Next-Gen Built-in Light. With WiFi", tablet, amazon));
         productDataStore.add(new Product("Pampa", 900, "USD", "The Pampa Horse is a horse breed that combines the characteristics of Brazilian Horses.", horse, rohan));
