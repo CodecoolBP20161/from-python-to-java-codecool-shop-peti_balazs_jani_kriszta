@@ -24,7 +24,7 @@ public class Main {
         populateData();
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/category/:id", ProductController::renderByCategory, new ThymeleafTemplateEngine());
+        get("/:type/:id", ProductController::renderByCategory, new ThymeleafTemplateEngine());
 
         get("/hello", (req, res) -> "Hello World");
 

@@ -21,7 +21,7 @@ public class ProductController {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         Map params = new HashMap<>();
-        params.put("category", productCategoryDataStore.find(1));
+        params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
         return new ModelAndView(params, "product/index");
@@ -29,16 +29,20 @@ public class ProductController {
 
     public static ModelAndView renderByCategory(Request req, Response res){
         String id = req.params("id");
+        String type = req.params("type");
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         Map params = new HashMap();
-        params.put("category", productCategoryDataStore.find(1));
-        params.put("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(id))));
+        params.put("categories", productCategoryDataStore.getAll());
+        if (type.equals("category")){
+            params.put("products", productDataStore.getBy(productCategoryDataStore.find(Integer.parseInt(id))));
+        }else if(type.equals("supplier")){
+            params.put("products", productDataStore.getBy(supplierDataStore.find(Integer.parseInt(id))));
+        }
         params.put("supplier", supplierDataStore.getAll());
-        System.out.println(params.values());
         return new ModelAndView(params, "product/index");
     }
 
