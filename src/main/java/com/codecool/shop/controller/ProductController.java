@@ -10,7 +10,9 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductController {
@@ -21,10 +23,16 @@ public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
 
+        List<Integer> counter = new ArrayList<>();
+        counter.add(1);
+        counter.add(2);
+        counter.add(3);
+
         Map params = new HashMap<>();
         params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
+        params.put("counter", counter.size());
         return new ModelAndView(params, "product/index");
     }
 

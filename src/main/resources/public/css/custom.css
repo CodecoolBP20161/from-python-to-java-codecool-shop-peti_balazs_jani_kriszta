@@ -80,3 +80,37 @@ hr {
     text-decoration: none;
 }
 
+
+.menu {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.left {
+    float: left;
+    margin-top: 20px;
+    font-size: 1.4em;
+}
+
+.right {
+    float: right;
+    margin-bottom: 10px;
+    /*position: absolute;*/
+}
+
+#items-counter {
+
+    width: 1.5em;
+    font-size: 1.3em;
+    text-align: center;
+    margin: 0 0 0 0;
+    display: inline-block;
+    border-radius: 100%;
+    color: white;
+    background-color: orangered;
+    vertical-align: middle;
+
+
+.fa-shopping-cart {
+    /*position: relative;*/
+}

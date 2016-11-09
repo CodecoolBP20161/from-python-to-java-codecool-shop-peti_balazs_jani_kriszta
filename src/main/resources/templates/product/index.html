@@ -24,10 +24,23 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <script src="https://use.fontawesome.com/dec0e9e92b.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
 </head>
 
 <body>
+<div class="container">
+    <ul class="list-inline">
+        <li class="menu left" ><a href="#">All Products</a></li>
+        <li class="menu right">
+            <a id="shopping-cart" href="#">
+                <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
+                <p id="items-counter" th:text="${counter}"></p>
+            </a>
+        </li>
+    </ul>
+</div>
 
 <div class="jumbotron text-center">
     <h1 id="codecool"><a th:href="${'/'}">Codecool Shop</a></h1>
@@ -54,7 +67,7 @@
         <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="thumbnail">
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                     th:attr="src='/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}"/>
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
                     <p class="group inner list-group-item-text" th:text="${prod.description}">Product
