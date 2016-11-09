@@ -15,10 +15,11 @@ import java.util.Map;
 
 public class ProductController {
 
+    static ProductDao productDataStore = ProductDaoMem.getInstance();
+    static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+
     public static ModelAndView renderProducts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         Map params = new HashMap<>();
         params.put("categories", productCategoryDataStore.getAll());
@@ -31,9 +32,9 @@ public class ProductController {
         int id = Integer.parseInt(req.params("id"));
         String type = req.params("type");
 
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         Map params = new HashMap();
         params.put("categories", productCategoryDataStore.getAll());
