@@ -21,4 +21,8 @@ public class Order {
     public List getLineItems() {
         return lineItems;
     }
+    @Override
+    public String toString(){
+        return "id: "+this.id+" Line Items: "+this.lineItems;
+    }
 }
