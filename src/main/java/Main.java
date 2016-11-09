@@ -16,6 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ThymeleafTemplateEngine tmp = new ThymeleafTemplateEngine();
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
@@ -23,8 +24,8 @@ public class Main {
 
         populateData();
 
-        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/:type/:id", ProductController::renderByCategory, new ThymeleafTemplateEngine());
+        get("/", ProductController::renderProducts, tmp);
+        get("/:type/:id", ProductController::renderByCategory, tmp);
 
         get("/hello", (req, res) -> "Hello World");
 
