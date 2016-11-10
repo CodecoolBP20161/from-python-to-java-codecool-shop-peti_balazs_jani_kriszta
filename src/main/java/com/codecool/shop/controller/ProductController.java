@@ -19,7 +19,7 @@ public class ProductController {
     private static ProductDao productDataStore = ProductDaoMem.getInstance();
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-//    private static ShoppingCart cart = ShoppingCart.getInstance();
+    private static ShoppingCart cart = ShoppingCart.getInstance();
 
 
     public static ModelAndView renderProducts(Request req, Response res) {
@@ -27,7 +27,7 @@ public class ProductController {
         params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-//        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", cart.getTotalQuantity());
         return new ModelAndView(params, "product/index");
     }
 
@@ -54,7 +54,7 @@ public class ProductController {
 
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-//        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", cart.getTotalQuantity());
 
         return new ModelAndView(params, "product/index");
     }

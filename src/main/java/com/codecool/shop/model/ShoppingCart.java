@@ -7,8 +7,8 @@ import java.util.Map;
  * Created by komlancz on 2016.11.09..
  */
 public class ShoppingCart {
-    private float totalPrice;
-    private int totalQuantity;
+    private static float totalPrice;
+    private static int totalQuantity;
     private static Map<Integer, LineItem> lineItems = new HashMap<>();
     private static ShoppingCart instance = null;
 
@@ -29,17 +29,17 @@ public class ShoppingCart {
         if (lineItems.containsKey(newItem.getProductID())) {
             lineItems.get(newItem.getProductID()).setQuantity();
             lineItems.get(newItem.getProductID()).setSubtotal();
+            setQuantity();
+
         } else {
             newItem.setSubtotal(newItem.getDefaultPrice());
             addToMap(newItem);
+            setQuantity();
         }
     }
 
-    public void setQuantity() {
-
-        for (LineItem item : lineItems.values()){
-            this.totalQuantity += item.getQuantity();
-        }
+    public static void setQuantity() {
+        totalQuantity += 1;
     }
     public int getTotalQuantity() {
         return totalQuantity;
