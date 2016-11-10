@@ -27,7 +27,7 @@ public class Main {
         get("/", ProductController::renderProducts, tmp);
         get("/category/:id", ProductController::renderByFilter, tmp);
         get("/supplier/:id", ProductController::renderByFilter, tmp);
-        get("/tocart/:id", ProductController::renderByFilter, tmp);
+        get("/tocart/:id", ProductController::saveToCart, tmp);
 
         get("/hello", (req, res) -> "Hello World");
 
