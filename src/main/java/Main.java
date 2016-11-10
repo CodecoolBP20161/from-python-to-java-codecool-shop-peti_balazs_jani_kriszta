@@ -24,12 +24,13 @@ public class Main {
 
         populateData();
 
-        get("/", ProductController::renderProducts, tmp);
         get("/category/:id", ProductController::renderByFilter, tmp);
         get("/supplier/:id", ProductController::renderByFilter, tmp);
         get("/tocart/:id", ProductController::saveToCart, tmp);
 
         get("/hello", (req, res) -> "Hello World");
+
+        get("/", ProductController::renderProducts, tmp);
 
     }
 
@@ -83,6 +84,5 @@ public class Main {
         productDataStore.add(new Product("Lenovo Yoga", 450, "USD", "Think you know everything a tablet can do? Think again.", tablet, lenovo));
         productDataStore.add(new Product("Canon EOS 70D", 500, "USD", "Think you know everything a tablet can do? Think again.", camera, canon));
     }
-
 
 }
