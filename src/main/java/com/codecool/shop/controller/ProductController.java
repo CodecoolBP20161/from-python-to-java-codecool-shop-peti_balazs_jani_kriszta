@@ -19,14 +19,24 @@ public class ProductController {
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
     private static ShoppingCart cart = ShoppingCart.getInstance();
+    private static ShoppingCart sessionCart;
 
+
+    private static void setSession(Request req){
+        req.session(true);
+        req.session().attribute("shoppingcart", cart);
+        sessionCart = req.session().attribute("shoppingcart");
+    }
 
     public static ModelAndView renderProducts(Request req, Response res) {
+
+        setSession(req);
+
         Map params = new HashMap<>();
         params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", sessionCart.getTotalQuantity());
         return new ModelAndView(params, "product/index");
     }
 
@@ -48,7 +58,7 @@ public class ProductController {
 
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", sessionCart.getTotalQuantity());
 
         return new ModelAndView(params, "product/index");
     }
@@ -56,10 +66,6 @@ public class ProductController {
 
     public static ModelAndView saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-
-        req.session(true);
-        req.session().attribute("shoppingcart", cart);
-        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
 
         sessionCart.addToCart(id);
 
@@ -73,7 +79,7 @@ public class ProductController {
         params.put("products", productDataStore.getAll());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", sessionCart.getTotalQuantity());
 
         return new ModelAndView(params, "product/index");
     }
