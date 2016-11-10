@@ -10,7 +10,6 @@ import com.codecool.shop.model.ShoppingCart;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,21 +19,40 @@ public class ProductController {
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
     private static ShoppingCart cart = ShoppingCart.getInstance();
+    private static ShoppingCart sessionCart;
 
+
+    private static void setSession(Request req){
+        req.session(true);
+        req.session().attribute("shoppingcart", cart);
+        sessionCart = req.session().attribute("shoppingcart");
+    }
 
     public static ModelAndView renderProducts(Request req, Response res) {
+        setSession(req);
         Map params = new HashMap<>();
-        params.put("lineitems", cart.getAllLineItems());
-        params.put("categories", productCategoryDataStore.getAll());
+        String currentUri = req.uri();
+        System.out.println(currentUri);
+        req.session().attribute("uri", currentUri);
+
+
+        params.put("lineitems", sessionCart.getAllLineItems());
+        params.put("totalprice", sessionCart.getTotalPrice());
+        params.put("counter", sessionCart.getTotalQuantity());
+
         params.put("products", productDataStore.getAll());
+        params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", cart.getTotalQuantity());
-        params.put("totalprice", cart.getTotalPrice());
+
+
         return new ModelAndView(params, "product/index");
     }
 
 
     public static ModelAndView renderByFilter(Request req, Response res) {
+        String currentUri = req.uri();
+        System.out.println(currentUri);
+        req.session().attribute("uri", currentUri);
         int id = Integer.parseInt(req.params("id"));
         Map params = new HashMap<>();
 
@@ -48,29 +66,37 @@ public class ProductController {
             params.put("title", supplierDataStore.find(id).getName());
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
-        params.put("lineitems", cart.getAllLineItems());
+
+        params.put("lineitems", sessionCart.getAllLineItems());
+        params.put("totalprice", sessionCart.getTotalPrice());
+        params.put("counter", sessionCart.getTotalQuantity());
+
+
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", cart.getTotalQuantity());
-        params.put("totalprice", cart.getTotalPrice());
 
         return new ModelAndView(params, "product/index");
     }
 
-    public static ModelAndView saveToCart(Request req, Response res) {
+
+    public static String saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-        ShoppingCart.addToCart(id);
+
+        sessionCart.addToCart(id);
 
         Map params = new HashMap<>();
+
+        params.put("lineitems", sessionCart.getAllLineItems());
+        params.put("counter", sessionCart.getTotalQuantity());
+        params.put("totalprice", sessionCart.getTotalPrice());
 
         params.put("products", productDataStore.getAll());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("lineitems", cart.getAllLineItems());
-        params.put("counter", cart.getTotalQuantity());
-        params.put("totalprice", cart.getTotalPrice());
 
-        return new ModelAndView(params, "product/index");
+        res.redirect(req.session().attribute("uri"));
+
+        return null;
     }
 
 }

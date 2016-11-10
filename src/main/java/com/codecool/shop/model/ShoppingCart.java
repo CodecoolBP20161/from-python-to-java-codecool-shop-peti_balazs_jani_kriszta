@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by komlancz on 2016.11.09..
- */
 public class ShoppingCart {
     private static float totalPrice;
     private static int totalQuantity;
@@ -26,23 +23,25 @@ public class ShoppingCart {
         lineItems.put(lineItem.getProductID(), lineItem);
     }
 
-    public static void addToCart(int id) {
+    public void addToCart(int id) {
         LineItem newItem = new LineItem(id);
         if (lineItems.containsKey(newItem.getProductID())) {
             lineItems.get(newItem.getProductID()).setQuantity();
             lineItems.get(newItem.getProductID()).setSubtotal();
             setTotalPrice();
             setQuantity();
+            setTotalPrice();
 
         } else {
             newItem.setSubtotal(newItem.getDefaultPrice());
             addToMap(newItem);
             setTotalPrice();
             setQuantity();
+            setTotalPrice();
         }
     }
 
-    public static void setQuantity() {
+    private static void setQuantity() {
         totalQuantity += 1;
     }
     public int getTotalQuantity() {
