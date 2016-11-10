@@ -3,6 +3,8 @@ package com.codecool.shop.model;
 
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 
+import java.math.BigDecimal;
+
 
 public class LineItem {
     private int productID;
@@ -34,6 +36,8 @@ public class LineItem {
 
     public void setSubtotal(){
         subtotal = defaultPrice * (float) quantity;
+        BigDecimal bd = new BigDecimal(Float.toString(subtotal));
+        subtotal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
     }
     public void setSubtotal(float price){
         subtotal = price;

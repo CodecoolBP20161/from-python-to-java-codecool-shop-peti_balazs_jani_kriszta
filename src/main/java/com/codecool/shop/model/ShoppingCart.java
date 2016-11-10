@@ -1,5 +1,7 @@
 package com.codecool.shop.model;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +43,8 @@ public class ShoppingCart {
 
     private void setTotalPrice(float price) {
         totalPrice += price;
+        BigDecimal bd = new BigDecimal(Float.toString(totalPrice));
+        totalPrice = bd.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
     }
 
     public float getTotalPrice() {
