@@ -9,22 +9,35 @@ import java.util.List;
 public class ShoppingCart {
     private float totalPrice;
     private int totalQuantity;
-    private List<LineItem> lineItems = new ArrayList<>();
+    private static List<LineItem> lineItems = new ArrayList<>();
+    private static ShoppingCart instance = null;
 
-    public void addToList(LineItem lineItem){
-        this.lineItems.add(lineItem);
+
+    public static ShoppingCart getInstance() {
+        if (instance == null) {
+            instance = new ShoppingCart();
+        }
+        return instance;
     }
 
-    public void addToCart(int id){
-        for (LineItem item : lineItems){
-            if (id == item.getProductID()){
+    private static void addToList(LineItem lineItem){
+        lineItems.add(lineItem);
+    }
+
+    public static LineItem addToCart(int id){
+        LineItem returnItem = null;
+        for (LineItem item : lineItems) {
+            if (id == item.getProductID()) {
                 item.setQuantity();
                 item.setSubtotal();
+                returnItem = item;
             } else {
                 LineItem newItem = new LineItem(id);
                 addToList(newItem);
+                returnItem = newItem;
             }
         }
+        return returnItem;
     }
 
     public void setQuantity() {
