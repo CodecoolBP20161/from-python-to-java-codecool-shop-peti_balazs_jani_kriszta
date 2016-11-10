@@ -26,7 +26,7 @@ public class Main {
 
         get("/category/:id", ProductController::renderByFilter, tmp);
         get("/supplier/:id", ProductController::renderByFilter, tmp);
-        get("/tocart/:id", ProductController::saveToCart, tmp);
+        get("/tocart/:id", (request, response) -> ProductController.saveToCart(request, response));
 
         get("/hello", (req, res) -> "Hello World");
 
@@ -65,7 +65,7 @@ public class Main {
         productCategoryDataStore.add(camera);
         ProductCategory smartphone = new ProductCategory("Smartphone", "Hardware", "Smartphones with touchscreen");
         productCategoryDataStore.add(smartphone);
-        ProductCategory horse = new ProductCategory("Horse", "Hardware", "Where now are the horse and the rider? Where is the horn that was blowing");
+        ProductCategory horse = new ProductCategory("Horse", "Hardware", "Where now are the horse and the rider? Where is the horn that was blowing?");
         productCategoryDataStore.add(horse);
         ProductCategory tv = new ProductCategory("TV", "Hardware", "Smart TVs");
         productCategoryDataStore.add(tv);

@@ -21,14 +21,14 @@ public class ShoppingCart {
         if (lineItems.containsKey(newItem.getProductID())) {
             lineItems.get(newItem.getProductID()).setQuantity();
             lineItems.get(newItem.getProductID()).setSubtotal();
+            setTotalPrice(newItem.getDefaultPrice());
             setQuantity();
-            setTotalPrice();
 
         } else {
             newItem.setSubtotal(newItem.getDefaultPrice());
             addToMap(newItem);
+            setTotalPrice(newItem.getDefaultPrice());
             setQuantity();
-            setTotalPrice();
         }
     }
 
@@ -39,11 +39,10 @@ public class ShoppingCart {
         return totalQuantity;
     }
 
-    public void setTotalPrice() {
-        for (LineItem item : lineItems.values()){
-            totalPrice += item.getSubtotal();
-        }
+    private void setTotalPrice(float price) {
+        totalPrice += price;
     }
+
     public float getTotalPrice() {
         return totalPrice;
     }

@@ -7,9 +7,9 @@ a :hover {
     color: rgba(0,0,0,0.5);
 }
 
-/*.jumbotron h1{*/
-    /*color: rgba(0,0,0,0.5);*/
-/*}*/
+.jumbotron h1{
+    color: rgba(0,0,0,0.7);
+}
 
 .glyphicon {
     margin-right:5px;
@@ -142,4 +142,17 @@ hr {
 
 #modal-button {
     border: none;
+}
+
+th, td {
+    text-align: center;
+}
+
+#total {
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+#table-title {
+    text-align: center;
 }

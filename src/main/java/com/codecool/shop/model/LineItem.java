@@ -33,7 +33,7 @@ public class LineItem {
     }
 
     public void setSubtotal(){
-        subtotal = defaultPrice * quantity;
+        subtotal = defaultPrice * (float) quantity;
     }
     public void setSubtotal(float price){
         subtotal = price;
