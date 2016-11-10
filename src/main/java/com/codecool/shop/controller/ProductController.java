@@ -75,10 +75,10 @@ public class ProductController {
         sessionCart.addToCart(id);
 
         // testing session storage
-        System.out.println(sessionCart.getAllLineItems());
-        System.out.println(sessionCart.getTotalPrice());
-        System.out.println(sessionCart.getTotalQuantity());
-        System.out.println(req.session().id());
+//        System.out.println(sessionCart.getAllLineItems());
+//        System.out.println(sessionCart.getTotalPrice());
+//        System.out.println(sessionCart.getTotalQuantity());
+//        System.out.println(req.session().id());
 
 
         Map params = new HashMap<>();
