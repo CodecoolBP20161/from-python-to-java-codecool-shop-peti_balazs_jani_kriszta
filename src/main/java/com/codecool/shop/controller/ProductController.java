@@ -6,6 +6,7 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.ShoppingCart;
 import com.sun.jndi.toolkit.url.Uri;
 import spark.ModelAndView;
@@ -22,41 +23,45 @@ public class ProductController {
     private static ProductDao productDataStore = ProductDaoMem.getInstance();
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-    private static ShoppingCart shoppingcart = ShoppingCart.getInstance();
+    private static ShoppingCart cart = ShoppingCart.getInstance();
+
 
     public static ModelAndView renderProducts(Request req, Response res) {
-        int counter = 3;
-
         Map params = new HashMap<>();
         params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", counter);
+        params.put("counter", cart.getTotalQuantity());
         return new ModelAndView(params, "product/index");
     }
 
 
     public static ModelAndView renderByFilter(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-        int counter = 3;
-
         Map params = new HashMap<>();
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
-        params.put("counter", counter);
 
 
         if (req.uri().contains("category")) {
             params.put("products", productDataStore.getBy(productCategoryDataStore.find(id)));
             params.put("title", productCategoryDataStore.find(id).getName());
+            params.put("slogan", productCategoryDataStore.find(id).getDescription());
         } else if (req.uri().contains("supplier")) {
             params.put("products", productDataStore.getBy(supplierDataStore.find(id)));
             params.put("title", supplierDataStore.find(id).getName());
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
+        else if (req.uri().contains("tocart")) {
+            ShoppingCart.addToCart(id);
+        }
+
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("supplier", supplierDataStore.getAll());
+        params.put("counter", cart.getTotalQuantity());
 
         return new ModelAndView(params, "product/index");
     }
+
+
 }
 
 

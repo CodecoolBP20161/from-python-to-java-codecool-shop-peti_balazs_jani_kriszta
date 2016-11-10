@@ -3,11 +3,13 @@ a :hover {
 }
 
 
-.jumbotron {
-    /*padding-bottom: 2em;*/
-    /*padding-top: 2em;*/
-    /*background-color: white;*/
+.jumbotron h3{
+    color: rgba(0,0,0,0.5);
 }
+
+/*.jumbotron h1{*/
+    /*color: rgba(0,0,0,0.5);*/
+/*}*/
 
 .glyphicon {
     margin-right:5px;

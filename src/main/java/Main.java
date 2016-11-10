@@ -27,7 +27,7 @@ public class Main {
         get("/", ProductController::renderProducts, tmp);
         get("/category/:id", ProductController::renderByFilter, tmp);
         get("/supplier/:id", ProductController::renderByFilter, tmp);
-//        post("/tocart/:id", ProductController::renderOrders, tmp);
+        get("/tocart/:id", ProductController::renderByFilter, tmp);
 
         get("/hello", (req, res) -> "Hello World");
 
@@ -50,23 +50,23 @@ public class Main {
         supplierDataStore.add(canon);
         Supplier panasonic = new Supplier("Panasonic", "Ideas For Life.");
         supplierDataStore.add(panasonic);
-        Supplier rohan = new Supplier("Rohan", "“Where now are the horse and the rider? Where is the horn that was blowing?");
+        Supplier rohan = new Supplier("Rohan", "Where now are the horse and the rider? Where is the horn that was blowing?");
         supplierDataStore.add(rohan);
         Supplier samsung = new Supplier("Samsung", "Make Everything Smarter.");
         supplierDataStore.add(samsung);
 
         //setting up a new product category
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
-        ProductCategory ebookreader = new ProductCategory("Ebook Reader", "Hardware", "Ebook reader with E-ink screen for the better reading experience.");
+        ProductCategory ebookreader = new ProductCategory("Ebook Reader", "Hardware", "Ebook reader with E-ink screen for better reading experience.");
         productCategoryDataStore.add(ebookreader);
         ProductCategory camera = new ProductCategory("Camera", "Hardware", "Digital cameras");
         productCategoryDataStore.add(camera);
         ProductCategory smartphone = new ProductCategory("Smartphone", "Hardware", "Smartphones with touchscreen");
         productCategoryDataStore.add(smartphone);
-        ProductCategory horse = new ProductCategory("Horse", "Hardware", "Riders of Rohan! What news from the Mark?");
+        ProductCategory horse = new ProductCategory("Horse", "Hardware", "Where now are the horse and the rider? Where is the horn that was blowing");
         productCategoryDataStore.add(horse);
-        ProductCategory tv = new ProductCategory("TV", "Hardware", "Smart tvs");
+        ProductCategory tv = new ProductCategory("TV", "Hardware", "Smart TVs");
         productCategoryDataStore.add(tv);
 
         //setting up products and printing it
@@ -76,7 +76,7 @@ public class Main {
         productDataStore.add(new Product("Przewalski's 2.0", 1500, "USD", "A rare and endangered subspecies of wild horse (Equus ferus) native to the steppes of central Asia. Przewalski's horse has never been domesticated", horse, rohan));
         productDataStore.add(new Product("Samsung Note7", 450, "USD", "Samsung's fiercest smartphone so far. Designed with that intrepid spirit in mind.", smartphone, samsung));
         productDataStore.add(new Product("Sony LED TV", 250, "USD", "Lose yourself in ultra contrast. It will take your breath away.", tv, sony));
-        productDataStore.add(new Product("Amazon Kindle", 79.9f, "USD", "High Resolution Display with Next-Gen Built-in Light. With WiFi", ebookreader, amazon));
+        productDataStore.add(new Product("Amazon Kindle Paperwhite", 79.9f, "USD", "High Resolution Display with Next-Gen Built-in Light. With WiFi", ebookreader, amazon));
         productDataStore.add(new Product("Pampa", 900, "USD", "The Pampa Horse is a horse breed that combines the characteristics of Brazilian Horses.", horse, rohan));
         productDataStore.add(new Product("Sony Z3", 350, "USD", "Don’t settle for good. Demand great. Do more than you thought possible.Impossibly slim and wonderfully powerful.", smartphone, sony));
         productDataStore.add(new Product("Przewalski's 1.0", 15, "USD", "A rare and endangered subspecies of wild horse (Equus ferus). NOW ON SALE!!!", horse, rohan));
