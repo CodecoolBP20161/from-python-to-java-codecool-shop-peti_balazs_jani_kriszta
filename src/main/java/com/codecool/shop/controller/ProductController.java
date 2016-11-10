@@ -18,7 +18,7 @@ public class ProductController {
     private static ProductDao productDataStore = ProductDaoMem.getInstance();
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-//    private static ShoppingCart cart = ShoppingCart.getInstance();
+    private static ShoppingCart cart = ShoppingCart.getInstance();
 
 
     public static ModelAndView renderProducts(Request req, Response res) {
@@ -26,7 +26,7 @@ public class ProductController {
         params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-//        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", cart.getTotalQuantity());
         return new ModelAndView(params, "product/index");
     }
 
@@ -45,17 +45,26 @@ public class ProductController {
             params.put("title", supplierDataStore.find(id).getName());
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
-        else if (req.uri().contains("tocart")) {
-            ShoppingCart.addToCart(id);
-        }
 
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
-//        params.put("counter", cart.getTotalQuantity());
+        params.put("counter", cart.getTotalQuantity());
 
         return new ModelAndView(params, "product/index");
     }
 
+    public static ModelAndView saveToCart(Request req, Response res) {
+        int id = Integer.parseInt(req.params("id"));
+        ShoppingCart.addToCart(id);
+
+        Map params = new HashMap<>();
+        params.put("products", productDataStore.getAll());
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("supplier", supplierDataStore.getAll());
+        params.put("counter", cart.getTotalQuantity());
+
+        return new ModelAndView(params, "product/index");
+    }
 
 }
 
