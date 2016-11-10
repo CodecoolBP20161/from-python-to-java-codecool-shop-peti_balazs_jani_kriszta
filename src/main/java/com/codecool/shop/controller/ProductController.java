@@ -18,21 +18,24 @@ public class ProductController {
     private static ProductDao productDataStore = ProductDaoMem.getInstance();
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-    private static ShoppingCart cart = ShoppingCart.getInstance();
-    private static ShoppingCart sessionCart;
 
 
     private static void setSession(Request req){
-        req.session(true);
-        req.session().attribute("shoppingcart", cart);
-        sessionCart = req.session().attribute("shoppingcart");
+
+        if(req.session().attribute("shoppingcart") == null) {
+            ShoppingCart cart = new ShoppingCart();
+            req.session().attribute("shoppingcart", cart);
+        }
     }
+
 
     public static ModelAndView renderProducts(Request req, Response res) {
         setSession(req);
+
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+
         Map params = new HashMap<>();
         String currentUri = req.uri();
-        System.out.println(currentUri);
         req.session().attribute("uri", currentUri);
 
 
@@ -43,6 +46,7 @@ public class ProductController {
         params.put("products", productDataStore.getAll());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
+        params.put("title", "Codecool Shop");
 
 
         return new ModelAndView(params, "product/index");
@@ -51,11 +55,11 @@ public class ProductController {
 
     public static ModelAndView renderByFilter(Request req, Response res) {
         String currentUri = req.uri();
-        System.out.println(currentUri);
         req.session().attribute("uri", currentUri);
         int id = Integer.parseInt(req.params("id"));
         Map params = new HashMap<>();
 
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
 
         if (req.uri().contains("category")) {
             params.put("products", productDataStore.getBy(productCategoryDataStore.find(id)));
@@ -78,10 +82,10 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
-
     public static String saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
 
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.addToCart(id);
 
         Map params = new HashMap<>();

@@ -6,20 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {
-    private static float totalPrice;
-    private static int totalQuantity;
-    private static Map<Integer, LineItem> lineItems = new HashMap<>();
-    private static ShoppingCart instance = null;
+    private float totalPrice;
+    private int totalQuantity;
+    private Map<Integer, LineItem> lineItems = new HashMap<>();
 
 
-    public static ShoppingCart getInstance() {
-        if (instance == null) {
-            instance = new ShoppingCart();
-        }
-        return instance;
-    }
 
-    private static void addToMap(LineItem lineItem) {
+    private void addToMap(LineItem lineItem) {
         lineItems.put(lineItem.getProductID(), lineItem);
     }
 
@@ -41,14 +34,14 @@ public class ShoppingCart {
         }
     }
 
-    private static void setQuantity() {
+    private void setQuantity() {
         totalQuantity += 1;
     }
     public int getTotalQuantity() {
         return totalQuantity;
     }
 
-    public static void setTotalPrice() {
+    public void setTotalPrice() {
         for (LineItem item : lineItems.values()){
             totalPrice += item.getSubtotal();
         }
