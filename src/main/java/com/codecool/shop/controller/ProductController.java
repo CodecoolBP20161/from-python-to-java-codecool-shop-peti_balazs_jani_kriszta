@@ -33,7 +33,6 @@ public class ProductController {
 
         setSession(req);
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
-        System.out.println(req.session().id());
 
         Map params = new HashMap<>();
         params.put("categories", productCategoryDataStore.getAll());
