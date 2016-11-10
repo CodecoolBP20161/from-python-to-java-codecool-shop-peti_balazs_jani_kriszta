@@ -1,5 +1,19 @@
+a :hover {
+    text-decoration: none;
+}
+
+
+.jumbotron h3{
+    color: rgba(0,0,0,0.5);
+}
+
+/*.jumbotron h1{*/
+    /*color: rgba(0,0,0,0.5);*/
+/*}*/
+
 .glyphicon {
     margin-right:5px;
+
 }
 .thumbnail
 {
@@ -76,10 +90,6 @@ hr {
     margin: 5px;
 }
 
-#codecool :hover {
-    text-decoration: none;
-}
-
 
 .menu {
     margin-top: 10px;
@@ -101,7 +111,7 @@ hr {
 #items-counter {
 
     width: 1.5em;
-    font-size: 1.3em;
+    /*font-size: 1.3em;*/
     text-align: center;
     margin: 0 0 0 0;
     display: inline-block;
@@ -110,7 +120,26 @@ hr {
     background-color: orangered;
     vertical-align: middle;
 
+}
+
+#div-counter {
+    display: inline;
+    margin-bottom: 5px;
+}
 
 .fa-shopping-cart {
     /*position: relative;*/
+}
+
+#bottom {
+    margin-bottom: 1em;
+}
+
+
+.select {
+    margin-bottom: 10px;
+}
+
+#modal-button {
+    border: none;
 }
