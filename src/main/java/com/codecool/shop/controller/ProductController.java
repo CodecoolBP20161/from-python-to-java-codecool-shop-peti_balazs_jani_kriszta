@@ -10,7 +10,6 @@ import com.codecool.shop.model.ShoppingCart;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +45,7 @@ public class ProductController {
             params.put("title", supplierDataStore.find(id).getName());
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
+
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
         params.put("counter", cart.getTotalQuantity());
@@ -53,13 +53,23 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
+
     public static ModelAndView saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
 
-        ShoppingCart.addToCart(id);
+        req.session(true);
+        req.session().attribute("shoppingcart", cart);
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+
+        sessionCart.addToCart(id);
+
+        // testing session storage
+//        System.out.println(sessionCart.getAllLineItems());
+//        System.out.println(sessionCart.getTotalPrice());
+//        System.out.println(sessionCart.getTotalQuantity());
+
 
         Map params = new HashMap<>();
-
         params.put("products", productDataStore.getAll());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
