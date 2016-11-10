@@ -77,5 +77,4 @@ public class Main {
         productDataStore.add(new Product("Lenovo Yoga", 450, "USD", "Think you know everything a tablet can do? Think again.", tablet, lenovo));
     }
 
-
 }
