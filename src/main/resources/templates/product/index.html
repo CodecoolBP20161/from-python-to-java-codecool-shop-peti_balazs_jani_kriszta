@@ -30,40 +30,50 @@
 </head>
 
 <body>
-<div class="container">
-    <ul class="list-inline">
-        <li class="menu left" ><a href="#">All Products</a></li>
-        <li class="menu right">
-            <a id="shopping-cart" href="#">
-                <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
-                <p id="items-counter" th:text="${counter}"></p>
-            </a>
-        </li>
-    </ul>
-</div>
 
-<div class="jumbotron text-center">
-    <h1 id="codecool"><a th:href="${'/'}">Codecool Shop</a></h1>
-</div>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
 
-<div class="container">
-    <h1 th:text="${title}"></h1>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li class="dropdown-header">Categories</li>
-            <li><a th:each="cat,iterStat : ${categories}" th:href="${'/category/'+cat.id}" th:text="${cat.name}"></a>
-            </li>
-           <hr/>
-            <li class="dropdown-header">Supplier</li>
-            <li><a th:each="sup,iterStat : ${supplier}" th:href="${'/supplier/'+sup.id}" th:text="${sup.name}"></a></li>
-        </ul>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
+                        <li> <a th:href="${'/'}">All Products</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter by <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Categories</li>
+                                <li><a th:each="cat,iterStat : ${categories}" th:href="${'/category/'+cat.id}" th:text="${cat.name}"></a>
+                                </li>
+                                <hr/>
+                                <li class="dropdown-header">Supplier</li>
+                                <li><a th:each="sup,iterStat : ${supplier}" th:href="${'/supplier/'+sup.id}" th:text="${sup.name}"></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- navbar-left will move the search to the left -->
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <a id="shopping-cart" href="#">
+                                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                                <div id="div-counter"><p id="items-counter" th:text="${counter}"></p></div>
+                            </a>
+                        </div>
+                        <!--<button type="submit" class="btn btn-default">Submit</button>-->
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
     </div>
 
 
-    <div id="products" class="row list-group">
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 id="title" th:text="${title}"></h1>
+        <h3 id="slogan" th:text="${slogan}"></h3>
+    </div>
 
+    <div id="products" class="row list-group">
         <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="thumbnail">
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
@@ -77,13 +87,15 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <a class="btn btn-success" th:href="${'/tocart/'+prod.id}">Add to cart</a>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <a id="bottom" data-brackets-id="18" class="btn btn-default btn-lg" role="button" href="#top">Back to the top</a>
 </div>
 
 </body>
