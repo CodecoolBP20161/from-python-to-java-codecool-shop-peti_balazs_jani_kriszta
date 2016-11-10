@@ -37,7 +37,7 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
+                        <li><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
                         <li> <a th:href="${'/'}">All Products</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter by <span class="caret"></span></a>
@@ -54,10 +54,49 @@
                     <!-- navbar-left will move the search to the left -->
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <a id="shopping-cart" href="#">
-                                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                                <div id="div-counter"><p id="items-counter" th:text="${counter}"></p></div>
-                            </a>
+                            <button id="modal-button" type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+                                <a id="shopping-cart" href="#">
+                                    <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
+                                    <p id="items-counter" th:text="${counter}"></p>
+
+                                </a>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog modal-lg">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Your Shopping Cart </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table-responsive">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center col-md-1">Product name</th>
+                                                    <th class="text-center col-md-1">Quantity</th>
+                                                    <th class="text-center col-md-1">Unit Price</th>
+                                                    <th class="text-center col-md-1">Subtotal</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+
+                                                </tr>
+                                                <!--<p>Total: </p>-->
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!--<button type="submit" class="btn btn-default">Submit</button>-->
                     </form>

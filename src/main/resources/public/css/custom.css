@@ -139,3 +139,7 @@ hr {
 .select {
     margin-bottom: 10px;
 }
+
+#modal-button {
+    border: none;
+}
