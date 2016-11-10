@@ -1,6 +1,8 @@
 package com.codecool.shop.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,7 +56,9 @@ public class ShoppingCart {
         return totalPrice;
     }
 
-    public Map<Integer, LineItem> getAllLineItems() {
-        return lineItems;
+    public List<LineItem> getAllLineItems() {
+        List<LineItem> returnList = new ArrayList<>();
+        returnList.addAll(lineItems.values());
+        return returnList;
     }
 }
