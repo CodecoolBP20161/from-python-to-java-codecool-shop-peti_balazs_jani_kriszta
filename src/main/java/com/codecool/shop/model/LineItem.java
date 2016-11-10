@@ -7,7 +7,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 public class LineItem {
     private int productID;
     private String productName;
-    private int quantity = 0;
+    private int quantity = 1;
     private float defaultPrice;
     private float subtotal = 0;
 
@@ -16,12 +16,12 @@ public class LineItem {
         ProductDaoMem productInstance = ProductDaoMem.getInstance();
 
         this.productID = productID;
-        defaultPrice = productInstance.find(productID).getDefaultPrice();
-        productName = productInstance.find(productID).getName();
+        this.defaultPrice = productInstance.find(productID).getDefaultPrice();
+        this.productName = productInstance.find(productID).getName();
     }
 
     public void setQuantity(){
-        quantity++;
+        this.quantity++;
     }
 
     public void setQuantity(int quantity){
@@ -35,6 +35,9 @@ public class LineItem {
     public void setSubtotal(){
         subtotal = defaultPrice * quantity;
     }
+    public void setSubtotal(float price){
+        subtotal = price;
+    }
 
     public float getSubtotal() {
         return subtotal;
@@ -46,5 +49,13 @@ public class LineItem {
 
     public int getProductID() {
         return productID;
+    }
+
+    public float getDefaultPrice() {
+        return defaultPrice;
+    }
+
+    public void setDefaultPrice(float defaultPrice) {
+        this.defaultPrice = defaultPrice;
     }
 }

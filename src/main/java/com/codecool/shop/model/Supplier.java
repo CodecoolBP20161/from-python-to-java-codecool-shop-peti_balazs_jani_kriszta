@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class Supplier extends BaseModel {
     private ArrayList<Product> products;
+    private String description;
 
     public Supplier(String name, String description) {
         super(name);
+        this.description = description;
         this.products = new ArrayList<>();
     }
 
@@ -22,6 +24,9 @@ public class Supplier extends BaseModel {
     public void addProduct(Product product) {
         this.products.add(product);
     }
+
+
+    public String getDescription() {return this.description;}
 
     public String toString() {
         return String.format("id: %1$d, " +
