@@ -1,7 +1,7 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by komlancz on 2016.11.09..
@@ -9,7 +9,7 @@ import java.util.List;
 public class ShoppingCart {
     private float totalPrice;
     private int totalQuantity;
-    private static List<LineItem> lineItems = new ArrayList<>();
+    private static Map<Integer, LineItem> lineItems = new HashMap<>();
     private static ShoppingCart instance = null;
 
 
@@ -20,28 +20,24 @@ public class ShoppingCart {
         return instance;
     }
 
-    private static void addToList(LineItem lineItem){
-        lineItems.add(lineItem);
+    private static void addToMap(LineItem lineItem) {
+        lineItems.put(lineItem.getProductID(), lineItem);
     }
 
-    public static LineItem addToCart(int id){
-        LineItem returnItem = null;
-        for (LineItem item : lineItems) {
-            if (id == item.getProductID()) {
-                item.setQuantity();
-                item.setSubtotal();
-                returnItem = item;
-            } else {
-                LineItem newItem = new LineItem(id);
-                addToList(newItem);
-                returnItem = newItem;
-            }
+    public static void addToCart(int id) {
+        LineItem newItem = new LineItem(id);
+        if (lineItems.containsKey(newItem.getProductID())) {
+            lineItems.get(newItem.getProductID()).setQuantity();
+            lineItems.get(newItem.getProductID()).setSubtotal();
+        } else {
+            newItem.setSubtotal(newItem.getDefaultPrice());
+            addToMap(newItem);
         }
-        return returnItem;
     }
 
     public void setQuantity() {
-        for (LineItem item : lineItems){
+
+        for (LineItem item : lineItems.values()){
             this.totalQuantity += item.getQuantity();
         }
     }
@@ -50,7 +46,7 @@ public class ShoppingCart {
     }
 
     public void setTotalPrice() {
-        for (LineItem item : lineItems){
+        for (LineItem item : lineItems.values()){
             this.totalPrice += item.getSubtotal();
         }
     }
@@ -58,7 +54,7 @@ public class ShoppingCart {
         return totalPrice;
     }
 
-    public List<LineItem> getAllLineItems() {
+    public Map<Integer, LineItem> getAllLineItems() {
         return lineItems;
     }
 }
