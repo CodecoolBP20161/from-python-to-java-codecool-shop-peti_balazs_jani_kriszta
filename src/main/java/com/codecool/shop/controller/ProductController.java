@@ -18,19 +18,22 @@ public class ProductController {
     private static ProductDao productDataStore = ProductDaoMem.getInstance();
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-    private static ShoppingCart cart = ShoppingCart.getInstance();
-    private static ShoppingCart sessionCart;
 
 
     private static void setSession(Request req){
-        req.session(true);
-        req.session().attribute("shoppingcart", cart);
-        sessionCart = req.session().attribute("shoppingcart");
+
+        if(req.session().attribute("shoppingcart") == null) {
+            ShoppingCart cart = new ShoppingCart();
+            req.session().attribute("shoppingcart", cart);
+        }
     }
+
 
     public static ModelAndView renderProducts(Request req, Response res) {
 
         setSession(req);
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        System.out.println(req.session().id());
 
         Map params = new HashMap<>();
         params.put("categories", productCategoryDataStore.getAll());
@@ -45,6 +48,7 @@ public class ProductController {
         int id = Integer.parseInt(req.params("id"));
         Map params = new HashMap<>();
 
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
 
         if (req.uri().contains("category")) {
             params.put("products", productDataStore.getBy(productCategoryDataStore.find(id)));
@@ -67,12 +71,14 @@ public class ProductController {
     public static ModelAndView saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
 
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.addToCart(id);
 
         // testing session storage
 //        System.out.println(sessionCart.getAllLineItems());
 //        System.out.println(sessionCart.getTotalPrice());
 //        System.out.println(sessionCart.getTotalQuantity());
+//        System.out.println(req.session().id());
 
 
         Map params = new HashMap<>();
