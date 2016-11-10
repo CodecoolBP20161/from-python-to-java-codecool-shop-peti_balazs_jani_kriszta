@@ -24,10 +24,12 @@ public class ProductController {
 
     public static ModelAndView renderProducts(Request req, Response res) {
         Map params = new HashMap<>();
+        params.put("lineitems", cart.getAllLineItems());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("products", productDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
         params.put("counter", cart.getTotalQuantity());
+        params.put("totalprice", cart.getTotalPrice());
         return new ModelAndView(params, "product/index");
     }
 
@@ -46,16 +48,17 @@ public class ProductController {
             params.put("title", supplierDataStore.find(id).getName());
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
+        params.put("lineitems", cart.getAllLineItems());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
         params.put("counter", cart.getTotalQuantity());
+        params.put("totalprice", cart.getTotalPrice());
 
         return new ModelAndView(params, "product/index");
     }
 
     public static ModelAndView saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-
         ShoppingCart.addToCart(id);
 
         Map params = new HashMap<>();
@@ -63,10 +66,13 @@ public class ProductController {
         params.put("products", productDataStore.getAll());
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
+        params.put("lineitems", cart.getAllLineItems());
         params.put("counter", cart.getTotalQuantity());
+        params.put("totalprice", cart.getTotalPrice());
 
         return new ModelAndView(params, "product/index");
     }
+
 }
 
 

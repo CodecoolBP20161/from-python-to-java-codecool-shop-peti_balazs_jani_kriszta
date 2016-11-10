@@ -143,3 +143,16 @@ hr {
 #modal-button {
     border: none;
 }
+
+th, td {
+    text-align: center;
+}
+
+#total {
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+#table-title {
+    text-align: center;
+}
