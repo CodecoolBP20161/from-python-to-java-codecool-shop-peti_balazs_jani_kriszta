@@ -53,9 +53,21 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
+
     public static ModelAndView saveToCart(Request req, Response res) {
         int id = Integer.parseInt(req.params("id"));
-        ShoppingCart.addToCart(id);
+
+        req.session(true);
+        req.session().attribute("shoppingcart", cart);
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+
+        sessionCart.addToCart(id);
+
+        // testing session storage
+//        System.out.println(sessionCart.getAllLineItems());
+//        System.out.println(sessionCart.getTotalPrice());
+//        System.out.println(sessionCart.getTotalQuantity());
+
 
         Map params = new HashMap<>();
         params.put("products", productDataStore.getAll());
@@ -65,7 +77,6 @@ public class ProductController {
 
         return new ModelAndView(params, "product/index");
     }
-
 }
 
 
