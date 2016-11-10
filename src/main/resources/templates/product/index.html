@@ -83,15 +83,24 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-
+                                                <tr th:each="item,iterStat : ${lineitems}">
+                                                    <td th:text="${item.productName}"></td>
+                                                    <td th:text="${item.quantity}"></td>
+                                                    <td th:text="${item.defaultPrice}"></td>
+                                                    <td th:text="${item.subtotal}"></td>
                                                 </tr>
-                                                <!--<p>Total: </p>-->
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="text-center col-md-1">Total: </td>
+                                                </tr>
                                                 </tbody>
 
                                             </table>
                                         </div>
                                         <div class="modal-footer">
+                                            <!--<p>Total: </p>-->
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
