@@ -24,10 +24,10 @@ public class Main {
 
         populateData();
 
+        // Routes
         get("/category/:id", ProductController::renderByFilter, tmp);
         get("/supplier/:id", ProductController::renderByFilter, tmp);
         get("/tocart/:id", (request, response) -> ProductController.saveToCart(request, response));
-
         get("/hello", (req, res) -> "Hello World");
 
         get("/", ProductController::renderProducts, tmp);

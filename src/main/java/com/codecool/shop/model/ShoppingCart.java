@@ -1,7 +1,6 @@
 package com.codecool.shop.model;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,12 +11,13 @@ public class ShoppingCart {
     private int totalQuantity;
     private Map<Integer, LineItem> lineItems = new HashMap<>();
 
-
-
+    // Add LineItems lineItems hashmap (content of shoppingcart)
     private void addToMap(LineItem lineItem) {
         lineItems.put(lineItem.getProductID(), lineItem);
     }
 
+    // Instantiate lineitems by productId and check whether they already added to the shoppingcart
+    // Set quantity of items and totalprice of shoppingcart
     public void addToCart(int id) {
         LineItem newItem = new LineItem(id);
         if (lineItems.containsKey(newItem.getProductID())) {
@@ -37,6 +37,7 @@ public class ShoppingCart {
     private void setQuantity() {
         totalQuantity += 1;
     }
+
     public int getTotalQuantity() {
         return totalQuantity;
     }
