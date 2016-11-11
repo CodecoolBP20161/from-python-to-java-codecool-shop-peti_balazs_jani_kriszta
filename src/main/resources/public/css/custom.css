@@ -1,5 +1,19 @@
+a :hover {
+    text-decoration: none;
+}
+
+
+.jumbotron h3{
+    color: rgba(0,0,0,0.5);
+}
+
+.jumbotron h1{
+    color: rgba(0,0,0,0.7);
+}
+
 .glyphicon {
     margin-right:5px;
+
 }
 .thumbnail
 {
@@ -36,6 +50,7 @@
 .item.list-group-item .caption
 {
     padding: 9px 9px 0px 9px;
+
 }
 .item.list-group-item:nth-of-type(odd)
 {
@@ -59,4 +74,85 @@
 .list-group-item-text
 {
     margin: 0 0 11px;
+}
+
+#to-the-top{
+    height: 50px;
+    width: 200px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+.dropdown-header {
+    font-size: 19px;
+}
+hr {
+    margin: 5px;
+}
+
+
+.menu {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.left {
+    float: left;
+    margin-top: 20px;
+    font-size: 1.4em;
+}
+
+.right {
+    float: right;
+    margin-bottom: 10px;
+    /*position: absolute;*/
+}
+
+#items-counter {
+
+    width: 1.5em;
+    /*font-size: 1.3em;*/
+    text-align: center;
+    margin: 0 0 0 0;
+    display: inline-block;
+    border-radius: 100%;
+    color: white;
+    background-color: orangered;
+    vertical-align: middle;
+
+}
+
+#div-counter {
+    display: inline;
+    margin-bottom: 5px;
+}
+
+.fa-shopping-cart {
+    /*position: relative;*/
+}
+
+#bottom {
+    margin-bottom: 1em;
+}
+
+
+.select {
+    margin-bottom: 10px;
+}
+
+#modal-button {
+    border: none;
+}
+
+th, td {
+    text-align: center;
+}
+
+#total {
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+#table-title {
+    text-align: center;
 }
