@@ -19,26 +19,25 @@ public class ProductController {
     private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
-
+    // Instantiate shopping cart if there is no shopping cart saved in session
     private static void setSession(Request req){
-
         if(req.session().attribute("shoppingcart") == null) {
             ShoppingCart cart = new ShoppingCart();
             req.session().attribute("shoppingcart", cart);
         }
     }
 
-
+    // Render all products and filter menu elements
     public static ModelAndView renderProducts(Request req, Response res) {
         setSession(req);
-
+        // Read data from from the shopping cart saved in the session
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
 
         Map params = new HashMap<>();
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
 
-
+        // Render data in shopping cart modal
         params.put("lineitems", sessionCart.getAllLineItems());
         params.put("totalprice", sessionCart.getTotalPrice());
         params.put("counter", sessionCart.getTotalQuantity());
@@ -52,8 +51,9 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
-
+    // Handle filter routes Category and Supplier
     public static ModelAndView renderByFilter(Request req, Response res) {
+        setSession(req);
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
         int id = Integer.parseInt(req.params("id"));
@@ -75,14 +75,15 @@ public class ProductController {
         params.put("totalprice", sessionCart.getTotalPrice());
         params.put("counter", sessionCart.getTotalQuantity());
 
-
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
 
         return new ModelAndView(params, "product/index");
     }
 
+    // Handle saving to cart and ensure staying on current page with redirect
     public static String saveToCart(Request req, Response res) {
+        setSession(req);
         int id = Integer.parseInt(req.params("id"));
 
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
@@ -98,6 +99,7 @@ public class ProductController {
         params.put("categories", productCategoryDataStore.getAll());
         params.put("supplier", supplierDataStore.getAll());
 
+        // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
 
         return null;
