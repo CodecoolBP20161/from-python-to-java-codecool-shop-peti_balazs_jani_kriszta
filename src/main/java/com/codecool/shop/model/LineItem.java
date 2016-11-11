@@ -13,7 +13,7 @@ public class LineItem {
     private float defaultPrice;
     private float subtotal = 0;
 
-
+    // Constructor for LineItem class
     public LineItem(int productID){
         ProductDaoMem productInstance = ProductDaoMem.getInstance();
 
