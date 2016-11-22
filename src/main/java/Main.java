@@ -1,4 +1,4 @@
-import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.controller.ProductControllerMem;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -25,12 +25,12 @@ public class Main {
         populateData();
 
         // Routes
-        get("/category/:id", ProductController::renderByFilter, tmp);
-        get("/supplier/:id", ProductController::renderByFilter, tmp);
-        get("/tocart/:id", (request, response) -> ProductController.saveToCart(request, response));
+        get("/category/:id", ProductControllerMem::renderByFilter, tmp);
+        get("/supplier/:id", ProductControllerMem::renderByFilter, tmp);
+        get("/tocart/:id", (request, response) -> ProductControllerMem.saveToCart(request, response));
         get("/hello", (req, res) -> "Hello World");
 
-        get("/", ProductController::renderProducts, tmp);
+        get("/", ProductControllerMem::renderProducts, tmp);
 
     }
 
