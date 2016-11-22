@@ -27,26 +27,35 @@ public class ProductControllerMem implements ProductController {
         }
     }
 
+    // collects shopping cart's data to show them on the modal and the shopping cart icon
+    private static Map showShoppingCart(Request req){
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        Map params = new HashMap<>();
+
+        params.put("lineitems", sessionCart.getAllLineItems());
+        params.put("totalprice", sessionCart.getTotalPrice());
+        params.put("counter", sessionCart.getTotalQuantity());
+
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("supplier", supplierDataStore.getAll());
+
+        return params;
+    }
+
     // Render all products and filter menu elements
     public static ModelAndView renderProducts(Request req, Response res) {
         setSession(req);
         // Read data from from the shopping cart saved in the session
-        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
 
         Map params = new HashMap<>();
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
 
-        // Render data in shopping cart modal
-        params.put("lineitems", sessionCart.getAllLineItems());
-        params.put("totalprice", sessionCart.getTotalPrice());
-        params.put("counter", sessionCart.getTotalQuantity());
+        // put shopping cart's data to params
+        params.putAll(showShoppingCart(req));
 
         params.put("products", productDataStore.getAll());
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
         params.put("title", "Codecool Shop");
-
 
         return new ModelAndView(params, "product/index");
     }
@@ -59,8 +68,6 @@ public class ProductControllerMem implements ProductController {
         int id = Integer.parseInt(req.params("id"));
         Map params = new HashMap<>();
 
-        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
-
         if (req.uri().contains("category")) {
             params.put("products", productDataStore.getBy(productCategoryDataStore.find(id)));
             params.put("title", productCategoryDataStore.find(id).getName());
@@ -71,12 +78,8 @@ public class ProductControllerMem implements ProductController {
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
 
-        params.put("lineitems", sessionCart.getAllLineItems());
-        params.put("totalprice", sessionCart.getTotalPrice());
-        params.put("counter", sessionCart.getTotalQuantity());
-
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
+        // put shopping cart's data to params
+        params.putAll(showShoppingCart(req));
 
         return new ModelAndView(params, "product/index");
     }
@@ -91,20 +94,16 @@ public class ProductControllerMem implements ProductController {
 
         Map params = new HashMap<>();
 
-        params.put("lineitems", sessionCart.getAllLineItems());
-        params.put("counter", sessionCart.getTotalQuantity());
-        params.put("totalprice", sessionCart.getTotalPrice());
+        // put shopping cart's data to params
+        params.putAll(showShoppingCart(req));
 
         params.put("products", productDataStore.getAll());
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
 
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
 
         return null;
     }
-
 }
 
 
