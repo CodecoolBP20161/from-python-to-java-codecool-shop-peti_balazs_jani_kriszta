@@ -1,7 +1,7 @@
 package com.codecool.shop.model;
 
 
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 
 import java.math.BigDecimal;
 
