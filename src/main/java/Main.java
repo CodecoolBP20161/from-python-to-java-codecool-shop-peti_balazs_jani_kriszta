@@ -2,6 +2,7 @@ import com.codecool.shop.controller.ProductControllerMem;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.database.DBConnection;
 import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.memory.SupplierDaoMem;
@@ -10,11 +11,15 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.sql.SQLException;
+
 import static spark.Spark.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        DBConnection dbConnection = new DBConnection();
+        dbConnection.connect();
 
         ThymeleafTemplateEngine tmp = new ThymeleafTemplateEngine();
         // default server settings
@@ -23,6 +28,7 @@ public class Main {
         port(8888);
 
         populateData();
+
 
         // Routes
         get("/category/:id", ProductControllerMem::renderByFilter, tmp);
@@ -33,6 +39,7 @@ public class Main {
         get("/", ProductControllerMem::renderProducts, tmp);
 
     }
+
 
     public static void populateData() {
 
