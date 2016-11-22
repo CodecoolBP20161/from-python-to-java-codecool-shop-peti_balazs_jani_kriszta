@@ -30,6 +30,8 @@ public class Main {
 
         PopulateDate.populateData();
 
+        // set ProductController to work with mem
+        ProductControllerMem.setAttributes();
 
         // Routes
         get("/category/:id", ProductControllerMem::renderByFilter, tmp);
