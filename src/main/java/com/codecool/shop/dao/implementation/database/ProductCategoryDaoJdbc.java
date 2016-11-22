@@ -17,30 +17,20 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         String name = category.getName();
         String description = category.getDescription();
         String department = category.getDepartment();
-        int counter = 1;
-        try {
-            category.setId(counter);
-            sql = "INSERT INTO product_categories (name, description, department) VALUES ('" + name + "','" + description + "','" + department + "')";
-            stmt = connection.getConnection().createStatement();
-            stmt.executeUpdate(sql);
-            counter++;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        sql = "INSERT INTO product_categories (name, description, department) VALUES ('" + name + "','" + description + "','" + department + "')";
+        connection.executeQuery(sql);
     }
 
     @Override
     public ProductCategory find(int productID) {
-        try {
-            sql = "SELECT * FROM product_categories WHERE id="+productID+";";
-            stmt = connection.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            ProductCategory productCategory;
+        sql = "SELECT * FROM product_categories WHERE id="+productID+";";
+        ProductCategory productCategory;
+        try (Connection conn = connection.connect();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
             if (rs.next()){
-                return productCategory= new ProductCategory(rs.getString("name"), rs.getString("department"), rs.getString("description"));
+                return productCategory = new ProductCategory(rs.getString("name"), rs.getString("department"), rs.getString("description"));
             }
-
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -49,23 +39,19 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
     @Override
     public void remove(int productID) {
-        try {
-            sql = "DELETE FROM product_categories WHERE id="+productID+";";
-            stmt = connection.getConnection().createStatement();
-            stmt.executeQuery(sql);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
+        String query = "DELETE FROM suppliers WHERE id = " + productID + ";";
+        connection.executeQuery(query);
     }
 
     @Override
     public List<ProductCategory> getAll() {
         ProductCategory productCategory;
         List<ProductCategory> allCategories;
-        try {
-            sql = "SELECT * FROM product_categories;";
-            stmt = connection.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        sql = "SELECT * FROM product_categories;";
+
+        try (Connection conn = connection.connect();
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(sql)){
             allCategories = new ArrayList<>();
             while (rs.next()){
                 productCategory= new ProductCategory(rs.getString("name"),rs.getString("department"),rs.getString("description"));
@@ -79,22 +65,4 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         }
         return null;
     }
-
-//    private java.sql.Connection getConnection() throws SQLException {
-//        return DriverManager.getConnection(
-//                DATABASE,
-//                DB_USER,
-//                DB_PASSWORD);
-//    }
-//
-//    private void executeQuery(String query) {
-//        try (java.sql.Connection connection = getConnection();
-//             Statement statement = connection.createStatement();
-//        ) {
-//            statement.execute(query);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
