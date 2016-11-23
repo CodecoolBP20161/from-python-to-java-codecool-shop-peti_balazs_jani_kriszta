@@ -26,8 +26,8 @@ public class SupplierDaoJdbc implements SupplierDao {
     @Override
     public Supplier find(int id) {
 
-         String query = " SELECT id, name, description " +
-                       " FROM supplier " +
+         String query = " SELECT *" +
+                       " FROM suppliers " +
                        " WHERE id = '" + id +"';";
 
         try (Connection connection = dbConnection.connect();
