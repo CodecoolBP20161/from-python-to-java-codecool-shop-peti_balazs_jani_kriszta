@@ -1,15 +1,6 @@
-import com.codecool.shop.controller.ProductControllerMem;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.controller.Controller;
+import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
-import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
-import com.codecool.shop.dao.implementation.memory.SupplierDaoMem;
-import com.codecool.shop.model.PopulateDate;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.sql.SQLException;
@@ -28,18 +19,20 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
-        PopulateDate.populateData();
+        // Run populateData only once at the first, then comment out to prevent duplicating data in database
+//        PopulateData.populateData();
 
-        // set ProductController to work with mem
-        ProductControllerMem.setAttributes();
+        Controller controller = new Controller();
+        controller.setState("DB");
+        controller.doAct();
 
         // Routes
-        get("/category/:id", ProductControllerMem::renderByFilter, tmp);
-        get("/supplier/:id", ProductControllerMem::renderByFilter, tmp);
-        get("/tocart/:id", (request, response) -> ProductControllerMem.saveToCart(request, response));
+        get("/category/:id", ProductController::renderByFilter, tmp);
+        get("/supplier/:id", ProductController::renderByFilter, tmp);
+        get("/tocart/:id", (request, response) -> ProductController.saveToCart(request, response));
         get("/hello", (req, res) -> "Hello World");
 
-        get("/", ProductControllerMem::renderProducts, tmp);
+        get("/", ProductController::renderProducts, tmp);
 
     }
 }
