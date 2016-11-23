@@ -3,18 +3,18 @@ package com.codecool.shop.model;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
-import com.codecool.shop.dao.implementation.memory.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.database.ProductCategoryDaoJdbc;
+import com.codecool.shop.dao.implementation.database.ProductDaoJdbc;
+import com.codecool.shop.dao.implementation.database.SupplierDaoJdbc;
 
 /**
  * Created by csyk on 2016.11.22..
  */
 public class PopulateData {
     public static void populateData() {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductDao productDataStore = new ProductDaoJdbc();
+        ProductCategoryDao productCategoryDataStore = new ProductCategoryDaoJdbc();
+        SupplierDao supplierDataStore = new SupplierDaoJdbc();
 
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "and you are done");
@@ -50,13 +50,13 @@ public class PopulateData {
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Panasonic TX-32CS510E ", 299, "USD", "Experience unrivaled image clarity with 4K Ultra HD direct-lit LED technology.", tv, panasonic));
-        productDataStore.add(new Product("Przewalski's 2.0", 1500, "USD", "A rare and endangered subspecies of wild horse (Equus ferus) native to the steppes of central Asia. Przewalski's horse has never been domesticated", horse, rohan));
-        productDataStore.add(new Product("Samsung Note7", 450, "USD", "Samsung's fiercest smartphone so far. Designed with that intrepid spirit in mind.", smartphone, samsung));
+        productDataStore.add(new Product("Przewalski s 2.0", 1500, "USD", "A rare and endangered subspecies of wild horse (Equus ferus) native to the steppes of central Asia. Przewalski s horse has never been domesticated", horse, rohan));
+        productDataStore.add(new Product("Samsung Note7", 450, "USD", "Samsung s fiercest smartphone so far. Designed with that intrepid spirit in mind.", smartphone, samsung));
         productDataStore.add(new Product("Sony LED TV", 250, "USD", "Lose yourself in ultra contrast. It will take your breath away.", tv, sony));
         productDataStore.add(new Product("Amazon Kindle Paperwhite", 79.9f, "USD", "High Resolution Display with Next-Gen Built-in Light. With WiFi", ebookreader, amazon));
         productDataStore.add(new Product("Pampa", 900, "USD", "The Pampa Horse is a horse breed that combines the characteristics of Brazilian Horses.", horse, rohan));
-        productDataStore.add(new Product("Sony Z3", 350, "USD", "Don’t settle for good. Demand great. Do more than you thought possible.Impossibly slim and wonderfully powerful.", smartphone, sony));
-        productDataStore.add(new Product("Przewalski's 1.0", 15, "USD", "A rare and endangered subspecies of wild horse (Equus ferus). NOW ON SALE!!!", horse, rohan));
+        productDataStore.add(new Product("Sony Z3", 350, "USD", "Don t settle for good. Demand great. Do more than you thought possible.Impossibly slim and wonderfully powerful.", smartphone, sony));
+        productDataStore.add(new Product("Przewalski s 1.0", 15, "USD", "A rare and endangered subspecies of wild horse (Equus ferus). NOW ON SALE!!!", horse, rohan));
         productDataStore.add(new Product("Lenovo Yoga", 450, "USD", "Think you know everything a tablet can do? Think again.", tablet, lenovo));
         productDataStore.add(new Product("Canon EOS 70D", 500, "USD", "Think you know everything a tablet can do? Think again.", camera, canon));
     }

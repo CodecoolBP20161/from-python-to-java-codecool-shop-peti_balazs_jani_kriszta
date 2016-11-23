@@ -8,8 +8,8 @@ import com.codecool.shop.dao.implementation.database.SupplierDaoJdbc;
 public class ProductControllerJdbc extends ProductController{
 
     public static void setAttributes() {
-        ProductControllerMem.productDataStore = new ProductDaoJdbc();
-        ProductControllerMem.productCategoryDataStore = new ProductCategoryDaoJdbc();
-        ProductControllerMem.supplierDataStore = new SupplierDaoJdbc();
+        ProductController.productDataStore = new ProductDaoJdbc();
+        ProductController.productCategoryDataStore = new ProductCategoryDaoJdbc();
+        ProductController.supplierDataStore = new SupplierDaoJdbc();
     }
 }
