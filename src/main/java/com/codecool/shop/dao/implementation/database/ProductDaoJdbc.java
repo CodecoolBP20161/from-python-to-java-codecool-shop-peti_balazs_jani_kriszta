@@ -36,7 +36,7 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public Product find(int id) {
-        sql = "SELECT * FROM product_categories WHERE id="+id+";";
+        sql = "SELECT * FROM products WHERE id="+id+";";
         ProductCategoryDao productCategoryDao = new  ProductCategoryDaoJdbc();
         SupplierDao supplierDao = new SupplierDaoJdbc();
         try (Connection conn = connection.connect();

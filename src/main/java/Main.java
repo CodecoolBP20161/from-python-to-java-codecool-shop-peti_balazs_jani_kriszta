@@ -19,12 +19,14 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
-        // Run populateData only once at the first, then comment out to prevent duplicating data in database
-//        PopulateData.populateData();
+        String state = "DB";
 
-        Controller controller = new Controller();
-        controller.setState("DB");
-        controller.doAct();
+        // Run populateData only once at the first, then comment out to prevent duplicating data in database
+//        PopulateData.populateData(state);
+
+        Controller.setState(state);
+        Controller.doAct();
+
 
         // Routes
         get("/category/:id", ProductController::renderByFilter, tmp);
