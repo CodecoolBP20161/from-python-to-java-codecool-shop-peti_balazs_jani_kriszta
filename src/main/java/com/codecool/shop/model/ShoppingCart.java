@@ -1,15 +1,24 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.controller.Controller;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class ShoppingCart {
     private float totalPrice;
     private int totalQuantity;
     private Map<Integer, LineItem> lineItems = new HashMap<>();
+    private static String state;
+
+    private static String getControllerState() {
+        state = Controller.getState();
+        return state;
+    }
 
     // Add LineItems lineItems hashmap (content of shoppingcart)
     private void addToMap(LineItem lineItem) {
@@ -19,7 +28,8 @@ public class ShoppingCart {
     // Instantiate lineitems by productId and check whether they already added to the shoppingcart
     // Set quantity of items and totalprice of shoppingcart
     public void addToCart(int id) {
-        LineItem newItem = new LineItem(id);
+        String state = getControllerState();
+        LineItem newItem = new LineItem(id, state);
         if (lineItems.containsKey(newItem.getProductID())) {
             lineItems.get(newItem.getProductID()).setQuantity();
             lineItems.get(newItem.getProductID()).setSubtotal();
