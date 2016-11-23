@@ -3,8 +3,8 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.junit.After;
 import org.junit.Test;
-import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -14,13 +14,19 @@ public class ProductDaoMemTest {
 
     private ProductDaoMem productDaoMem;
 
-    @Mock
-    List<Product> testData = new ArrayList<>();
+    private List<Product> testData = new ArrayList<>();
+
+    private Supplier testSupplier;
+    private ProductCategory testCategory;
+    private Product testProduct;
+
+    private List<Supplier> testSupplierList = new ArrayList<>();
+    private List<Product> testProductList = new ArrayList<>();
+
 
     @org.junit.Before
     public void setUp() throws Exception {
-        productDaoMem = new ProductDaoMem();
-
+        productDaoMem = ProductDaoMem.getInstance();
 
         // create test data
         Supplier supplier1 = new Supplier("suppliername1", "supplierdesc1");
@@ -46,6 +52,13 @@ public class ProductDaoMemTest {
         testData.add(product1);
         testData.add(product2);
 
+        // assign/add test objects
+        testSupplier = supplier1;
+        testCategory = productCategory1;
+        testProduct = product1;
+        testSupplierList.add(supplier1);
+        testProductList.add(product1);
+
     }
 
 
@@ -61,7 +74,7 @@ public class ProductDaoMemTest {
 
     @Test
     public void find() throws Exception {
-
+        assertEquals(testProduct, productDaoMem.find(1));
     }
 
     @org.junit.Test
@@ -76,12 +89,19 @@ public class ProductDaoMemTest {
 
     @org.junit.Test
     public void getBySupplier() throws Exception {
-
+        assertEquals(testProductList, productDaoMem.getBy(testSupplier));
     }
 
     @org.junit.Test
     public void getByCategory() throws Exception {
+        assertEquals(testProductList, productDaoMem.getBy(testCategory));
 
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        productDaoMem.remove(1);
+        productDaoMem.remove(2);
     }
 
 }
