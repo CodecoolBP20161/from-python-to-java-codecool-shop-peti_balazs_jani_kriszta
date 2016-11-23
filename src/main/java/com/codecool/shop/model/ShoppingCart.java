@@ -25,7 +25,7 @@ public class ShoppingCart {
         lineItems.put(lineItem.getProductID(), lineItem);
     }
 
-    // Instantiate lineitems by productId and check whether they already added to the shoppingcart
+    // Instantiate lineItems by productId and the Controller's state and check whether they have been already added to the shoppingcart
     // Set quantity of items and totalprice of shoppingcart
     public void addToCart(int id) {
         String state = getControllerState();

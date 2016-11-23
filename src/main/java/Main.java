@@ -10,23 +10,29 @@ import static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
+        // Connection to PostgreSQL Database
         DBConnection dbConnection = new DBConnection();
         dbConnection.connect();
 
+        // Instantiate template engine
         ThymeleafTemplateEngine tmp = new ThymeleafTemplateEngine();
-        // default server settings
+
+        // Default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
 
+        // Declare the value for the Controller's state variable
+        // Choose between "DB" or "MEM"
         String state = "DB";
 
-        // Run populateData only once at the first, then comment out to prevent duplicating data in database
-//        PopulateData.populateData(state);
+        // IF RUN IN DB STATE, RUN POPULATEDATA ONLY ONCE, AT THE FIRST TIME WHEN YOU ARE RUNNING MAIN
+        // so there won't be duplicates of records
+//         PopulateData.populateData(state);
 
+        // Set state
         Controller.setState(state);
         Controller.doAct();
-
 
         // Routes
         get("/category/:id", ProductController::renderByFilter, tmp);

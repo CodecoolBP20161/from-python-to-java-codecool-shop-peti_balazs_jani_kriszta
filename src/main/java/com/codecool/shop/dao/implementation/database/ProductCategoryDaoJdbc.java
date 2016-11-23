@@ -10,7 +10,7 @@ import java.util.List;
 public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private String sql;
     private DBConnection connection = new DBConnection();
-    private Statement stmt;
+    private ProductCategory productCategory;
 
     @Override
     public void add(ProductCategory category) {
@@ -24,7 +24,6 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     @Override
     public ProductCategory find(int productID) {
         sql = "SELECT * FROM product_categories WHERE id="+productID+";";
-        ProductCategory productCategory;
         try (Connection conn = connection.connect();
              Statement statement = conn.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
@@ -45,20 +44,17 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
     @Override
     public List<ProductCategory> getAll() {
-        ProductCategory productCategory;
-        List<ProductCategory> allCategories;
         sql = "SELECT * FROM product_categories;";
-
         try (Connection conn = connection.connect();
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql)){
-            allCategories = new ArrayList<>();
+            List<ProductCategory> returnCategoriesList = new ArrayList<>();
             while (rs.next()){
                 productCategory= new ProductCategory(rs.getString("name"),rs.getString("department"),rs.getString("description"));
                 productCategory.setId(rs.getInt("id"));
-                allCategories.add(productCategory);
+                returnCategoriesList.add(productCategory);
             }
-            return allCategories;
+            return returnCategoriesList;
 
         }catch (SQLException e){
             e.printStackTrace();

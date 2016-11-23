@@ -43,16 +43,15 @@ public abstract class ProductController {
 
     // Render all products and filter menu elements
     public static ModelAndView renderProducts(Request req, Response res) {
+        // Read data from the shopping cart saved in the session
         setSession(req);
-        // Read data from from the shopping cart saved in the session
 
         Map params = new HashMap<>();
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
 
-        // put shopping cart's data to params
+        // Add shopping cart's data to params
         params.putAll(showShoppingCart(req));
-
         params.put("products", productDataStore.getAll());
         params.put("title", "Codecool Shop");
 
@@ -77,7 +76,7 @@ public abstract class ProductController {
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
 
-        // put shopping cart's data to params
+        // Add shopping cart's data to params
         params.putAll(showShoppingCart(req));
 
         return new ModelAndView(params, "product/index");
@@ -87,15 +86,13 @@ public abstract class ProductController {
     public static String saveToCart(Request req, Response res) {
         setSession(req);
         int id = Integer.parseInt(req.params("id"));
-
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.addToCart(id);
 
         Map params = new HashMap<>();
 
-        // put shopping cart's data to params
+        // Add shopping cart's data to params
         params.putAll(showShoppingCart(req));
-
         params.put("products", productDataStore.getAll());
 
         // Save uri into session for redirect

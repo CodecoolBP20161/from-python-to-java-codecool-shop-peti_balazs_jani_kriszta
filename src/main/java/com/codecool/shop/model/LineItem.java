@@ -17,19 +17,17 @@ public class LineItem {
 
     // Constructor for LineItem class
     public LineItem(int productID, String state){
-//        String state = status;
         ProductDao productInstance = null;
+
         if (state.equals("DB")) {
             productInstance = new ProductDaoJdbc();
         } else if (state.equals("MEM")) {
             productInstance = ProductDaoMem.getInstance();
         }
-//        ProductDaoMem productInstance = ProductDaoMem.getInstance();
 
         this.productID = productID;
         this.defaultPrice = productInstance.find(productID).getDefaultPrice();
         this.productName = productInstance.find(productID).getName();
-
     }
 
     public void setQuantity(){

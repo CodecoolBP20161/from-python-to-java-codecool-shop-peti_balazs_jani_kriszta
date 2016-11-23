@@ -10,9 +10,11 @@ import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.dao.implementation.memory.SupplierDaoMem;
 
+
 /**
  * Created by csyk on 2016.11.22..
  */
+
 public class PopulateData {
     public static void populateData(String state) {
 
