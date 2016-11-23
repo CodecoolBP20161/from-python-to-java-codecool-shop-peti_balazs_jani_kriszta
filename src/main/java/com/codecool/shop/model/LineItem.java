@@ -1,6 +1,8 @@
 package com.codecool.shop.model;
 
 
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.database.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 
 import java.math.BigDecimal;
@@ -14,12 +16,20 @@ public class LineItem {
     private float subtotal = 0;
 
     // Constructor for LineItem class
-    public LineItem(int productID){
-        ProductDaoMem productInstance = ProductDaoMem.getInstance();
+    public LineItem(int productID, String state){
+//        String state = status;
+        ProductDao productInstance = null;
+        if (state.equals("DB")) {
+            productInstance = new ProductDaoJdbc();
+        } else if (state.equals("MEM")) {
+            productInstance = ProductDaoMem.getInstance();
+        }
+//        ProductDaoMem productInstance = ProductDaoMem.getInstance();
 
         this.productID = productID;
         this.defaultPrice = productInstance.find(productID).getDefaultPrice();
         this.productName = productInstance.find(productID).getName();
+
     }
 
     public void setQuantity(){
