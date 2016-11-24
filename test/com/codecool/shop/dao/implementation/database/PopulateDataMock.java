@@ -10,9 +10,9 @@ import com.codecool.shop.model.Supplier;
 public class PopulateDataMock {
     public static void populateDataMock() {
 
-        ProductDao productDataStore = new ProductDaoJdbc();
-        ProductCategoryDao productCategoryDataStore = new ProductCategoryDaoJdbc();
-        SupplierDao supplierDataStore = new SupplierDaoJdbc();
+        ProductDao productDataStore = ProductDaoJdbc.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoJdbc.getInstance();
 
 
         //setting up new suppliers
