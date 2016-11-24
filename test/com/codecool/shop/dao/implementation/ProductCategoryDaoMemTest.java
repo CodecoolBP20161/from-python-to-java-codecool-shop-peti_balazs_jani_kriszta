@@ -33,7 +33,7 @@ public class ProductCategoryDaoMemTest {
 
         testList.clear();
         getAllTestList.clear();
-        
+
         testList.add(productCategory);
         getAllTestList.add(productCategory);
         getAllTestList.add(productCategory2);
@@ -42,13 +42,13 @@ public class ProductCategoryDaoMemTest {
     @Test
     public void add() throws Exception {
         productCategoryDaoMem.add(productCategory);
-        assertEquals(this.testList, productCategoryDaoMem.getAll());
+        assertEquals("Test add",this.testList, productCategoryDaoMem.getAll());
     }
 
     @Test
     public void find() throws Exception {
         productCategoryDaoMem.add(productCategory);
-        assertEquals(productCategory, productCategoryDaoMem.find(productCategory.getId()));
+        assertEquals("Test find",productCategory, productCategoryDaoMem.find(productCategory.getId()));
     }
 
     @Test
@@ -56,13 +56,13 @@ public class ProductCategoryDaoMemTest {
         productCategoryDaoMem.add(productCategory);
         assertTrue(productCategoryDaoMem.getAll().contains(productCategory));
         productCategoryDaoMem.remove(productCategory.getId());
-        assertTrue(!productCategoryDaoMem.getAll().contains(productCategory));
+        assertTrue("Test remove",!productCategoryDaoMem.getAll().contains(productCategory));
     }
 
     @Test
     public void getAll() throws Exception {
         productCategoryDaoMem.add(productCategory);
         productCategoryDaoMem.add(productCategory2);
-        assertEquals(productCategoryDaoMem.getAll(), getAllTestList);
+        assertEquals("Get all test",productCategoryDaoMem.getAll(), getAllTestList);
     }
 }
