@@ -1,6 +1,7 @@
 import com.codecool.shop.controller.Controller;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
+import com.codecool.shop.model.PopulateData;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.sql.SQLException;

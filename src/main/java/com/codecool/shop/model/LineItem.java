@@ -20,7 +20,7 @@ public class LineItem {
         ProductDao productInstance = null;
 
         if (state.equals("DB")) {
-            productInstance = new ProductDaoJdbc();
+            productInstance = ProductDaoJdbc.getInstance();
         } else if (state.equals("MEM")) {
             productInstance = ProductDaoMem.getInstance();
         }
