@@ -1,23 +1,18 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import org.junit.Before;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by csyk on 2016.11.23..
- */
 public class SupplierDaoMemTest {
     private SupplierDao supplierDao;
     private List<Supplier> testData = new ArrayList<>();
+    private Supplier supplier2;
 
     @Before
     public void setUp() throws Exception {
@@ -25,14 +20,7 @@ public class SupplierDaoMemTest {
 
         //populate test datas
         Supplier supplier1 = new Supplier("suppliername1", "supplierdesc1");
-        supplier1.setId(1);
-        Supplier supplier2 = new Supplier("suppliername2", "supplierdesc2");
-        supplier2.setId(2);
-
-        ProductCategory productCategory1 = new ProductCategory("categoryname1", "department1", "categorydesc1");
-        productCategory1.setId(1);
-        ProductCategory productCategory2 = new ProductCategory("categoryname2", "department2", "categorydesc2");
-        productCategory2.setId(2);
+        supplier2 = new Supplier("suppliername2", "supplierdesc2");
 
         //add suppliers to supplierDaoMem arraylist
         supplierDao.add(supplier1);
@@ -45,22 +33,30 @@ public class SupplierDaoMemTest {
 
     @org.junit.After
     public void tearDown() throws Exception {
-        //remove
+        //removing elements from supplierDao
+        for(int i = supplierDao.getAll().size(); i > 0; i--){
+            supplierDao.remove(i);
+        }
     }
 
     @org.junit.Test
     public void add() throws Exception {
-
+        Supplier supplier3 = new Supplier("suppliername3", "supplierdesc3");
+        supplierDao.add(supplier3);
+        testData.add(supplier3);
+        assertEquals(testData, supplierDao.getAll());
     }
 
     @org.junit.Test
     public void find() throws Exception {
-
+        assertEquals(supplier2, supplierDao.find(2));
     }
 
     @org.junit.Test
     public void remove() throws Exception {
-
+        testData.remove(supplier2);
+        supplierDao.remove(2);
+        assertEquals(testData, supplierDao.getAll());
     }
 
     @org.junit.Test
