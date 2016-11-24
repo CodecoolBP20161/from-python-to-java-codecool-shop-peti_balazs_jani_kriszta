@@ -53,7 +53,7 @@ public abstract class ProductController {
         // Add shopping cart's data to params
         params.putAll(showShoppingCart(req));
         params.put("products", productDataStore.getAll());
-        params.put("title", "Codecool Shop");
+        params.put("title", "Horsecool Shop");
 
         return new ModelAndView(params, "product/index");
     }
