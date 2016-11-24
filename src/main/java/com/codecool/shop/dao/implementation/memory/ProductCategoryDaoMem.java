@@ -45,7 +45,7 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
         return DATA;
     }
 
-    protected void clear(){
+    public void clear(){
         DATA.clear();
     }
 }
