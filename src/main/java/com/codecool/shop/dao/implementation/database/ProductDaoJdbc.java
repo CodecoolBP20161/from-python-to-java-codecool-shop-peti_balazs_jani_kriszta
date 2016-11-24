@@ -20,6 +20,17 @@ public class ProductDaoJdbc implements ProductDao {
     private String sql;
     public Product product;
     public List<Product> returnProductsList;
+    private static ProductDaoJdbc instance = null;
+
+    private ProductDaoJdbc() {
+    }
+
+    public static ProductDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoJdbc();
+        }
+        return instance;
+    }
 
     @Override
     public void add(Product product) {
@@ -38,8 +49,8 @@ public class ProductDaoJdbc implements ProductDao {
     @Override
     public Product find(int id) {
         sql = "SELECT * FROM products WHERE id="+id+";";
-        ProductCategoryDao productCategoryDao = new  ProductCategoryDaoJdbc();
-        SupplierDao supplierDao = new SupplierDaoJdbc();
+        ProductCategoryDao productCategoryDao = ProductCategoryDaoJdbc.getInstance();
+        SupplierDao supplierDao = SupplierDaoJdbc.getInstance();
         try (Connection conn = connection.connect();
              Statement statement = conn.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
@@ -99,8 +110,8 @@ public class ProductDaoJdbc implements ProductDao {
 
     private void updateReturnProductList(String sql){
         returnProductsList = new ArrayList<>();
-        ProductCategoryDao productCategoryDao = new  ProductCategoryDaoJdbc();
-        SupplierDao supplierDao = new SupplierDaoJdbc();
+        ProductCategoryDao productCategoryDao = ProductCategoryDaoJdbc.getInstance();
+        SupplierDao supplierDao = SupplierDaoJdbc.getInstance();
         try (Connection conn = connection.connect();
              Statement statement = conn.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {

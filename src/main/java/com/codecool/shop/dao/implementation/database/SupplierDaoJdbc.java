@@ -14,6 +14,17 @@ import java.util.List;
 
 public class SupplierDaoJdbc implements SupplierDao {
     private DBConnection dbConnection = new DBConnection();
+    private static SupplierDaoJdbc instance = null;
+
+    private SupplierDaoJdbc() {
+    }
+
+    public static SupplierDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new SupplierDaoJdbc();
+        }
+        return instance;
+    }
 
     @Override
     public void add(Supplier supplier){
