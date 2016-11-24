@@ -23,9 +23,9 @@ public class PopulateData {
         SupplierDao supplierDataStore = null;
 
         if (state.equals("DB")) {
-            productDataStore = new ProductDaoJdbc();
-            productCategoryDataStore = new ProductCategoryDaoJdbc();
-            supplierDataStore = new SupplierDaoJdbc();
+            productDataStore = ProductDaoJdbc.getInstance();
+            productCategoryDataStore = ProductCategoryDaoJdbc.getInstance();
+            supplierDataStore = SupplierDaoJdbc.getInstance();
         } else if (state.equals("MEM")) {
             productDataStore = ProductDaoMem.getInstance();
             productCategoryDataStore = ProductCategoryDaoMem.getInstance();
