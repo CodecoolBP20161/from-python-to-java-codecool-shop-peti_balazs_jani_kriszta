@@ -3,21 +3,20 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.ShoppingCart;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductController {
+public abstract class ProductController {
 
-    private static ProductDao productDataStore = ProductDaoMem.getInstance();
-    private static ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    private static SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+    static ProductDao productDataStore;
+    static ProductCategoryDao productCategoryDataStore;
+    static SupplierDao supplierDataStore;
+
 
     // Instantiate shopping cart if there is no shopping cart saved in session
     private static void setSession(Request req){
@@ -27,26 +26,34 @@ public class ProductController {
         }
     }
 
+    // collects shopping cart's data to show them on the modal and the shopping cart icon
+    private static Map showShoppingCart(Request req){
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        Map params = new HashMap<>();
+
+        params.put("lineitems", sessionCart.getAllLineItems());
+        params.put("totalprice", sessionCart.getTotalPrice());
+        params.put("counter", sessionCart.getTotalQuantity());
+
+        params.put("categories", productCategoryDataStore.getAll());
+        params.put("supplier", supplierDataStore.getAll());
+
+        return params;
+    }
+
     // Render all products and filter menu elements
     public static ModelAndView renderProducts(Request req, Response res) {
+        // Read data from the shopping cart saved in the session
         setSession(req);
-        // Read data from from the shopping cart saved in the session
-        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
 
         Map params = new HashMap<>();
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
 
-        // Render data in shopping cart modal
-        params.put("lineitems", sessionCart.getAllLineItems());
-        params.put("totalprice", sessionCart.getTotalPrice());
-        params.put("counter", sessionCart.getTotalQuantity());
-
+        // Add shopping cart's data to params
+        params.putAll(showShoppingCart(req));
         params.put("products", productDataStore.getAll());
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
-        params.put("title", "Codecool Shop");
-
+        params.put("title", "Horsecool Shop");
 
         return new ModelAndView(params, "product/index");
     }
@@ -59,8 +66,6 @@ public class ProductController {
         int id = Integer.parseInt(req.params("id"));
         Map params = new HashMap<>();
 
-        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
-
         if (req.uri().contains("category")) {
             params.put("products", productDataStore.getBy(productCategoryDataStore.find(id)));
             params.put("title", productCategoryDataStore.find(id).getName());
@@ -71,12 +76,8 @@ public class ProductController {
             params.put("slogan", supplierDataStore.find(id).getDescription());
         }
 
-        params.put("lineitems", sessionCart.getAllLineItems());
-        params.put("totalprice", sessionCart.getTotalPrice());
-        params.put("counter", sessionCart.getTotalQuantity());
-
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
+        // Add shopping cart's data to params
+        params.putAll(showShoppingCart(req));
 
         return new ModelAndView(params, "product/index");
     }
@@ -85,26 +86,20 @@ public class ProductController {
     public static String saveToCart(Request req, Response res) {
         setSession(req);
         int id = Integer.parseInt(req.params("id"));
-
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.addToCart(id);
 
         Map params = new HashMap<>();
 
-        params.put("lineitems", sessionCart.getAllLineItems());
-        params.put("counter", sessionCart.getTotalQuantity());
-        params.put("totalprice", sessionCart.getTotalPrice());
-
+        // Add shopping cart's data to params
+        params.putAll(showShoppingCart(req));
         params.put("products", productDataStore.getAll());
-        params.put("categories", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
 
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
 
         return null;
     }
-
 }
 
 

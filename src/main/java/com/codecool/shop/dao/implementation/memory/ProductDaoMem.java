@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.memory;
 
 
 import com.codecool.shop.dao.ProductDao;
@@ -17,7 +17,7 @@ public class ProductDaoMem implements ProductDao {
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductDaoMem() {
+    public ProductDaoMem() {
     }
 
     public static ProductDaoMem getInstance() {
