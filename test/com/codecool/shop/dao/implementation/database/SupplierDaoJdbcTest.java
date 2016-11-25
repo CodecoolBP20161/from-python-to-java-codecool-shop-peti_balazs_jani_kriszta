@@ -101,7 +101,7 @@ public class SupplierDaoJdbcTest {
 
     @Test
     public void remove() throws Exception {
-        
+
     }
 
     @Test
