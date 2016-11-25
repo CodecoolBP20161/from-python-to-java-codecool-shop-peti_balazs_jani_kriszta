@@ -81,7 +81,8 @@ public class ProductDaoJdbcTest {
         Statement stmt = connection.createStatement();
 
         // truncate tables, reset id sequence
-        String sql = "TRUNCATE products, product_categories, suppliers; ALTER SEQUENCE products_id_seq RESTART;";
+        String sql = "TRUNCATE products, product_categories, suppliers; ALTER SEQUENCE suppliers_id_seq RESTART;" +
+                "ALTER SEQUENCE products_id_seq RESTART; ALTER SEQUENCE product_categories_id_seq RESTART;";
         // Execute deletion
         stmt.executeUpdate(sql);
 
@@ -105,7 +106,8 @@ public class ProductDaoJdbcTest {
         Statement stmt = connection.createStatement();
 
         // Use TRUNCATE
-        String sql = "TRUNCATE products, product_categories, suppliers";
+        String sql = "TRUNCATE products, product_categories, suppliers; ALTER SEQUENCE suppliers_id_seq RESTART;" +
+                "ALTER SEQUENCE products_id_seq RESTART; ALTER SEQUENCE product_categories_id_seq RESTART;";
         // Execute deletion
         stmt.executeUpdate(sql);
     }
