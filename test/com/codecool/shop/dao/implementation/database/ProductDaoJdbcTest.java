@@ -23,8 +23,11 @@ public class ProductDaoJdbcTest {
 
     private ProductDao productDao;
 
-    private List<Product> testProductList = new ArrayList<>();
-    Product testProduct2;
+    private List<Product> testProductList;
+    private Product testProduct2;
+    private List<Product> testProduct1InList;
+    private Supplier testSupplier1;
+    private ProductCategory testCategory1;
 
 
     @Before
@@ -33,12 +36,12 @@ public class ProductDaoJdbcTest {
         /*
          populate testProductList
          */
-        //setting up new suppliers
+        //set up new suppliers
         Supplier supplier1 = new Supplier("supplier1", "supplierdesc1");
         Supplier supplier2 = new Supplier("supplier2", "supplierdesc2");
         Supplier supplier3 = new Supplier("supplier3", "supplierdesc3");
 
-        //setting up new product categories
+        //set up new product categories
         ProductCategory category1 = new ProductCategory("category1", "department1", "categorydesc1");
         ProductCategory category2 = new ProductCategory("category2", "department2", "categorydesc2");
         ProductCategory category3 = new ProductCategory("category3", "department3", "categorydesc3");
@@ -51,14 +54,24 @@ public class ProductDaoJdbcTest {
         Product product3 = new Product("product3", 300, "USD", "productdesc3", category3, supplier3);
         product3.setId(3);
 
+        // define lists
+        testProductList = new ArrayList<>();
+        testProduct1InList = new ArrayList<>();
+
+        // add/assert test data
         testProductList.add(product1);
         testProductList.add(product2);
         testProductList.add(product3);
 
+        testProduct1InList.add(product1);
+
         testProduct2 = product2;
+        testSupplier1 = supplier1;
+        testCategory1 = category1;
+
 
         /*
-        clearing database before populate
+        clear database before populate
          */
         String url = "jdbc:postgresql://localhost:5432/codecoolshop";
         String username = "postgres";
@@ -75,6 +88,7 @@ public class ProductDaoJdbcTest {
         // repopulate tables
         PopulateDataMock.populateDataMock();
 
+        // create productDaoJdbc for testing
         productDao = ProductDaoJdbc.getInstance();
     }
 
@@ -122,6 +136,10 @@ public class ProductDaoJdbcTest {
 
     @Test
     public void remove() throws Exception {
+        testProductList.remove(testProduct2);
+        productDao.remove(2);
+
+        assertEquals("testing remove()", testProductList, productDao.getAll());
 
     }
 
@@ -132,13 +150,14 @@ public class ProductDaoJdbcTest {
     }
 
     @Test
-    public void getBy() throws Exception {
+    public void getBySupplier() throws Exception {
+        assertEquals("testing getBy(supplier)", testProduct1InList, productDao.getBy(testSupplier1));
 
     }
 
     @Test
-    public void getBy1() throws Exception {
-
+    public void getByCategory() throws Exception {
+        assertEquals("testing getBy(category)", testProduct1InList, productDao.getBy(testCategory1));
     }
 
 }
