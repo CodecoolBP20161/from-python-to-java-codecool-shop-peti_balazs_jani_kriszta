@@ -1,8 +1,12 @@
+/****** GENERAL ***********/
+
 a :hover {
     text-decoration: none;
 }
 
 
+
+/****** JUMBOTRON *********/
 .jumbotron h3{
     color: rgba(0,0,0,0.5);
 }
@@ -15,6 +19,65 @@ a :hover {
     margin-right:5px;
 
 }
+
+.select {
+    margin-bottom: 10px;
+}
+
+
+
+/********** NAVBAR *************/
+.dropdown-header {
+    font-size: 19px;
+}
+hr {
+    margin: 5px;
+}
+
+.menu {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.left {
+    float: left;
+    margin-top: 20px;
+    font-size: 1.4em;
+}
+
+.right {
+    float: right;
+    margin-bottom: 10px;
+    /*position: absolute;*/
+}
+
+#items-counter {
+    width: 1.5em;
+    /*font-size: 1.3em;*/
+    text-align: center;
+    margin: 0 0 0 0;
+    display: inline-block;
+    border-radius: 100%;
+    color: white;
+    background-color: orangered;
+    vertical-align: middle;
+}
+
+#div-counter {
+    display: inline;
+    margin-bottom: 5px;
+}
+
+.fa-shopping-cart {
+    /*position: relative;*/
+}
+
+#bottom {
+    margin-bottom: 1em;
+}
+
+
+/******* MAIN CONTENT ******/
 .thumbnail
 {
     margin-bottom: 20px;
@@ -83,63 +146,8 @@ a :hover {
     border-radius: 10px;
 }
 
-.dropdown-header {
-    font-size: 19px;
-}
-hr {
-    margin: 5px;
-}
 
-
-.menu {
-    margin-top: 10px;
-    display: inline-block;
-}
-
-.left {
-    float: left;
-    margin-top: 20px;
-    font-size: 1.4em;
-}
-
-.right {
-    float: right;
-    margin-bottom: 10px;
-    /*position: absolute;*/
-}
-
-#items-counter {
-
-    width: 1.5em;
-    /*font-size: 1.3em;*/
-    text-align: center;
-    margin: 0 0 0 0;
-    display: inline-block;
-    border-radius: 100%;
-    color: white;
-    background-color: orangered;
-    vertical-align: middle;
-
-}
-
-#div-counter {
-    display: inline;
-    margin-bottom: 5px;
-}
-
-.fa-shopping-cart {
-    /*position: relative;*/
-}
-
-#bottom {
-    margin-bottom: 1em;
-}
-
-
-.select {
-    margin-bottom: 10px;
-}
-
+/******** MODAL **********/
 #modal-button {
     border: none;
 }
@@ -155,4 +163,8 @@ th, td {
 
 #table-title {
     text-align: center;
+}
+
+.delete-item {
+    margin-left: 10px;
 }

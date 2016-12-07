@@ -1,9 +1,7 @@
+import com.codecool.shop.controller.CartController;
 import com.codecool.shop.controller.Controller;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
-import com.codecool.shop.model.LineItem;
-import com.codecool.shop.model.PopulateData;
-import com.codecool.shop.model.ShoppingCart;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.sql.SQLException;
@@ -40,7 +38,7 @@ public class Main {
         // Routes
         get("/category/:id", ProductController::renderByFilter, tmp);
         get("/supplier/:id", ProductController::renderByFilter, tmp);
-        get("/tocart/:id", (request, response) -> ProductController.saveToCart(request, response));
+        get("/tocart/:id", (request, response) -> CartController.saveToCart(request, response));
         get("/hello", (req, res) -> "Hello World");
 
         get("/", ProductController::renderProducts, tmp);
