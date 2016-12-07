@@ -3,10 +3,7 @@ package com.codecool.shop.model;
 import com.codecool.shop.controller.Controller;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class ShoppingCart {
@@ -34,18 +31,34 @@ public class ShoppingCart {
             lineItems.get(newItem.getProductID()).setQuantity();
             lineItems.get(newItem.getProductID()).setSubtotal();
             setTotalPrice(newItem.getDefaultPrice());
-            setQuantity();
+            setTotalQuantity();
 
         } else {
             newItem.setSubtotal(newItem.getDefaultPrice());
             addToMap(newItem);
             setTotalPrice(newItem.getDefaultPrice());
-            setQuantity();
+            setTotalQuantity();
         }
     }
 
-    private void setQuantity() {
+    public List<LineItem> getAllLineItems() {
+        List<LineItem> returnList = new ArrayList<>();
+        returnList.addAll(lineItems.values());
+        return returnList;
+    }
+
+    void removeFromCart(int lineItemID){
+        LineItem lineItem = lineItems.get(lineItemID);
+        setTotalQuantity(totalQuantity - lineItem.getQuantity());
+        lineItems.remove(lineItemID);
+    }
+
+    private void setTotalQuantity() {
         totalQuantity += 1;
+    }
+
+    private void setTotalQuantity(int quantity){
+        totalQuantity = quantity;
     }
 
     public int getTotalQuantity() {
@@ -62,9 +75,4 @@ public class ShoppingCart {
         return totalPrice;
     }
 
-    public List<LineItem> getAllLineItems() {
-        List<LineItem> returnList = new ArrayList<>();
-        returnList.addAll(lineItems.values());
-        return returnList;
-    }
 }
