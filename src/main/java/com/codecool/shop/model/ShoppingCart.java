@@ -48,11 +48,17 @@ public class ShoppingCart {
     }
 
     void removeFromCart(int lineItemID){
+        LineItem lineItem = lineItems.get(lineItemID);
+        setTotalQuantity(totalQuantity - lineItem.getQuantity());
         lineItems.remove(lineItemID);
     }
 
     private void setTotalQuantity() {
         totalQuantity += 1;
+    }
+
+    private void setTotalQuantity(int quantity){
+        totalQuantity = quantity;
     }
 
     public int getTotalQuantity() {
