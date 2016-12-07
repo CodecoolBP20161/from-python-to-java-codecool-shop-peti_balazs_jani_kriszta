@@ -90,7 +90,11 @@
                                                 <tbody>
                                                 <tr th:each="item,iterStat : ${lineitems}">
                                                     <td th:text="${item.productName}"></td>
-                                                    <td th:text="${item.quantity}"></td>
+                                                    <td>
+                                                        <form method="post">
+                                                            <input action="#" type="number" min="1" class="form-control" th:value="${item.quantity}"></input>
+                                                        </form>
+                                                    </td>
                                                     <td th:text="${item.defaultPrice}"></td>
                                                     <td th:text="${item.subtotal}"></td>
                                                 </tr>
@@ -106,6 +110,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default"><a th:href="${'/'}">Continue shopping</a></button>
                                         </div>
                                     </div>
                                 </div>
