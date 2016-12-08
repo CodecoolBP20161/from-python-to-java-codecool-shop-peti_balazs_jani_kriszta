@@ -19,22 +19,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
 
+    <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-
-    <script
-            src="https://code.jquery.com/jquery-1.12.4.js"
-            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-            crossorigin="anonymous"></script>
-
-    <script src="js/quantity.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
     <!-- CDN for icons -->
     <script src="https://use.fontawesome.com/dec0e9e92b.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+    <script src="/javascript/quantity.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -104,17 +100,33 @@
                                                         <td th:text="${item.defaultPrice}"></td>
                                                         <td th:text="${item.subtotal}"></td>
                                                         <td id="q">
-                                                            <a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}"><i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i></a>
-                                                            <p th:text="${item.quantity}" class="bin quantity"></p>
 
-                                                            <a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}"><i class="fa fa-plus-square-o blackicon plus" aria-hidden="true"></i></a>
+                                                            <!--Minus button in modal-->
+                                                            <a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}">
+                                                                <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true" id="reduce"></i>
+                                                            </a>
 
-                                                            <a th:href="'/deleteItem/'+${item.productID}"><i class="fa fa-trash-o bin redicon" aria-hidden="true"></i></a>
+                                                            <!--Display quantities of lineItem-->
+                                                            <p th:text="${item.quantity}" class="bin quantity" ></p>
 
 
-                                                                <!--<input name="quantity" type="number" min="1"  th:value="${item.quantity}" ></input>-->
-                                                                <input th:name="productID" type="number" th:value="${item.productID}" class="hidden"></input>
 
+
+                                                            <!--Plus button in modal-->
+                                                            <a href="#"><p th:id="${item.productID}">
+                                                                <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" id="add"></i>
+                                                            </p></a>
+
+
+
+                                                            <!--Delete icon in modal-->
+                                                            <a th:href="'/deleteItem/'+${item.productID}">
+                                                                <i class="fa fa-trash-o bin redicon" aria-hidden="true"></i>
+                                                            </a>
+
+                                                            <!--<a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}">-->
+                                                            <!--<i class="fa fa-plus-square-o blackicon plus" aria-hidden="true"></i>-->
+                                                            <!--</a>-->
 
                                                         </td>
                                                     </tr>

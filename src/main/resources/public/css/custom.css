@@ -179,7 +179,8 @@ th, td {
 }
 
 .blackicon {
-    color: #587272;
+    /*color: #587272;*/
+    color: #6d8383;
 
 }
 
@@ -198,6 +199,6 @@ th, td {
 
 .quantity {
     margin-left: 1.5em;
-    color: #436060;
-    /*color: #2f4f4f;*/
+    /*color: #436060;*/
+    color: #2f4f4f;
 }
