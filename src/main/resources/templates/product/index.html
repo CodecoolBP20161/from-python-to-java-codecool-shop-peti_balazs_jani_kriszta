@@ -102,7 +102,7 @@
                                                         <td id="q">
 
                                                             <!--Minus button in modal-->
-                                                            <a href="#"><p th:id="${item.productID}">
+                                                            <a href="#"><p th:data-minus="${item.productID}">
                                                                 <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true" id="reduce"></i>
                                                             </p></a>
 
@@ -112,25 +112,27 @@
 
 
                                                             <!--Plus button in modal-->
-                                                            <a href="#"><p th:id="${item.productID}">
-                                                                <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" id="add"></i>
-                                                            </p></a>
+                                                            <p><a href="#" th:content="${item.productID}" id="add">
+                                                                <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>
+                                                            </a></p>
 
 
 
-                                                            <!--Delete icon in modal-->
+                                                            <!--Bin (delete) icon in modal-->
                                                             <a th:href="'/deleteItem/'+${item.productID}">
                                                                 <i class="fa fa-trash-o bin redicon" aria-hidden="true"></i>
                                                             </a>
 
-                                                            <!--<a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}">-->
-                                                            <!--<i class="fa fa-plus-square-o blackicon plus" aria-hidden="true"></i>-->
-                                                            <!--</a>-->
 
-                                                            <!--Minus button in modal-->
-                                                            <!--<a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}">-->
-                                                                <!--<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true" id="reduce"></i>-->
-                                                            <!--</a>-->
+                                                            <!--Display quantities of lineItem-->
+                                                            <!--<p th:text="${item.quantity}"></p>-->
+
+
+                                                            <!--Plus button in modal-->
+                                                            <!--<a href="#"><p>-->
+                                                                <!--<i id="add" th:data-id="${item.productID}" th:data-quantity="${item.quantity}" class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>-->
+                                                            <!--</p></a>-->
+
 
                                                         </td>
                                                     </tr>

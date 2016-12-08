@@ -18,13 +18,27 @@ function setQuantity(quantity){
     $(".quantity").text(quantity);
 };
 
+function getAddingId() {
+    return $("#add").attr("content");
+}
+
+function getMinusId() {
+    return null;
+}
 
 
 
 $(document).ready(function () {
+    var QUANTITY_URL = 'http://127.0.0.1:8888/changeQuantity/';
+    var DELETE_URL = 'http://127.0.0.1:8888/deleteItem/';
     $("#add").on('click', function() {
         var quantity = increaseQuantity();
+        var id = getAddingId();
         setQuantity(quantity);
+        var url = QUANTITY_URL + id + "/" + quantity;
+        $.get(url);
+
+
     });
 
     $("#reduce").on('click', function() {
@@ -36,14 +50,6 @@ $(document).ready(function () {
 
 
 
-// var QUANTITY_URL = 'http://127.0.0.1:8888//changeQuantity/';
-//
-//
-// function sendQuantity(id, quantity) {
-//     var url = QUANTITY_URL + id + quantity;
-//     $.get(url);
-// }
-//
 
 
 
