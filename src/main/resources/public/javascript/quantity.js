@@ -4,14 +4,13 @@
 
 function getQuantity(){
     return parseInt($(".quantity").text());
-
 }
 
-function increaseQunatity(){
+function increaseQuantity(){
     return quantity = (getQuantity() + 1).toString();
 }
 
-function decreaseQunatity(){
+function reduceQuantity(){
     return quantity = (getQuantity() - 1).toString();
 }
 
@@ -23,14 +22,13 @@ function setQuantity(quantity){
 
 
 $(document).ready(function () {
-
     $("#add").on('click', function() {
-        var quantity = increaseQunatity();
+        var quantity = increaseQuantity();
         setQuantity(quantity);
     });
 
-    $("#decrease").on('click', function() {
-        var quantity = decreaseQunatity();
+    $("#reduce").on('click', function() {
+        var quantity = reduceQuantity();
         setQuantity(quantity);
     });
 
