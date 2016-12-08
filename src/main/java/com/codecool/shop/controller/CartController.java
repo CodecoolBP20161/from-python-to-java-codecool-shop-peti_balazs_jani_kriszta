@@ -54,27 +54,21 @@ public class CartController extends ProductController {
     }
 
     public static String changeQuantityOfLineItem(Request req, Response res) {
-//        setSession(req);
-
         Integer quantity = Integer.parseInt(req.params("quantity"));
         Integer productID = Integer.parseInt(req.params("productID"));
         System.out.println(productID);
         System.out.println(quantity);
 
-//
-//
-//
-//
-//        int id = Integer.parseInt(req.params("productID"));
-//        Integer quantity= Integer.parseInt(req.queryParams("quantity"));
-//        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
-//        sessionCart.addToCart(id, quantity);
-//
-//        Map params = new HashMap<>();
-//
-//        // Add shopping cart's data to params
-//        params.putAll(showShoppingCart(req));
-//        params.put("products", productDataStore.getAll());
+        setSession(req);
+
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        sessionCart.addToCart(productID, quantity);
+
+        Map params = new HashMap<>();
+
+        // Add shopping cart's data to params
+        params.putAll(showShoppingCart(req));
+        params.put("products", productDataStore.getAll());
 //
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));

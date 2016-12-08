@@ -11,7 +11,11 @@ function increaseQuantity(){
 }
 
 function reduceQuantity(){
-    return quantity = (getQuantity() - 1).toString();
+    var quantity = getQuantity();
+    if (quantity < 0) {
+        return "0";
+    }
+    return (quantity-1).toString();
 }
 
 function setQuantity(quantity){
@@ -41,7 +45,7 @@ $(document).ready(function () {
     $("#reduce").on('click', function() {
         var quantity = reduceQuantity();
         var id = getMinusId();
-        if (quantity == 0) {
+        if (quantity < 0 ) {
             url = DELETE_URL + id;
             $.get(url);
         } else {
