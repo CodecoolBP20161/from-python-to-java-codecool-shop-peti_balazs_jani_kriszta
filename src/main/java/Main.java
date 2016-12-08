@@ -1,6 +1,6 @@
-import com.codecool.shop.controller.CartController;
 import com.codecool.shop.controller.Controller;
 import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.controller.SiteController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
@@ -36,9 +36,11 @@ public class Main {
         Controller.doAct();
 
         // Routes
-        get("/category/:id", ProductController::renderByFilter, tmp);
-        get("/supplier/:id", ProductController::renderByFilter, tmp);
-        get("/tocart/:id", (request, response) -> CartController.saveToCart(request, response));
+        get("/category/:id", SiteController::renderByFilter, tmp);
+        get("/supplier/:id", SiteController::renderByFilter, tmp);
+        get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
+        get("/changeQuantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
+        get("/deleteItem/:productName", (request, response) -> SiteController.deleteItem(request, response));
         get("/hello", (req, res) -> "Hello World");
 
         get("/", ProductController::renderProducts, tmp);

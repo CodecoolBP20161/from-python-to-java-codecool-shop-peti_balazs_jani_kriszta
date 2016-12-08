@@ -15,20 +15,20 @@ public abstract class ProductController {
     static ProductDao productDataStore;
     static ProductCategoryDao productCategoryDataStore;
     static SupplierDao supplierDataStore;
-    static CartController cart = new CartController();
+    static CartController cartController = new CartController();
 
 
     // Render all products and filter menu elements
-    public static ModelAndView renderProducts(Request req, Response res) {
+        public static ModelAndView renderProducts(Request req, Response res) {
         // Read data from the shopping cart saved in the session
-        cart.setSession(req);
+        cartController.setSession(req);
 
         Map params = new HashMap<>();
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
 
         // Add shopping cart's data to params
-        params.putAll(cart.showShoppingCart(req));
+        params.putAll(cartController.showShoppingCart(req));
         params.put("products", productDataStore.getAll());
         params.put("title", "Horsecool Shop");
 
@@ -37,7 +37,7 @@ public abstract class ProductController {
 
     // Handle filter routes Category and Supplier
     public static ModelAndView renderByFilter(Request req, Response res) {
-        cart.setSession(req);
+        cartController.setSession(req);
         String currentUri = req.uri();
         req.session().attribute("uri", currentUri);
         int id = Integer.parseInt(req.params("id"));
@@ -54,7 +54,7 @@ public abstract class ProductController {
         }
 
         // Add shopping cart's data to params
-        params.putAll(cart.showShoppingCart(req));
+        params.putAll(cartController.showShoppingCart(req));
 
         return new ModelAndView(params, "product/index");
     }

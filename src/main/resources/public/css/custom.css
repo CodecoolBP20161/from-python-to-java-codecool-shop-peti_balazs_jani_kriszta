@@ -156,6 +156,10 @@ th, td {
     text-align: center;
 }
 
+#q {
+    width: 50px;
+}
+
 #total {
     font-weight: 800;
     font-size: 1.2em;
@@ -166,5 +170,10 @@ th, td {
 }
 
 .delete-item {
-    margin-left: 10px;
+    margin-left: 30px;
+}
+
+.cart-button {
+    background-color: transparent;
+    border: none;
 }

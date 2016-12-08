@@ -11,8 +11,8 @@ import java.util.Map;
  * Created by krisztinabaranyai on 07/12/2016.
  */
 public class CartController extends ProductController {
-    // Instantiate shopping cart if there is no shopping cart saved in session
 
+    // Instantiate shopping cart if there is no shopping cart saved in session
      static void setSession(Request req){
         if(req.session().attribute("shoppingcart") == null) {
             ShoppingCart cart = new ShoppingCart();
@@ -51,6 +51,30 @@ public class CartController extends ProductController {
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
 
+        return null;
+    }
+
+    public static String changeQuantityOfLineItem(Request req, Response res) {
+        System.out.println("hello");
+        setSession(req);
+        int id = Integer.parseInt(req.params("id"));
+        Integer quantity= Integer.parseInt(req.queryParams("quantity"));
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        sessionCart.addToCart(id, quantity);
+
+        Map params = new HashMap<>();
+
+        // Add shopping cart's data to params
+        params.putAll(showShoppingCart(req));
+        params.put("products", productDataStore.getAll());
+
+        // Save uri into session for redirect
+        res.redirect(req.session().attribute("uri"));
+
+        return null;
+    }
+
+    public static String deleteItem(Request req, Response res) {
         return null;
     }
 }
