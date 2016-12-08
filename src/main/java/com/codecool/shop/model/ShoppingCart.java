@@ -41,6 +41,23 @@ public class ShoppingCart {
         }
     }
 
+    public void addToCart(int id, int quantity) {
+        String state = getControllerState();
+        LineItem newItem = new LineItem(id, state);
+        if (lineItems.containsKey(newItem.getProductID())) {
+            lineItems.get(newItem.getProductID()).setQuantity(quantity);
+            lineItems.get(newItem.getProductID()).setSubtotal();
+            setTotalPrice(newItem.getDefaultPrice());
+            setTotalQuantity();
+
+        } else {
+            newItem.setSubtotal(newItem.getDefaultPrice());
+            addToMap(newItem);
+            setTotalPrice(newItem.getDefaultPrice());
+            setTotalQuantity();
+        }
+    }
+
     public List<LineItem> getAllLineItems() {
         List<LineItem> returnList = new ArrayList<>();
         returnList.addAll(lineItems.values());

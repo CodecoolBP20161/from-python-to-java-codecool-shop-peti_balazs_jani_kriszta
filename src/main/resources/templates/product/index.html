@@ -73,45 +73,51 @@
 
                                     <!-- Modal content-->
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 id="table-title" class="modal-title">Your Shopping Cart </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table table-hover table-responsive ">
-                                                <thead>
-                                                <tr>
-                                                    <th class="text-center col-md-1">Product name</th>
-                                                    <th class="text-center col-md-1">Quantity</th>
-                                                    <th class="text-center col-md-1">Unit Price</th>
-                                                    <th class="text-center col-md-1">Subtotal</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="item,iterStat : ${lineitems}">
-                                                    <td th:text="${item.productName}"></td>
-                                                    <td>
-                                                        <form method="post">
-                                                            <input action="#" type="number" min="1" class="form-control" th:value="${item.quantity}"></input>
-                                                        </form>
-                                                    </td>
-                                                    <td th:text="${item.defaultPrice}"></td>
-                                                    <td th:text="${item.subtotal}"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td id="total" class="text-center col-md-1" th:text="'Total price: '+${totalprice}">Total: </td>
-                                                </tr>
-                                                </tbody>
+                                        <form action="/changeQuantity" role="form" method="get" class="quantity">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 id="table-title" class="modal-title">Your Shopping Cart </h4>
+                                            </div>
 
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-default"><a th:href="${'/'}">Continue shopping</a></button>
-                                        </div>
+                                            <div class="modal-body">
+
+                                                <table class="table table-hover table-responsive ">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-center col-md-1">Product name</th>
+                                                        <th class="text-center col-md-1">Unit Price</th>
+                                                        <th class="text-center col-md-1">Subtotal</th>
+                                                        <th class="text-center col-md-1">Quantity</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="item,iterStat : ${lineitems}">
+                                                        <td th:text="${item.productName}"></td>
+                                                        <td th:text="${item.defaultPrice}"></td>
+                                                        <td th:text="${item.subtotal}"></td>
+                                                        <td id="q">
+                                                            <input name="quantity" type="number" min="1"  th:value="${item.quantity}" ></input>
+                                                            <a th:action="'/deleteItem/' + ${item.productName}" method="get"><i class="fa fa-trash-o delete-item" aria-hidden="true"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td id="total" class="text-center col-md-1" th:text="'Total price: '+${totalprice}">Total: </td>
+
+                                                    </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Close" class="cart-button"></input></button>
+                                                <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Continue Shopping" class="cart-button"></input></button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
