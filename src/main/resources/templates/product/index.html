@@ -102,9 +102,9 @@
                                                         <td id="q">
 
                                                             <!--Minus button in modal-->
-                                                            <a href="#"><p th:data-minus="${item.productID}">
-                                                                <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true" id="reduce"></i>
-                                                            </p></a>
+                                                            <a href="#" th:content="${item.productID}" id="reduce">
+                                                                <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>
+                                                            </a>
 
 
                                                             <!--Display quantities of lineItem-->
@@ -112,27 +112,15 @@
 
 
                                                             <!--Plus button in modal-->
-                                                            <p><a href="#" th:content="${item.productID}" id="add">
+                                                            <a href="#" th:content="${item.productID}" id="add">
                                                                 <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>
-                                                            </a></p>
-
+                                                            </a>
 
 
                                                             <!--Bin (delete) icon in modal-->
                                                             <a th:href="'/deleteItem/'+${item.productID}">
                                                                 <i class="fa fa-trash-o bin redicon" aria-hidden="true"></i>
                                                             </a>
-
-
-                                                            <!--Display quantities of lineItem-->
-                                                            <!--<p th:text="${item.quantity}"></p>-->
-
-
-                                                            <!--Plus button in modal-->
-                                                            <!--<a href="#"><p>-->
-                                                                <!--<i id="add" th:data-id="${item.productID}" th:data-quantity="${item.quantity}" class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>-->
-                                                            <!--</p></a>-->
-
 
                                                         </td>
                                                     </tr>

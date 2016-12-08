@@ -58,8 +58,9 @@ public class CartController extends ProductController {
 
         Integer quantity = Integer.parseInt(req.params("quantity"));
         Integer productID = Integer.parseInt(req.params("productID"));
-        System.out.println(quantity);
         System.out.println(productID);
+        System.out.println(quantity);
+
 //
 //
 //

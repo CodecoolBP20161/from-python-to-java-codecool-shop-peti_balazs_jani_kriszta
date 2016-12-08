@@ -23,9 +23,8 @@ function getAddingId() {
 }
 
 function getMinusId() {
-    return null;
+    return $("#reduce").attr("content");
 }
-
 
 
 $(document).ready(function () {
@@ -37,13 +36,19 @@ $(document).ready(function () {
         setQuantity(quantity);
         var url = QUANTITY_URL + id + "/" + quantity;
         $.get(url);
-
-
     });
 
     $("#reduce").on('click', function() {
         var quantity = reduceQuantity();
-        setQuantity(quantity);
+        var id = getMinusId();
+        if (quantity == 0) {
+            url = DELETE_URL + id;
+            $.get(url);
+        } else {
+            setQuantity(quantity);
+            var url = QUANTITY_URL + id + "/" + quantity;
+            $.get(url);
+        }
     });
 
 });
