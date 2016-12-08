@@ -1,5 +1,4 @@
 import com.codecool.shop.controller.Controller;
-import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.controller.SiteController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -27,7 +26,7 @@ public class Main {
         // Choose between "DB" or "MEM"
         String state = "DB";
 
-        // IF RUN IN DB STATE, RUN POPULATEDATA ONLY ONCE, AT THE FIRST TIME WHEN YOU ARE RUNNING MAIN
+        // IF RUN IN DB STATE, RUN PopulateData ONLY ONCE, AT THE FIRST TIME WHEN YOU ARE RUNNING MAIN
         // so there won't be duplicates of records
 //         PopulateData.populateData(state);
 
@@ -41,9 +40,9 @@ public class Main {
         get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
         get("/changeQuantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
         get("/deleteItem/:productName", (request, response) -> SiteController.deleteItem(request, response));
-        get("/hello", (req, res) -> "Hello World");
 
-        get("/", ProductController::renderProducts, tmp);
+        get("/hello", (req, res) -> "Hello World");
+        get("/", SiteController::renderProducts, tmp);
 
     }
 }

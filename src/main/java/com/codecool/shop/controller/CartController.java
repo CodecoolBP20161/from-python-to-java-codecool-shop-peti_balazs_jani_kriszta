@@ -75,6 +75,10 @@ public class CartController extends ProductController {
     }
 
     public static String deleteItem(Request req, Response res) {
+        System.out.println("torolj");
+        // Save uri into session for redirect
+        res.redirect(req.session().attribute("uri"));
+
         return null;
     }
 }
