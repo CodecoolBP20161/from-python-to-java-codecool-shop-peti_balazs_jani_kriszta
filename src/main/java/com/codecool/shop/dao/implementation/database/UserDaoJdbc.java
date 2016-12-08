@@ -13,7 +13,6 @@ import java.util.List;
 public class UserDaoJdbc implements UserDao {
     private DBConnection connection = new DBConnection();
     private String sql;
-    public User user;
     private static UserDaoJdbc instance = null;
 
 
