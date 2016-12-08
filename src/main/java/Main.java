@@ -39,7 +39,7 @@ public class Main {
         get("/supplier/:id", SiteController::renderByFilter, tmp);
         get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
         get("/changeQuantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
-        get("/deleteItem/:productName", (request, response) -> SiteController.deleteItem(request, response));
+        get("/deleteItem/:productID", (request, response) -> SiteController.deleteItem(request, response));
 
         get("/hello", (req, res) -> "Hello World");
         get("/", SiteController::renderProducts, tmp);

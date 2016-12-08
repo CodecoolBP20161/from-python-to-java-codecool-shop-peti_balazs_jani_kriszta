@@ -22,6 +22,7 @@ public class SiteController {
     }
 
     public static String changeQuantityOfLineItem(Request req, Response res) {
+        System.out.println("bla");
         return CartController.changeQuantityOfLineItem(req, res);
     }
 

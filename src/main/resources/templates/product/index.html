@@ -73,7 +73,6 @@
 
                                     <!-- Modal content-->
                                     <div class="modal-content">
-                                        <form action="/changeQuantity" role="form" method="get" class="quantity">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <h4 id="table-title" class="modal-title">Your Shopping Cart </h4>
@@ -98,7 +97,7 @@
                                                         <td th:text="${item.subtotal}"></td>
                                                         <td id="q">
                                                             <input name="quantity" type="number" min="1"  th:value="${item.quantity}" ></input>
-                                                            <a th:action="'/deleteItem/' + ${item.productName}" method="get"><i class="fa fa-trash-o delete-item" aria-hidden="true"></i></a>
+                                                            <a th:href="'/deleteItem/' + ${item.productID}"><i class="fa fa-trash-o delete-item" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -113,11 +112,9 @@
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-
                                                 <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Close" class="cart-button"></input></button>
                                                 <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Continue Shopping" class="cart-button"></input></button>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
