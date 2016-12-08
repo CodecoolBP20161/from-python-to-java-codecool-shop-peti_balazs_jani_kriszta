@@ -38,7 +38,7 @@ public class Main {
         get("/category/:id", SiteController::renderByFilter, tmp);
         get("/supplier/:id", SiteController::renderByFilter, tmp);
         get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
-        get("/changeQuantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
+        get("/changeQuantity/:productID/:quantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
         get("/deleteItem/:productID", (request, response) -> SiteController.deleteItem(request, response));
 
         get("/hello", (req, res) -> "Hello World");

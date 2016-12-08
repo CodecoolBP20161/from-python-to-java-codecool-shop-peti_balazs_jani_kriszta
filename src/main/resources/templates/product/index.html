@@ -24,6 +24,13 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+
+    <script src="js/quantity.js" type="text/javascript"></script>
+
     <!-- CDN for icons -->
     <script src="https://use.fontawesome.com/dec0e9e92b.js"></script>
 
@@ -57,7 +64,7 @@
                         </li>
                     </ul>
                     <!-- navbar-left will move the search to the left -->
-                    <form class="navbar-form navbar-right" role="search">
+                    <div class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <button id="modal-button" type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
                                 <a id="shopping-cart" href="#">
@@ -73,6 +80,7 @@
 
                                     <!-- Modal content-->
                                     <div class="modal-content">
+                                        <form action="changeQuantity" id="changeQuantity">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <h4 id="table-title" class="modal-title">Your Shopping Cart </h4>
@@ -96,8 +104,18 @@
                                                         <td th:text="${item.defaultPrice}"></td>
                                                         <td th:text="${item.subtotal}"></td>
                                                         <td id="q">
-                                                            <input name="quantity" type="number" min="1"  th:value="${item.quantity}" ></input>
-                                                            <a th:href="'/deleteItem/' + ${item.productID}"><i class="fa fa-trash-o delete-item" aria-hidden="true"></i></a>
+                                                            <a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}"><i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i></a>
+                                                            <p th:text="${item.quantity}" class="bin quantity"></p>
+
+                                                            <a th:href="'/changeQuantity/'+${item.productID}+'/'+${item.quantity}"><i class="fa fa-plus-square-o blackicon plus" aria-hidden="true"></i></a>
+
+                                                            <a th:href="'/deleteItem/'+${item.productID}"><i class="fa fa-trash-o bin redicon" aria-hidden="true"></i></a>
+
+
+                                                                <!--<input name="quantity" type="number" min="1"  th:value="${item.quantity}" ></input>-->
+                                                                <input th:name="productID" type="number" th:value="${item.productID}" class="hidden"></input>
+
+
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -112,18 +130,21 @@
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Close" class="cart-button"></input></button>
-                                                <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Continue Shopping" class="cart-button"></input></button>
+                                                <button class="btn btn-default" type="submit">Checkout</button>
+                                                <button class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
                                             </div>
+
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
     </div>
+
 
 <!-- Jumbotron with title and description-->
 <div class="container">
@@ -158,4 +179,5 @@
 </div>
 
 </body>
+
 </html>
