@@ -56,15 +56,4 @@ public class User {
         data.put("address", address);
         return data;
     }
-    public static void main(String[] args) {
-        User user = new User("jani", "jkomlancz@gmail.com", "06309115524");
-        user.setBilling_address("mo", "bp", "1124", "Gyimes u");
-
-        ShoppingCart shoppingCart = new ShoppingCart();
-        Order order = new Order(shoppingCart, user);
-        System.out.println(order.getUserData().getName());
-        System.out.println(order.getUserData().getBilling_address().get("country"));
-        System.out.println(order.getShoppingCart().getTotalPrice());
-
-    }
 }
