@@ -95,7 +95,7 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr th:each="item,iterStat : ${lineitems}">
+                                                    <tr id="stable" th:each="item,iterStat : ${lineitems}">
                                                         <td th:text="${item.productName}"></td>
                                                         <td th:text="${item.defaultPrice}"></td>
                                                         <td th:text="${item.subtotal}"></td>
@@ -108,7 +108,7 @@
 
 
                                                             <!--Display quantities of lineItem-->
-                                                            <p th:text="${item.quantity}" class="quantity" ></p>
+                                                            <p th:text="${item.quantity}" class="quantity"></p>
 
 
                                                             <!--Plus button in modal-->

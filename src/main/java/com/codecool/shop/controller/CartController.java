@@ -1,10 +1,13 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.model.ShoppingCart;
+import com.google.gson.Gson;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by krisztinabaranyai on 07/12/2016.
@@ -46,6 +49,7 @@ public class CartController extends ProductController {
         // Add shopping cart's data to params
         params.putAll(showShoppingCart(req));
         params.put("products", productDataStore.getAll());
+        params.put("total-price", sessionCart.getTotalPrice());
 
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
@@ -53,14 +57,12 @@ public class CartController extends ProductController {
         return null;
     }
 
-    public static String changeQuantityOfLineItem(Request req, Response res) {
+    public static ModelAndView changeQuantityOfLineItem(Request req, Response res) {
+        setSession(req);
         Integer quantity = Integer.parseInt(req.params("quantity"));
         Integer productID = Integer.parseInt(req.params("productID"));
         System.out.println(productID);
         System.out.println(quantity);
-
-        setSession(req);
-
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.addToCart(productID, quantity);
 
@@ -69,11 +71,13 @@ public class CartController extends ProductController {
         // Add shopping cart's data to params
         params.putAll(showShoppingCart(req));
         params.put("products", productDataStore.getAll());
+        params.put("total-price", sessionCart.getTotalPrice());
+
 //
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
 
-        return null;
+        return new ModelAndView(params, "product/index");
     }
 
     public static String deleteItem(Request req, Response res) {
@@ -85,4 +89,17 @@ public class CartController extends ProductController {
         res.redirect(req.session().attribute("uri"));
         return null;
     }
+
+
+    public static String getTotals(Request req, Response res) {
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("price", String.valueOf(sessionCart.getTotalPrice()));
+        data.put("totalItem", String.valueOf(sessionCart.getTotalQuantity()));
+        Gson gson = new Gson();
+
+        return gson.toJson(data);
+    }
+
+//
 }

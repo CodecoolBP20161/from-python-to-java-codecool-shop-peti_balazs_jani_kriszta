@@ -1,0 +1,114 @@
+<!--<!doctype html>-->
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta charset="utf-8"/></meta>-->
+    <!--<meta name="author" content="Codecool"/></meta>-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/></meta>-->
+
+    <!--<title>Horsecool Shop</title>-->
+
+    <!--&lt;!&ndash; Latest compiled and minified Jquery &ndash;&gt;-->
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"-->
+            <!--integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>-->
+
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+          <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
+
+    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"-->
+          <!--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
+
+    <!--<link rel="stylesheet" type="text/css" href="/css/custom.css"/>-->
+
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"-->
+            <!--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"-->
+            <!--crossorigin="anonymous"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+
+    <!--&lt;!&ndash; CDN for icons &ndash;&gt;-->
+    <!--<script src="https://use.fontawesome.com/dec0e9e92b.js"></script>-->
+
+    <!--<script src="/javascript/quantity.js" type="text/javascript"></script>-->
+<!--</head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+
+
+    <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+    <!--<div class="content">-->
+        <!--<form action="changeQuantity" id="changeQuantity">-->
+            <!--<div class="header">-->
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <!--<h4 id="table-title" class="modal-title">Your Shopping Cart </h4>-->
+            <!--</div>-->
+
+            <!--<div class="body">-->
+
+                <!--<table class="table table-hover table-responsive ">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th class="text-center col-md-1">Product name</th>-->
+                        <!--<th class="text-center col-md-1">Unit Price</th>-->
+                        <!--<th class="text-center col-md-1">Subtotal</th>-->
+                        <!--<th class="text-center col-md-1">Quantity</th>-->
+
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr id="stable" th:each="item,iterStat : ${lineitems}">-->
+                        <!--<td th:text="${item.productName}"></td>-->
+                        <!--<td th:text="${item.defaultPrice}"></td>-->
+                        <!--<td th:text="${item.subtotal}"></td>-->
+                        <!--<td id="q">-->
+
+                            <!--&lt;!&ndash;Minus button in modal&ndash;&gt;-->
+                            <!--<a href="#" th:content="${item.productID}" id="reduce">-->
+                                <!--<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>-->
+                            <!--</a>-->
+
+
+                            <!--&lt;!&ndash;Display quantities of lineItem&ndash;&gt;-->
+                            <!--<p th:text="${item.quantity}" class="quantity"></p>-->
+
+
+                            <!--&lt;!&ndash;Plus button in modal&ndash;&gt;-->
+                            <!--<a href="#" th:content="${item.productID}" id="add">-->
+                                <!--<i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>-->
+                            <!--</a>-->
+
+
+                            <!--&lt;!&ndash;Bin (delete) icon in modal&ndash;&gt;-->
+                            <!--<a th:href="'/deleteItem/'+${item.productID}">-->
+                                <!--<i class="fa fa-trash-o bin redicon" aria-hidden="true"></i>-->
+                            <!--</a>-->
+
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td id="total" class="text-center col-md-1" th:text="'Total price: '+${totalprice}">Total: </td>-->
+
+                    <!--</tr>-->
+                    <!--</tbody>-->
+
+                <!--</table>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button class="btn btn-default" type="submit">Checkout</button>-->
+                <!--<button class="btn btn-default" data-dismiss="modal">Continue Shopping</button>-->
+            <!--</div>-->
+
+        <!--</form>-->
+    <!--</div>-->
+
+
+
+<!--</body>-->
+<!--</html>-->
