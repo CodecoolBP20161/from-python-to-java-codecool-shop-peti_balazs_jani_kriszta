@@ -21,11 +21,16 @@ public class SiteController {
         return CartController.saveToCart(req, res);
     }
 
-    public static String changeQuantityOfLineItem(Request req, Response res) {
+    public static ModelAndView changeQuantityOfLineItem(Request req, Response res) {
         return CartController.changeQuantityOfLineItem(req, res);
     }
 
     public static String deleteItem(Request req, Response res) {
         return CartController.deleteItem(req, res);
     }
+
+    public static String getTotals(Request req, Response res) {
+        return CartController.getTotals(req, res);
+    }
+
 }

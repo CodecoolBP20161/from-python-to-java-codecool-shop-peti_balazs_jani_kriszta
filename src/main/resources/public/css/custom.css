@@ -169,11 +169,37 @@ th, td {
     text-align: center;
 }
 
-.delete-item {
-    margin-left: 30px;
-}
-
 .cart-button {
     background-color: transparent;
     border: none;
+}
+
+.bin {
+    display: inline-block;
+}
+
+.blackicon {
+    /*color: #587272;*/
+    color: #6d8383;
+
+}
+
+.redicon {
+    color: #ff4c4c;
+    margin-left: 2.5em;
+}
+
+.plus {
+    margin-left: 1.5em;
+}
+
+.minus{
+    margin-left: 4em;
+}
+
+.quantity {
+    margin-left: 1.5em;
+    /*color: #436060;*/
+    color: #2f4f4f;
+    display: inline-block;
 }

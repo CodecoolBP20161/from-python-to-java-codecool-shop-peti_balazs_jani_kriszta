@@ -64,7 +64,7 @@ public class ShoppingCart {
         return returnList;
     }
 
-    void removeFromCart(int lineItemID){
+    public void removeFromCart(int lineItemID){
         LineItem lineItem = lineItems.get(lineItemID);
         setTotalQuantity(totalQuantity - lineItem.getQuantity());
         lineItems.remove(lineItemID);
