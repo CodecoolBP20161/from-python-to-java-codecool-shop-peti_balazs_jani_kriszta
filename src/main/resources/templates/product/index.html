@@ -19,15 +19,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
 
+    <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
     <!-- CDN for icons -->
     <script src="https://use.fontawesome.com/dec0e9e92b.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+    <script src="/javascript/quantity.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -57,7 +60,7 @@
                         </li>
                     </ul>
                     <!-- navbar-left will move the search to the left -->
-                    <form class="navbar-form navbar-right" role="search">
+                    <div class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <button id="modal-button" type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
                                 <a id="shopping-cart" href="#">
@@ -73,7 +76,7 @@
 
                                     <!-- Modal content-->
                                     <div class="modal-content">
-                                        <form action="/changeQuantity" role="form" method="get" class="quantity">
+                                        <form action="changeQuantity" id="changeQuantity">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <h4 id="table-title" class="modal-title">Your Shopping Cart </h4>
@@ -92,13 +95,33 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr th:each="item,iterStat : ${lineitems}">
+                                                    <tr id="stable" th:each="item,iterStat : ${lineitems}">
                                                         <td th:text="${item.productName}"></td>
                                                         <td th:text="${item.defaultPrice}"></td>
                                                         <td th:text="${item.subtotal}"></td>
                                                         <td id="q">
-                                                            <input name="quantity" type="number" min="1"  th:value="${item.quantity}" ></input>
-                                                            <a th:action="'/deleteItem/' + ${item.productName}" method="get"><i class="fa fa-trash-o delete-item" aria-hidden="true"></i></a>
+
+                                                            <!--Minus button in modal-->
+                                                            <a href="#" th:content="${item.productID}" id="reduce">
+                                                                <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>
+                                                            </a>
+
+
+                                                            <!--Display quantities of lineItem-->
+                                                            <p th:text="${item.quantity}" class="quantity"></p>
+
+
+                                                            <!--Plus button in modal-->
+                                                            <a href="#" th:content="${item.productID}" id="add">
+                                                                <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>
+                                                            </a>
+
+
+                                                            <!--Bin (delete) icon in modal-->
+                                                            <a th:href="'/deleteItem/'+${item.productID}">
+                                                                <i class="fa fa-trash-o bin redicon" aria-hidden="true"></i>
+                                                            </a>
+
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -113,21 +136,22 @@
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Close" class="cart-button"></input></button>
-                                                <button class="btn btn-default" data-dismiss="modal"><input type="submit" value="Continue Shopping" class="cart-button"></input></button>
+                                                <button class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
                                                 <!-- Trigger checkout modal with a button -->
                                                 <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#checkoutModal">Checkout</button>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
     </div>
+
 
 <!-- Jumbotron with title and description-->
 <div class="container">
@@ -296,4 +320,5 @@
     </div>
 
 </body>
+
 </html>
