@@ -1,7 +1,6 @@
 import com.codecool.shop.controller.Controller;
-import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.controller.SiteController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
-import com.codecool.shop.model.PopulateData;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.sql.SQLException;
@@ -27,7 +26,7 @@ public class Main {
         // Choose between "DB" or "MEM"
         String state = "DB";
 
-        // IF RUN IN DB STATE, RUN POPULATEDATA ONLY ONCE, AT THE FIRST TIME WHEN YOU ARE RUNNING MAIN
+        // IF RUN IN DB STATE, RUN PopulateData ONLY ONCE, AT THE FIRST TIME WHEN YOU ARE RUNNING MAIN
         // so there won't be duplicates of records
 //         PopulateData.populateData(state);
 
@@ -36,12 +35,15 @@ public class Main {
         Controller.doAct();
 
         // Routes
-        get("/category/:id", ProductController::renderByFilter, tmp);
-        get("/supplier/:id", ProductController::renderByFilter, tmp);
-        get("/tocart/:id", (request, response) -> ProductController.saveToCart(request, response));
-        get("/hello", (req, res) -> "Hello World");
+        get("/category/:id", SiteController::renderByFilter, tmp);
+        get("/supplier/:id", SiteController::renderByFilter, tmp);
+        get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
+        get("/changeQuantity/:productID/:quantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
+        get("/deleteItem/:productID", (request, response) -> SiteController.deleteItem(request, response));
+        get("/totals", (request, response) -> SiteController.getTotals(request, response));
 
-        get("/", ProductController::renderProducts, tmp);
+        get("/hello", (req, res) -> "Hello World");
+        get("/", SiteController::renderProducts, tmp);
 
     }
 }

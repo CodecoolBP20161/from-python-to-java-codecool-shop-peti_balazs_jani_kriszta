@@ -34,7 +34,7 @@ public class LineItem {
         this.quantity++;
     }
 
-    public void setQuantity(int quantity){
+    void setQuantity(int quantity){
         this.quantity = quantity;
     }
 
@@ -42,12 +42,12 @@ public class LineItem {
         return quantity;
     }
 
-    public void setSubtotal(){
+    void setSubtotal(){
         subtotal = defaultPrice * (float) quantity;
         BigDecimal bd = new BigDecimal(Float.toString(subtotal));
         subtotal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
     }
-    public void setSubtotal(float price){
+    void setSubtotal(float price){
         subtotal = price;
     }
 
@@ -55,19 +55,28 @@ public class LineItem {
         return subtotal;
     }
 
+    void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public String getProductName() {
         return productName;
+    }
+
+    void setProductID(int productID){
+        this.productID = productID;
     }
 
     public int getProductID() {
         return productID;
     }
 
+    void setDefaultPrice(float defaultPrice) {
+        this.defaultPrice = defaultPrice;
+    }
+
     public float getDefaultPrice() {
         return defaultPrice;
     }
 
-    public void setDefaultPrice(float defaultPrice) {
-        this.defaultPrice = defaultPrice;
-    }
 }
