@@ -201,4 +201,5 @@ th, td {
     margin-left: 1.5em;
     /*color: #436060;*/
     color: #2f4f4f;
+    display: inline-block;
 }

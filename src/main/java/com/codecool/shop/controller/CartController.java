@@ -96,6 +96,7 @@ public class CartController extends ProductController {
         Map<String, String> data = new HashMap<String, String>();
         data.put("price", String.valueOf(sessionCart.getTotalPrice()));
         data.put("totalItem", String.valueOf(sessionCart.getTotalQuantity()));
+//        data.put("subtotal", String.valueOf(sessionCart.getSubtotal()))
         Gson gson = new Gson();
 
         return gson.toJson(data);

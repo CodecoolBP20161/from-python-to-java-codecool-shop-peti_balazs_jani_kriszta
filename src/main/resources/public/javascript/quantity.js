@@ -18,10 +18,6 @@ function reduceQuantity(){
     return (quantity-1).toString();
 }
 
-function setQuantity(quantity){
-    $(".quantity").text(quantity);
-    $("#items-counter").text(quantity);
-};
 
 function getAddingId() {
     return $("#add").attr("content");
@@ -31,11 +27,22 @@ function getMinusId() {
     return $("#reduce").attr("content");
 }
 
+function setQuantity(quantity){
+    $(".quantity").text(quantity);
+    $("#items-counter").text(quantity);
+};
 
 function getTotals(url) {
     return $.getJSON(url, function(response){
+        setTotalPrice(response.price);
     });
 }
+
+function setTotalPrice(price){
+    $("#total").text(price);
+}
+
+
 
 $(document).ready(function () {
     var QUANTITY_URL = 'http://127.0.0.1:8888/changeQuantity/';
@@ -43,11 +50,14 @@ $(document).ready(function () {
     var PRICE_URL = 'http://127.0.0.1:8888/totals';
 
     $("#add").on('click', function() {
-        getTotals(PRICE_URL);
         var quantity = increaseQuantity();
         var id = getAddingId();
         setQuantity(quantity);
         var url = QUANTITY_URL + id + "/" + quantity;
+        $.get(url);
+
+        getTotals(PRICE_URL);
+
     });
 
     $("#reduce").on('click', function() {
