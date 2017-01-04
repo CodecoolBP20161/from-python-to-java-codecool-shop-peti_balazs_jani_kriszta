@@ -1,6 +1,6 @@
-package com.codecool.shop.review_service.controller;
+package com.codecool.review_service.controller;
 
-import com.codecool.shop.review_service.service.APIService;
+import com.codecool.review_service.service.APIService;
 import spark.Request;
 import spark.Response;
 

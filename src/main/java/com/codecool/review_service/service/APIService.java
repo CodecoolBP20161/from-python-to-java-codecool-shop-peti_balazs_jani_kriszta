@@ -1,4 +1,4 @@
-package com.codecool.shop.review_service.service;
+package com.codecool.review_service.service;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.fluent.Request;
