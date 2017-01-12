@@ -34,7 +34,7 @@ public class ShoppingCart {
             setTotalQuantity();
 
         } else {
-            newItem.setSubtotal(newItem.getDefaultPrice());
+            newItem.setSubtotal();
             addToMap(newItem);
             setTotalPrice(newItem.getDefaultPrice());
             setTotalQuantity();
@@ -51,7 +51,7 @@ public class ShoppingCart {
             setTotalQuantity();
 
         } else {
-            newItem.setSubtotal(newItem.getDefaultPrice());
+            newItem.setSubtotal();
             addToMap(newItem);
             setTotalPrice(newItem.getDefaultPrice());
             setTotalQuantity();

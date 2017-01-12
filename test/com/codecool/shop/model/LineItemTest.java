@@ -49,17 +49,17 @@ public class LineItemTest {
         assertEquals(200, lineItem.getSubtotal(), 0.0);
     }
 
-    @Test
-    public void setSubtotalWithArg() throws Exception {
-        lineItem.setSubtotal(200);
-        assertEquals(200, lineItem.getSubtotal(), 0.0);
-    }
+//    @Test
+//    public void setSubtotalWithArg() throws Exception {
+//        lineItem.setSubtotal(200);
+//        assertEquals(200, lineItem.getSubtotal(), 0.0);
+//    }
 
-    @Test
-    public void getSubtotal() throws Exception {
-        lineItem.setSubtotal(100);
-        assertEquals(100, lineItem.getSubtotal(), 0.0);
-    }
+//    @Test
+//    public void getSubtotal() throws Exception {
+//        lineItem.setSubtotal(100);
+//        assertEquals(100, lineItem.getSubtotal(), 0.0);
+//    }
 
     @Test
     public void setProductName() throws Exception {

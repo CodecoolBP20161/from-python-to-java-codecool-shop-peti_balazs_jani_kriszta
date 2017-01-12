@@ -2,16 +2,17 @@
  * Created by krisztinabaranyai on 08/12/2016.
  */
 
-function getQuantity(){
-    return parseInt($(".quantity").text());
+function getQuantity(element){
+    return parseInt($(".quantity", element).text());
 }
 
-function increaseQuantity(){
-    return (getQuantity() + 1).toString();
+function increaseQuantity(element){
+
+    return (getQuantity(element) + 1).toString();
 }
 
-function reduceQuantity(){
-    var quantity = getQuantity();
+function reduceQuantity(element){
+    var quantity = getQuantity(element);
     if (quantity < 0) {
         return "0";
     }
@@ -27,8 +28,8 @@ function getMinusId() {
     return $("#reduce").attr("content");
 }
 
-function setQuantity(quantity){
-    $(".quantity").text(quantity);
+function setQuantity(quantity, element){
+    $(".quantity", element).text(quantity);
     $("#items-counter").text(quantity);
 };
 
@@ -50,9 +51,9 @@ $(document).ready(function () {
     var PRICE_URL = 'http://127.0.0.1:8888/totals';
 
     $("#add").on('click', function() {
-        var quantity = increaseQuantity();
+        var quantity = increaseQuantity($(this).parent());
         var id = getAddingId();
-        setQuantity(quantity);
+        setQuantity(quantity, $(this).parent());
         var url = QUANTITY_URL + id + "/" + quantity;
         $.get(url);
 
@@ -61,13 +62,13 @@ $(document).ready(function () {
     });
 
     $("#reduce").on('click', function() {
-        var quantity = reduceQuantity();
+        var quantity = reduceQuantity($(this).parent());
         var id = getMinusId();
         if (quantity < 0 ) {
             url = DELETE_URL + id;
             $.get(url);
         } else {
-            setQuantity(quantity);
+            setQuantity(quantity, $(this).parent());
             var url = QUANTITY_URL + id + "/" + quantity;
             $.get(url);
         }

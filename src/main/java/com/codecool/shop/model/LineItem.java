@@ -43,13 +43,13 @@ public class LineItem {
     }
 
     void setSubtotal(){
-        subtotal = defaultPrice * (float) quantity;
+        subtotal = defaultPrice * (float) this.quantity;
         BigDecimal bd = new BigDecimal(Float.toString(subtotal));
         subtotal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
     }
-    void setSubtotal(float price){
-        subtotal = price;
-    }
+//    void setSubtotal(float price){
+//        subtotal = price;
+//    }
 
     public float getSubtotal() {
         return subtotal;

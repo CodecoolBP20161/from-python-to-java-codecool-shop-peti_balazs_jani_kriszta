@@ -17,13 +17,15 @@ public class CartController extends ProductController {
     // Instantiate shopping cart if there is no shopping cart saved in session
      static void setSession(Request req){
         if(req.session().attribute("shoppingcart") == null) {
-            ShoppingCart cart = new ShoppingCart();
-            req.session().attribute("shoppingcart", cart);
+             ShoppingCart cart = new ShoppingCart();
+             req.session().attribute("shoppingcart", cart);
         }
+//         System.out.println(req.uri());
     }
 
     // collects shopping cart's data to show them on the modal and the shopping cart icon
      static Map showShoppingCart(Request req){
+        setSession(req);
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         Map params = new HashMap<>();
 
@@ -73,10 +75,6 @@ public class CartController extends ProductController {
         params.put("products", productDataStore.getAll());
         params.put("total-price", sessionCart.getTotalPrice());
 
-//
-        // Save uri into session for redirect
-        res.redirect(req.session().attribute("uri"));
-
         return new ModelAndView(params, "product/index");
     }
 
@@ -85,22 +83,23 @@ public class CartController extends ProductController {
         Integer productID = Integer.parseInt(req.params("productID"));
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.removeFromCart(productID);
+
         // Save uri into session for redirect
         res.redirect(req.session().attribute("uri"));
         return null;
     }
 
-
     public static String getTotals(Request req, Response res) {
+        setSession(req);
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+
         Map<String, String> data = new HashMap<String, String>();
         data.put("price", String.valueOf(sessionCart.getTotalPrice()));
         data.put("totalItem", String.valueOf(sessionCart.getTotalQuantity()));
-//        data.put("subtotal", String.valueOf(sessionCart.getSubtotal()))
+
+//        data.put("subtotal", String.valueOf(sessionCart.getSubtotal());
         Gson gson = new Gson();
 
         return gson.toJson(data);
     }
-
-//
 }
