@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.ShoppingCart;
 import com.google.gson.Gson;
 import spark.ModelAndView;
@@ -96,10 +97,15 @@ public class CartController extends ProductController {
         Map<String, String> data = new HashMap<String, String>();
         data.put("price", String.valueOf(sessionCart.getTotalPrice()));
         data.put("totalItem", String.valueOf(sessionCart.getTotalQuantity()));
-
+        Map<Integer, Float> subtotals = new HashMap<Integer, Float>();
+        for(LineItem item : sessionCart.getAllLineItems()){
+            subtotals.put(item.getProductID(), item.getSubtotal());
+        }
 //        data.put("subtotal", String.valueOf(sessionCart.getSubtotal());
         Gson gson = new Gson();
-
-        return gson.toJson(data);
+        Map<String, Map> allData = new HashMap<String, Map>();
+        allData.put("subtotal", subtotals);
+        allData.put("data", data);
+        return gson.toJson(allData);
     }
 }
