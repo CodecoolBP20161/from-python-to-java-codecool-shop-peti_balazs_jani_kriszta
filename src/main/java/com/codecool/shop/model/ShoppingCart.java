@@ -89,6 +89,10 @@ public class ShoppingCart {
     }
 
     public float getTotalPrice() {
+        totalPrice = 0;
+        for (LineItem item : getAllLineItems()){
+            totalPrice += item.getSubtotal();
+        }
         return totalPrice;
     }
 
