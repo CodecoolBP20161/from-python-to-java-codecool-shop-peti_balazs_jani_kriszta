@@ -36,7 +36,6 @@
 <body>
 
     <div class="container">
-
         <!--Navbar-->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -62,93 +61,16 @@
                     <!-- navbar-left will move the search to the left -->
                     <div class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <button id="modal-button" type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
-                                <a id="shopping-cart" href="#">
+                            <button id="modal-button" type="button" class="btn btn-default btn-xs">
+                                <a id="shopping-cart" href="/showcart">
                                     <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
                                     <p id="items-counter" th:text="${counter}"></p>
-
                                 </a>
                             </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
-                                <div class="modal-dialog modal-lg">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <form action="changeQuantity" id="changeQuantity">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 id="table-title" class="modal-title">Your Shopping Cart </h4>
-                                            </div>
-
-                                            <div class="modal-body">
-
-                                                <table class="table table-hover table-responsive ">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="text-center col-md-1">Product name</th>
-                                                        <th class="text-center col-md-1">Unit Price</th>
-                                                        <th class="text-center col-md-1">Subtotal</th>
-                                                        <th class="text-center col-md-1">Quantity</th>
-
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr id="stable" th:each="item,iterStat : ${lineitems}">
-                                                        <td th:text="${item.productName}"></td>
-                                                        <td th:text="${item.defaultPrice}"></td>
-                                                        <td th:text="${item.subtotal}"></td>
-                                                        <td id="q">
-
-                                                            <!--Minus button in modal-->
-                                                            <a href="#" th:content="${item.productID}" id="reduce">
-                                                                <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>
-                                                            </a>
-
-
-                                                            <!--Display quantities of lineItem-->
-                                                            <p th:text="${item.quantity}" class="quantity"></p>
-
-
-                                                            <!--Plus button in modal-->
-                                                            <a href="#" th:content="${item.productID}" id="add">
-                                                                <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>
-                                                            </a>
-
-
-                                                            <!--Bin (delete) icon in modal-->
-                                                            <a th:href="'/deleteItem/'+${item.productID}">
-                                                                <i class="fa fa-trash-o bin redicon" aria-hidden="true"></i>
-                                                            </a>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td id="total" class="text-center col-md-1" th:text="'Total price: '+${totalprice}">Total: </td>
-
-                                                    </tr>
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
-                                                <!-- Trigger checkout modal with a button -->
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#checkoutModal">Checkout</button>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
     </div>
 
@@ -184,140 +106,6 @@
     </div>
     <a id="bottom" data-brackets-id="18" class="btn btn-default btn-lg" role="button" href="#top">Back to the top</a>
 </div>
-
-    <!-- Checkout Modal -->
-    <div id="checkoutModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Checkout</h4>
-                </div>
-                <form class="form-horizontal">
-
-                    <div class="modal-body">
-
-                            <!-- name -->
-                            <div class="form-group">
-                                <label for="inputName" class="col-lg-2 control-label">Name</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control"  id="inputName" name="inputName" placeholder="name" required="required"/>
-                                </div>
-                            </div>
-                            <!-- email -->
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-                                <div class="col-lg-10">
-                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="email" required="required"/>
-                                </div>
-                            </div>
-                            <!-- phone number -->
-                            <div class="form-group">
-                                <label for="inputPhoneNumber" class="col-lg-2 control-label">Phone number</label>
-                                <div class="col-lg-10">
-                                    <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber" placeholder="phone number" required="required"/>
-                                </div>
-                            </div>
-                            <!-- address -->
-                            Billing address:
-                            <!-- country-->
-                            <div class="form-group">
-                                <label for="billingCountry" class="col-lg-2 control-label">Country</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="billingCountry" name="billingCountry" placeholder="country" required="required"/>
-                                </div>
-                            </div>
-                            <!-- city -->
-                            <div class="form-group">
-                                <label for="billingCity" class="col-lg-2 control-label">City</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="billingCity" name="billingCity" placeholder="city" required="required"/>
-                                </div>
-                            </div>
-                            <!-- zipcode -->
-                            <div class="form-group">
-                                <label for="billingZipcode" class="col-lg-2 control-label">Zipcode</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="billingZipcode" name="billingZipcode" placeholder="zipcode" required="required"/>
-                                </div>
-                            </div>
-                            <!-- address -->
-                            <div class="form-group">
-                                <label for="billingAddress" class="col-lg-2 control-label">Address</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="billingAddress" name="billingAddress" placeholder="address" required="required"/>
-                                </div>
-                            </div>
-
-                            Shipping address:
-                            <!-- country-->
-                            <div class="form-group">
-                                <label for="shippingCountry" class="col-lg-2 control-label">Country</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="shippingCountry" name="shippingCountry" placeholder="country" required="required"/>
-                                </div>
-                            </div>
-                            <!-- city -->
-                            <div class="form-group">
-                                <label for="shippingCity" class="col-lg-2 control-label">City</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="shippingCity" name="shippingCity" placeholder="city" required="required"/>
-                                </div>
-                            </div>
-                            <!-- zipcode -->
-                            <div class="form-group">
-                                <label for="shippingZipcode" class="col-lg-2 control-label">Zipcode</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="shippingZipcode" name="shippingZipcode" placeholder="zipcode" required="required"/>
-                                </div>
-                            </div>
-                            <!-- address -->
-                            <div class="form-group">
-                                <label for="shippingAddress" class="col-lg-2 control-label">Address</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="shippingAddress" name="shippingAddress" placeholder="address" required="required"/>
-                                </div>
-                            </div>
-
-                            <!-- Trigger payment modal with a button -->
-                    </div> <!-- /.modal-body -->
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary checkout-button" data-dismiss="modal" data-toggle="modal" data-target="#paymentModal"><input class="hidden" type="submit" value="payment"/>Pay</button>
-                    </div>
-                </form> <!-- /.form-horizontal -->
-
-            </div> <!-- /.modal-content -->
-        </div> <!-- /.modal-dialog -->
-    </div> <!-- /.checkoutModal -->
-
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Payment</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            Payment page under development...
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 </body>
 

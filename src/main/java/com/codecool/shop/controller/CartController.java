@@ -105,7 +105,15 @@ public class CartController extends ProductController {
         Gson gson = new Gson();
         Map<String, Map> allData = new HashMap<String, Map>();
         allData.put("subtotal", subtotals);
-        allData.put("data", data);
+        allData.put("valami", data);
         return gson.toJson(allData);
+    }
+
+    public static ModelAndView renderCart(Request req, Response res) {
+
+        cartController.setSession(req);
+        Map params = new HashMap<>();
+        params.putAll(cartController.showShoppingCart(req));
+        return new ModelAndView(params, "product/shopping_cart");
     }
 }

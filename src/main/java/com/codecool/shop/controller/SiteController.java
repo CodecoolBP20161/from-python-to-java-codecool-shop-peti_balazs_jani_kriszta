@@ -33,4 +33,9 @@ public class SiteController {
         return CartController.getTotals(req, res);
     }
 
+    public static ModelAndView renderCart(Request req, Response res) {
+        return CartController.renderCart(req, res);
+    }
+
+
 }

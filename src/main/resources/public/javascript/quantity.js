@@ -34,15 +34,15 @@ function setQuantity(quantity, element){
 };
 
 function getTotals(url) {
-    return $.getJSON(url, function(response){
-        setTotalPrice(response.price);
+    return $.ajax(url, function(response){
+        console.log(response.valami)
+        setTotalPrice(response.valami);
     });
 }
 
 function setTotalPrice(price){
     $("#total").text(price);
 }
-
 
 
 $(document).ready(function () {
