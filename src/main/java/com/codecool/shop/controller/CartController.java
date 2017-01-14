@@ -79,15 +79,13 @@ public class CartController extends ProductController {
         return new ModelAndView(params, "product/index");
     }
 
-    public static String deleteItem(Request req, Response res) {
+    public static ModelAndView deleteItem(Request req, Response res) {
         setSession(req);
         Integer productID = Integer.parseInt(req.params("productID"));
         ShoppingCart sessionCart = req.session().attribute("shoppingcart");
         sessionCart.removeFromCart(productID);
 
-        // Save uri into session for redirect
-        res.redirect(req.session().attribute("uri"));
-        return null;
+        return renderCart(req, res);
     }
 
     public static String getTotals(Request req, Response res) {
@@ -110,7 +108,6 @@ public class CartController extends ProductController {
     }
 
     public static ModelAndView renderCart(Request req, Response res) {
-
         cartController.setSession(req);
         Map params = new HashMap<>();
         params.putAll(cartController.showShoppingCart(req));

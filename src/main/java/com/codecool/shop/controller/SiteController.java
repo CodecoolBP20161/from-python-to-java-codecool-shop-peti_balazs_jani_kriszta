@@ -25,7 +25,7 @@ public class SiteController {
         return CartController.changeQuantityOfLineItem(req, res);
     }
 
-    public static String deleteItem(Request req, Response res) {
+    public static ModelAndView deleteItem(Request req, Response res) {
         return CartController.deleteItem(req, res);
     }
 
