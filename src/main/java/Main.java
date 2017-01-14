@@ -1,3 +1,4 @@
+import com.codecool.shop.controller.CartController;
 import com.codecool.shop.controller.Controller;
 import com.codecool.shop.controller.SiteController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
@@ -37,11 +38,15 @@ public class Main {
         // Routes
         get("/category/:id", SiteController::renderByFilter, tmp);
         get("/supplier/:id", SiteController::renderByFilter, tmp);
-        get("/showcart", SiteController::renderCart, tmp);
+
         get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
-        get("/changeQuantity/:productID/:quantity", (request, response) -> SiteController.changeQuantityOfLineItem(request, response));
+        get("/showcart", SiteController::renderCart, tmp);
+
+//      
         get("/deleteItem/:productID", SiteController::deleteItem, tmp);
-        get("/totals", (request, response) -> SiteController.getTotals(request, response));
+
+        get("/plus/:id", (request, response) -> CartController.increase(request, response));
+        get("/minus/:id", (request, response) -> CartController.increase(request, response));
 
         get("/hello", (req, res) -> "Hello World");
         get("/", SiteController::renderProducts, tmp);

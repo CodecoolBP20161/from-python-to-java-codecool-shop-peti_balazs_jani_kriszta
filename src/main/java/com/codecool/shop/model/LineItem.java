@@ -33,6 +33,7 @@ public class LineItem {
     public void setQuantity(){
         this.quantity++;
     }
+    public void reduceQuantity() {this.quantity--;}
 
     void setQuantity(int quantity){
         this.quantity = quantity;

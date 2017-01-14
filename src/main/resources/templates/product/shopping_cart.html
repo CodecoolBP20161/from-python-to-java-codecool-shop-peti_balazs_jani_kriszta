@@ -59,8 +59,8 @@
                 <td th:text="${item.subtotal}"></td>
                 <td id="q">
 
-                    <!--&lt;!&ndash;Minus button&ndash;&gt;-->
-                    <!--<a href="/minus" th:content="${item.productID}" id="reduce">-->
+                    <!--Minus button-->
+                    <!--<a th:href="${'/changeQuantity/'+item.id+'/-1'} id="reduce">-->
                         <!--<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>-->
                     <!--</a>-->
 
@@ -69,10 +69,10 @@
                     <p th:text="${item.quantity}" class="quantity"></p>
 
 
-                    <!--&lt;!&ndash;Plus button&ndash;&gt;-->
-                    <!--<a href="/plus" th:content="${item.productID}" id="add">-->
-                        <!--<i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>-->
-                    <!--</a>-->
+                    <!--Plus button-->
+                    <a th:href="${'/plus/'+item.productID}" id="add">
+                        <i class="fa fa-plus-square-o blackicon plus" aria-hidden="true" ></i>
+                    </a>
 
 
                     <!--Bin (delete) icon-->
