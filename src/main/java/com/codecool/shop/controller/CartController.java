@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.ShoppingCart;
 import spark.ModelAndView;
 import spark.Request;
@@ -19,7 +20,6 @@ public class CartController extends ProductController {
              ShoppingCart cart = new ShoppingCart();
              req.session().attribute("shoppingcart", cart);
         }
-//         System.out.println(req.uri());
     }
 
     // collects shopping cart's data to show them on the modal and the shopping cart icon
@@ -107,6 +107,17 @@ public class CartController extends ProductController {
 
         res.redirect("/showcart");
         return null;
+    }
+
+    public void deleteZeroQuantityLineItems(Request req) {
+        setSession(req);
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        for (LineItem item : sessionCart.getAllLineItems()) {
+            if (item.getQuantity() == 0) {
+                sessionCart.removeFromCart(item.getProductID());
+            }
+        }
+
 
     }
 
