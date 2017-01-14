@@ -33,14 +33,18 @@ public class LineItem {
     public void setQuantity(){
         this.quantity++;
     }
-    public void reduceQuantity() {this.quantity--;}
 
-    void setQuantity(int quantity){
-        this.quantity = quantity;
-    }
+    public void reduceQuantity() {this.quantity--;}
 
     public int getQuantity(){
         return quantity;
+    }
+
+    public int getQuantity(int productID) {
+        if (this.productID == productID) {
+            return this.quantity;
+        }
+        return 0;
     }
 
     void setSubtotal(){

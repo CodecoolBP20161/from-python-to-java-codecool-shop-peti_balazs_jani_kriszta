@@ -21,6 +21,14 @@ public class SiteController {
         return CartController.saveToCart(req, res);
     }
 
+    public static String increase(Request req, Response res){
+        return CartController.increase(req, res);
+    }
+
+    public static String decrease(Request req, Response res){
+        return CartController.decrease(req, res);
+    }
+
     public static ModelAndView deleteItem(Request req, Response res) {
         return CartController.deleteItem(req, res);
     }

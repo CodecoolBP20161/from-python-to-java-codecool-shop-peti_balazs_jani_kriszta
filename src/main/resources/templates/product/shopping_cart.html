@@ -60,9 +60,9 @@
                 <td id="q">
 
                     <!--Minus button-->
-                    <!--<a th:href="${'/changeQuantity/'+item.id+'/-1'} id="reduce">-->
-                        <!--<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>-->
-                    <!--</a>-->
+                    <a th:href="${'/minus/'+item.productID}" id="reduce">
+                        <i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>
+                    </a>
 
 
                     <!--Display quantities of lineItem-->
@@ -91,7 +91,7 @@
         </table>
         <div>
             <button class="btn btn-default"><a href="/">Continue Shopping</a></button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#checkoutModal">Checkout</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#checkoutModal" disabled="disabled">Checkout</button>
         </div>
     </div>
 </div>

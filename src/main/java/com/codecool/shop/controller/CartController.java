@@ -91,5 +91,24 @@ public class CartController extends ProductController {
 
     }
 
+    public static String decrease(Request req, Response res) {
+        setSession(req);
+        int id = Integer.parseInt(req.params("id"));
+        ShoppingCart sessionCart = req.session().attribute("shoppingcart");
+        if (sessionCart.getLineItemById(id).getQuantity() > 0) {
+            sessionCart.reduceQuantity(id);
+        }
+        Map params = new HashMap<>();
+
+        // Add shopping cart's data to params
+        params.putAll(showShoppingCart(req));
+        params.put("products", productDataStore.getAll());
+        params.put("total-price", sessionCart.getTotalPrice());
+
+        res.redirect("/showcart");
+        return null;
+
+    }
+
 
 }

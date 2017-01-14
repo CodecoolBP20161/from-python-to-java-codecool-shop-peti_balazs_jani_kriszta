@@ -24,26 +24,22 @@ public class LineItemTest {
 
     @Test
     public void setQuantityNoArg() throws Exception {
-        lineItem.setQuantity(10);
         lineItem.setQuantity();
         assertEquals(11, lineItem.getQuantity());
     }
 
     @Test
     public void setQuantityWithArg() throws Exception {
-        lineItem.setQuantity(10);
         assertEquals(10, lineItem.getQuantity());
     }
 
     @Test
     public void getQuantity() throws Exception {
-        lineItem.setQuantity(10);
         assertEquals(10, lineItem.getQuantity());
     }
 
     @Test
     public void setSubtotalNoArg() throws Exception {
-        lineItem.setQuantity(2);
         lineItem.setDefaultPrice(100);
         lineItem.setSubtotal();
         assertEquals(200, lineItem.getSubtotal(), 0.0);
