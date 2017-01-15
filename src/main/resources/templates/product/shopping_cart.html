@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Horsecool Shop</title>
+    <title>Shopping Cart | Horsecool Shop</title>
 
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -34,10 +34,36 @@
 </head>
 
 <body>
+<div class="container">
+    <!--Navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
 
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
+                    <li> <a th:href="${'/'}">All Products</a></li>
+                </ul>
+                <!-- navbar-left will move the search to the left -->
+                <div class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <button id="modal-button" type="button" class="btn btn-default btn-xs">
+                            <a id="shopping-cart" href="/showcart">
+                                <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
+                                <p id="items-counter" th:text="${counter}"></p>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-bordered table-striped table-hover table-responsive">
+        <table class="table table-bordered table-striped table-hover table-responsive ">
 
             <thead>
             <tr>
@@ -90,12 +116,13 @@
             </tbody>
         </table>
         <div>
-            <button class="btn btn-default"><a href="/">Continue Shopping</a></button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#checkoutModal" disabled="disabled">Checkout</button>
+            <button class="btn btn-default col-md-2"><a href="/">Continue Shopping</a></button>
+            <div class="col-md-8"></div>
+            <button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" data-toggle="modal" data-target="#checkoutModal">Checkout</button>
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- Checkout Modal -->
 <div id="checkoutModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -198,7 +225,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary checkout-button" data-dismiss="modal" data-toggle="modal" data-target="#paymentModal"><input class="hidden" type="submit" value="payment"/>Pay</button>
+                    <button type="button" class="btn btn-primary checkout-button" data-dismiss="modal" data-toggle="modal" data-target="#paymentModal" disabled="disabled"><input class="hidden" type="submit" value="payment"/>Pay</button>
                 </div>
             </form> <!-- /.form-horizontal -->
         </div>
