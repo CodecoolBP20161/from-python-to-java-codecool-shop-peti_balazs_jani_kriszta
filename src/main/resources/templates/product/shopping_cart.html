@@ -5,28 +5,7 @@
 <body>
 <div class="container">
     <!--Navbar-->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
-                    <li> <a th:href="${'/'}">All Products</a></li>
-                </ul>
-                <!-- navbar-left will move the search to the left -->
-                <div class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <button id="modal-button" type="button" class="btn btn-default btn-xs">
-                            <a id="shopping-cart" href="/showcart">
-                                <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
-                                <p id="items-counter" th:text="${counter}"></p>
-                            </a>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <nav th:replace="product/fragments/navbar::cart_navbar"></nav>
 </div>
 
 <div class="container">
