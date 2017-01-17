@@ -57,7 +57,7 @@ public class ProductDaoJdbc implements ProductDao {
             if (rs.next()){
                 ProductCategory category_name = productCategoryDao.find(rs.getInt("category_id"));
                 Supplier supplier_name = supplierDao.find(rs.getInt("supplier_id"));
-                return new Product(rs.getString("name"), rs.getFloat("default_price"),rs.getString("default_currency"),
+                return new Product(id, rs.getString("name"), rs.getFloat("default_price"),rs.getString("default_currency"),
                         rs.getString("description"),category_name, supplier_name);
             }
         }catch (SQLException e){

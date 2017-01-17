@@ -1,3 +1,5 @@
+package com.codecool.shop;
+
 import com.codecool.shop.controller.Controller;
 import com.codecool.shop.controller.SiteController;
 import com.codecool.shop.dao.implementation.database.DBConnection;
@@ -45,6 +47,8 @@ public class Main {
 
         get("/plus/:id", (request, response) -> SiteController.increase(request, response));
         get("/minus/:id", (request, response) -> SiteController.decrease(request, response));
+
+        get("/reviewFinder/:id", SiteController::renderReview, tmp);
 
         get("/hello", (req, res) -> "Hello World");
         get("/", SiteController::renderProducts, tmp);
