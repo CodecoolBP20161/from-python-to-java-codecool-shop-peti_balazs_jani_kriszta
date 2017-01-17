@@ -13,7 +13,6 @@ public class APIService {
 
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
     private static final String API_URL = "localhost:8888/";
-    private static final String APIKey = "6bZD4zuR0Qmsh13bz0e6djc4jk1Op1ZAPXIjsnGyaTSNRONHQm";
 
     private static APIService INSTANCE;
 
@@ -33,27 +32,10 @@ public class APIService {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public String reviews() throws IOException, URISyntaxException {
+    public String findReviews(String productName) throws IOException, URISyntaxException {
         logger.info("Getting reviews.");
-        URIBuilder builder = new URIBuilder(API_URL + "/reviewFromClient");
-        builder.addParameter("APIKey", APIKey);
-        logger.info("My builder looks like: " + builder);
-        return execute(builder.build());
-    }
-
-    /**
-     * Gets reviews from a specific product from this webshop
-     *
-     * @param productName - product name or serial  number.
-     * @return - JSON received from the API as it is.
-     * @throws IOException
-     * @throws URISyntaxException
-     */
-    public String allReview(String productName) throws IOException, URISyntaxException {
-        logger.info("Getting reviews.");
-        URIBuilder builder = new URIBuilder(API_URL + "/reviewFromClient");
-        builder.addParameter("APIKey", APIKey);
-        builder.addParameter("productName", productName);
+        URIBuilder builder = new URIBuilder(API_URL + "/api/review");
+        builder.addParameter("title", productName);
         logger.info("My builder looks like: " + builder);
         return execute(builder.build());
     }

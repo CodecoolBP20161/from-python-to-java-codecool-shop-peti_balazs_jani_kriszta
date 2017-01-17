@@ -51,6 +51,10 @@ hr {
     /*position: absolute;*/
 }
 
+.cart-header {
+    margin: 0 auto;
+}
+
 #items-counter {
     width: 1.5em;
     /*font-size: 1.3em;*/

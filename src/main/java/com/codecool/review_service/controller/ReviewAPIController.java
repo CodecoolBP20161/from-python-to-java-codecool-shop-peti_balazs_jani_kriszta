@@ -12,11 +12,8 @@ public class ReviewAPIController {
 
     private final APIService apiService;
 
-    /**
-     * @param apiService
-     */
-    public ReviewAPIController(APIService apiService){
-        this.apiService = apiService;
+    public ReviewAPIController(){
+        this.apiService = APIService.getInstance();
     }
 
     /**
@@ -26,20 +23,9 @@ public class ReviewAPIController {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public String allReview(Request request, Response response) throws IOException, URISyntaxException {
+    public String findReviews(Request request, Response response) throws IOException, URISyntaxException {
         String productName = request.queryParams(PRODUCT_NAME_PARAM_KEY);
-        return apiService.allReview(productName);
-    }
-
-    /**
-     * @param request
-     * @param response
-     * @return
-     * @throws IOException
-     * @throws URISyntaxException
-     */
-    public String reviews(Request request, Response response) throws IOException, URISyntaxException {
-        return apiService.reviews();
+        return apiService.findReviews(productName);
     }
 
     public String status(Request request, Response response) {

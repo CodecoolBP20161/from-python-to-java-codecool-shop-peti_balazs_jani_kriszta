@@ -22,6 +22,7 @@ public abstract class ProductController {
         public static ModelAndView renderProducts(Request req, Response res) {
         // Read data from the shopping cart saved in the session
         cartController.setSession(req);
+            cartController.deleteZeroQuantityLineItems(req);
 
         Map params = new HashMap<>();
         String currentUri = req.uri();
@@ -58,6 +59,8 @@ public abstract class ProductController {
 
         return new ModelAndView(params, "product/index");
     }
+
+
 
 }
 

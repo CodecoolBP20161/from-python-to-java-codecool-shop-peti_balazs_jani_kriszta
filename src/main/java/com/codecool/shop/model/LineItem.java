@@ -34,22 +34,27 @@ public class LineItem {
         this.quantity++;
     }
 
-    void setQuantity(int quantity){
-        this.quantity = quantity;
-    }
+    public void reduceQuantity() {this.quantity--;}
 
     public int getQuantity(){
         return quantity;
     }
 
+    public int getQuantity(int productID) {
+        if (this.productID == productID) {
+            return this.quantity;
+        }
+        return 0;
+    }
+
     void setSubtotal(){
-        subtotal = defaultPrice * (float) quantity;
+        subtotal = defaultPrice * (float) this.quantity;
         BigDecimal bd = new BigDecimal(Float.toString(subtotal));
         subtotal = bd.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
     }
-    void setSubtotal(float price){
-        subtotal = price;
-    }
+//    void setSubtotal(float price){
+//        subtotal = price;
+//    }
 
     public float getSubtotal() {
         return subtotal;
