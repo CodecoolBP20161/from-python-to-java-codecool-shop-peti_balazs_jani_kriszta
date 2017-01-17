@@ -1,14 +1,13 @@
 package com.codecool.shop.controller;
 
 import com.codecool.review_service.controller.ReviewAPIController;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONArray;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,7 @@ import java.util.Map;
  */
 public class ProductPageController {
 
-    public static ModelAndView renderReview(Request req, Response res) throws IOException{
+    public static ModelAndView renderReview(Request req, Response res) throws IOException, URISyntaxException {
         String productName = req.params("productName");
         ReviewAPIController finderController = new ReviewAPIController();
         String reviewJson = finderController.findReviews(productName);

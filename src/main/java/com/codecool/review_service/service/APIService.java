@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 public class APIService {
 
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
-    private static final String API_URL = "localhost:8888/";
+    private static final String API_URL = "localhost:60008/";
 
     private static APIService INSTANCE;
 

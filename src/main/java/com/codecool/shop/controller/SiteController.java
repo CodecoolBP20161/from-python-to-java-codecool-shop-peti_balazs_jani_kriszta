@@ -4,6 +4,9 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 /**
  * Created by krisztinabaranyai on 07/12/2016.
  */
@@ -37,7 +40,7 @@ public class SiteController {
         return CartController.renderCart(req, res);
     }
 
-    public static ModelAndView renderReview(Request req, Response res) {
+    public static ModelAndView renderReview(Request req, Response res) throws IOException, URISyntaxException{
         return ProductPageController.renderReview(req, res);
     }
 

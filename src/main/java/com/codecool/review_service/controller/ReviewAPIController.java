@@ -17,14 +17,11 @@ public class ReviewAPIController {
     }
 
     /**
-     * @param request
-     * @param response
      * @return
      * @throws IOException
      * @throws URISyntaxException
      */
-    public String findReviews(Request request, Response response) throws IOException, URISyntaxException {
-        String productName = request.queryParams(PRODUCT_NAME_PARAM_KEY);
+    public String findReviews(String productName) throws IOException, URISyntaxException {
         return apiService.findReviews(productName);
     }
 
