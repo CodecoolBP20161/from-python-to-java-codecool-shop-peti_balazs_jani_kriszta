@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--Navbar WITH filtering-->
+<nav th:fragment="main_navbar" class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
+                <li> <a th:href="${'/'}">All Products</a></li>
+
+                <!--Dropdown menu for filters-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter by <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Categories</li>
+                        <li><a th:each="cat,iterStat : ${categories}" th:href="${'/category/'+cat.id}" th:text="${cat.name}"></a>
+                        </li>
+                        <hr/>
+                        <li class="dropdown-header">Supplier</li>
+                        <li><a th:each="sup,iterStat : ${supplier}" th:href="${'/supplier/'+sup.id}" th:text="${sup.name}"></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- navbar-left will move the search to the left -->
+            <div class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <button id="modal-button" type="button" class="btn btn-default btn-xs">
+                        <a id="shopping-cart" href="/showcart">
+                            <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
+                            <p id="items-counter" th:text="${counter}"></p>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--Navbar WITHOUT filtering-->
+<nav th:fragment="reduced_navbar" class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a id="codecool" th:href="${'/'}">Codecool Shop<span class="sr-only">(current)</span></a></li>
+                <li> <a th:href="${'/'}">All Products</a></li>
+            </ul>
+            <!-- navbar-left will move the search to the left -->
+            <div class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <button id="modal-button" type="button" class="btn btn-default btn-xs">
+                        <a id="shopping-cart" href="/showcart">
+                            <i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
+                            <p id="items-counter" th:text="${counter}"></p>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+</html>
