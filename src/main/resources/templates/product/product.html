@@ -9,15 +9,15 @@
 <div class="container">
     <div class="item col-xs-4 col-lg-4">
         <div class="show_product">
-            <h2 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h2>
-            <p class="group inner list-group-item-text" th:text="${prod.description}">Product
+            <h2 class="group inner list-group-item-heading" th:text="${product.name}">Product name</h2>
+            <p class="group inner list-group-item-text" th:text="${product.description}">Product
                 description... </p>
             <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                 th:attr="src='/img/product_' + ${prod.id} + '.jpg'" th:alt="${prod.name}"/>
+                 th:attr="src='/img/product_' + ${product.id} + '.jpg'" th:alt="${product.name}"/>
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-6">
-                <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                <p class="lead" th:text="${product.getPrice()}">100 USD</p>
             </div>
         </div>
         <div class="row">
