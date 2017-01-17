@@ -4,6 +4,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.fluent.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spark.Response;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,7 +13,8 @@ import java.net.URISyntaxException;
 public class APIService {
 
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
-    private static final String API_URL = "localhost:60008/";
+    private static String port = "60010";
+    private static final String API_URL = "http://localhost:" + port + "/api/review";
 
     private static APIService INSTANCE;
 
@@ -32,9 +34,9 @@ public class APIService {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public String findReviews(String productName) throws IOException, URISyntaxException {
+    public String findReviews(String productName, spark.Request req, Response res) throws IOException, URISyntaxException {
         logger.info("Getting reviews.");
-        URIBuilder builder = new URIBuilder(API_URL + "/api/review");
+        URIBuilder builder = new URIBuilder(API_URL);
         builder.addParameter("title", productName);
         logger.info("My builder looks like: " + builder);
         return execute(builder.build());

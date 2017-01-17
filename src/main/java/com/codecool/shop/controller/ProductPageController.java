@@ -1,6 +1,8 @@
 package com.codecool.shop.controller;
 
 import com.codecool.review_service.controller.ReviewAPIController;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.database.ProductDaoJdbc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import spark.ModelAndView;
 import spark.Request;
@@ -16,13 +18,26 @@ import java.util.Map;
  * Created by csyk on 2017.01.17..
  */
 public class ProductPageController {
+    static ProductDao productDataStore = ProductDaoJdbc.getInstance();
+    static CartController cartController = new CartController();
+
+
 
     public static ModelAndView renderReview(Request req, Response res) throws IOException, URISyntaxException {
-        String productName = req.params("productName");
+        cartController.setSession(req);
+
+        int id = Integer.parseInt(req.params("id"));
+        String productName = productDataStore.find(id).getName();
+
+
         ReviewAPIController finderController = new ReviewAPIController();
-        String reviewJson = finderController.findReviews(productName);
+        String reviewJson = finderController.findReviews(productName, req, res);
+
         Map params = new HashMap<>();
         params.put("reviews", parseReviews(reviewJson));
+        params.put("product", productDataStore.find(id));
+        System.out.println(productDataStore.find(id).toString());
+        params.putAll(cartController.showShoppingCart(req));
         return new ModelAndView(params, "product/product");
     }
 

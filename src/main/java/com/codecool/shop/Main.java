@@ -48,7 +48,7 @@ public class Main {
         get("/plus/:id", (request, response) -> SiteController.increase(request, response));
         get("/minus/:id", (request, response) -> SiteController.decrease(request, response));
 
-        get("/reviewFinder/:productName", (request, response) -> SiteController.renderReview(request, response));
+        get("/reviewFinder/:id", SiteController::renderReview, tmp);
 
         get("/hello", (req, res) -> "Hello World");
         get("/", SiteController::renderProducts, tmp);

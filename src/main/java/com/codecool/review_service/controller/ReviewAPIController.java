@@ -21,8 +21,8 @@ public class ReviewAPIController {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public String findReviews(String productName) throws IOException, URISyntaxException {
-        return apiService.findReviews(productName);
+    public String findReviews(String productName, Request req, Response res) throws IOException, URISyntaxException {
+        return apiService.findReviews(productName, req, res);
     }
 
     public String status(Request request, Response response) {
