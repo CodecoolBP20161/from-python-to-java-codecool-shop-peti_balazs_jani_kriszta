@@ -37,7 +37,7 @@ public class APIService {
     public String findReviews(String productName, spark.Request req, Response res) throws IOException, URISyntaxException {
         logger.info("Getting reviews.");
         URIBuilder builder = new URIBuilder(API_URL);
-        builder.addParameter("tittle", productName);
+        builder.addParameter("title", productName);
         logger.info("My builder looks like: " + builder);
         return execute(builder.build());
     }
