@@ -33,7 +33,7 @@ public class APIService {
         logger.info("new review url: "+builder);
         return execute(builder.build());
     }
-    public String getAllReviewOfProduct(String productName, Request request, Response response) throws URISyntaxException, IOException {
+    public String getAllApprovedReviewsOfProduct(String productName, Request request, Response response) throws URISyntaxException, IOException {
         logger.info("Get all review of product: "+productName);
         URIBuilder builder = new URIBuilder(API_URL + "/allReviewOfProduct/"+SHOP_API_KEY+"/"+productName);
         logger.info("get all review url: "+builder);
