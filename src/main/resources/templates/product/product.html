@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="product/fragments/head::head"></head>
+<body>
+<div class="container">
+    <!--Navbar-->
+    <nav th:replace="product/fragments/navbar::reduced_navbar"></nav>
+</div>
+<div class="container">
+    <div class="item col-xs-4 col-lg-4">
+        <div class="row">
+        <div class="show_product">
+            <h2 class="group inner list-group-item-heading" th:text="${product.name}">Product name</h2>
+            <p class="group inner list-group-item-text" th:text="${product.description}">Product
+                description... </p>
+            <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
+                 th:attr="src='/img/product_' + ${product.id} + '.jpg'" th:alt="${product.name}"/>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <p class="lead" th:text="${product.getPrice()}">100 USD</p>
+            </div>
+        </div>
+        </div>
+    <div class="item col-xs-12 col-lg-12">
+        <div class="row">
+            <h3>Reviews:</h3>
+            <div class="col-xs-12 col-md-12" th:each="review,iterStat : ${reviews}">
+                <p class="lead" th:text="${review.text}">text</p>
+                <a th:href="${review.url}" th:text="${review.url}">Url</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
