@@ -25,9 +25,7 @@ public class ProductPageController {
 
     public static String saveReview(Request req, Response res) {
         String body = req.body();
-        System.out.println(req.queryParams("comment"));
-        System.out.println(body);
-//        req.qoeryParams("name")
+
 //        ModeratorAPIController moderatorController = new ModeratorAPIController();
 //        moderatorController.saveReview(req);
 

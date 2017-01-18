@@ -48,7 +48,6 @@ public class APIService {
      */
     private String execute(URI uri) throws IOException {
         return Request.Post(uri)
-                .bodyString()
                 .execute()
                 .returnContent()
                 .asString();
