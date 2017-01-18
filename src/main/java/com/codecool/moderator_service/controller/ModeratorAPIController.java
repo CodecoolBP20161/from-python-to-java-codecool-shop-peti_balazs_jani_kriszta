@@ -9,9 +9,7 @@ import spark.Response;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-/**
- * Created by komlancz on 2017.01.18..
- */
+
 public class ModeratorAPIController {
     private static final Logger logger = LoggerFactory.getLogger(ModeratorAPIController.class);
 

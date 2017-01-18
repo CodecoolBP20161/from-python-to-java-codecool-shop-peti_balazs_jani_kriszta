@@ -18,7 +18,7 @@ public class APIService {
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
     private static String port = "61000";
     private static final String API_URL = "http://localhost:" + port;
-    private static final String SHOP_API_KEY = "4c544040-43e2-478f-9239-c35f5601579f";
+    private static final String SHOP_API_KEY = "3682be4e-d207-48a5-9fbb-3db5a9abc00c";
 
     private static APIService INSTANCE;
 
@@ -54,9 +54,9 @@ public class APIService {
 
     public String getAllApprovedReviewsOfProduct(String productName, spark.Request request, Response response) throws URISyntaxException, IOException {
         logger.info("Get all reviews of product: " + productName);
-        URIBuilder builder = new URIBuilder(API_URL + "/allReviewOfProduct");
-        builder.addParameter("APIKey", SHOP_API_KEY);
-        builder.addParameter("productName", productName);
+        URIBuilder builder = new URIBuilder(API_URL + "/allReviewOfProduct/" + SHOP_API_KEY + "/" + productName.replace(" ", "+"));
+//        builder.addParameter("APIKey", SHOP_API_KEY);
+//        builder.addParameter("productName", productName);
         return executeAll(builder.build());
     }
 
