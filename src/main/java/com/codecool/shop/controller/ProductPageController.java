@@ -25,16 +25,19 @@ public class ProductPageController {
 
     public static ModelAndView renderReview(Request req, Response res) throws IOException, URISyntaxException {
         cartController.setSession(req);
+        Map params = new HashMap<>();
 
         int id = Integer.parseInt(req.params("id"));
         String productName = productDataStore.find(id).getName();
 
+        try {
+            ReviewAPIController finderController = new ReviewAPIController();
+            String reviewJson = finderController.findReviews(productName, req, res);
+            params.put("reviews", parseReviews(reviewJson));
+        } catch (IOException e) {
+            System.out.println("Caught IOException from Review Finder Service: " + e.getMessage());
+        }
 
-        ReviewAPIController finderController = new ReviewAPIController();
-        String reviewJson = finderController.findReviews(productName, req, res);
-
-        Map params = new HashMap<>();
-        params.put("reviews", parseReviews(reviewJson));
         params.put("product", productDataStore.find(id));
         params.putAll(cartController.showShoppingCart(req));
         return new ModelAndView(params, "product/product");
