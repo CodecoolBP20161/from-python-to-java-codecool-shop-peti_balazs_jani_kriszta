@@ -17,7 +17,7 @@ public class APIService {
     private static final String API_URL = "http://localhost:" + port;
     private static final String SHOP_API_KEY = "";
 
-    private static com.codecool.moderator_service.service.APIService INSTANCE;
+    private static APIService INSTANCE;
 
     private APIService(){}
 
@@ -39,6 +39,13 @@ public class APIService {
         logger.info("get all review url: "+builder);
         return execute(builder.build());
     }
+    /**
+     * Executes the actual GET request against the given URI
+     *
+     * @param uri - obj containing path and params.
+     * @return
+     * @throws IOException
+     */
     private String execute(URI uri) throws IOException {
         return Request.Get(uri)
                 .execute()
