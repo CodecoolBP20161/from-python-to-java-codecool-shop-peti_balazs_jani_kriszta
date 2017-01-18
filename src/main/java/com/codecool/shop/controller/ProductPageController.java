@@ -36,7 +36,6 @@ public class ProductPageController {
         Map params = new HashMap<>();
         params.put("reviews", parseReviews(reviewJson));
         params.put("product", productDataStore.find(id));
-        System.out.println(productDataStore.find(id).toString());
         params.putAll(cartController.showShoppingCart(req));
         return new ModelAndView(params, "product/product");
     }
