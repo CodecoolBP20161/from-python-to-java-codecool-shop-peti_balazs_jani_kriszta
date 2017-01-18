@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.moderator_service.controller.ModeratorAPIController;
 import com.codecool.review_service.controller.ReviewAPIController;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.database.ProductDaoJdbc;
@@ -30,25 +31,42 @@ public class ProductPageController {
         int id = Integer.parseInt(req.params("id"));
         String productName = productDataStore.find(id).getName();
 
-        try {
-            ReviewAPIController finderController = new ReviewAPIController();
-            String reviewJson = finderController.findReviews(productName, req, res);
-            params.put("reviews", parseReviews(reviewJson));
-        } catch (IOException e) {
-            System.out.println("Caught IOException from Review Finder Service: " + e.getMessage());
-        }
-
+        params.put("moderated", getAllApprovedReviewsOfProduct(productName, req, res));
+        params.put("reviews", getParsedReviews(productName, req, res));
         params.put("product", productDataStore.find(id));
         params.putAll(cartController.showShoppingCart(req));
         return new ModelAndView(params, "product/product");
     }
 
-    public static ArrayList parseReviews(String json) throws IOException{
-        HashMap<String,Object> result = new ObjectMapper().readValue(json, HashMap.class);
+    private static ArrayList getParsedReviews(String productName, Request req, Response res) throws URISyntaxException{
+        try {
+            ReviewAPIController finderController = new ReviewAPIController();
+            String reviewJson = finderController.findReviews(productName, req, res);
+            return parseReviews(reviewJson);
+        } catch (IOException e) {
+            System.out.println("Caught IOException from Review Finder Service: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private static ArrayList getAllApprovedReviewsOfProduct(String productName, Request req, Response res) throws URISyntaxException{
+        try {
+            ModeratorAPIController moderatorController = new ModeratorAPIController();
+            String reviewJson = moderatorController.getAllApprovedReviewsOfProduct(productName, req, res);
+            return parseReviews(reviewJson);
+        } catch (IOException e) {
+            System.out.println("Caught IOException from Horseshoe Review Service: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public static ArrayList parseReviews(String json) throws IOException {
+        HashMap<String, Object> result = new ObjectMapper().readValue(json, HashMap.class);
         ArrayList reviews = new ArrayList();
-        for (Object element : result.values()){
+        for (Object element : result.values()) {
             reviews.add(element);
         }
         return reviews;
     }
+
 }
