@@ -54,7 +54,7 @@ public class APIService {
 
     public String getAllApprovedReviewsOfProduct(String productName, spark.Request request, Response response) throws URISyntaxException, IOException {
         logger.info("Get all reviews of product: " + productName);
-        URIBuilder builder = new URIBuilder(API_URL + "/allReviewOfProduct/" + SHOP_API_KEY + "/" + productName.replace(" ", "+"));
+        URIBuilder builder = new URIBuilder(API_URL + "/allReviewOfProduct/" + SHOP_API_KEY + "/" + productName.replace(" ", ""));
 //        builder.addParameter("APIKey", SHOP_API_KEY);
 //        builder.addParameter("productName", productName);
         return executeAll(builder.build());
