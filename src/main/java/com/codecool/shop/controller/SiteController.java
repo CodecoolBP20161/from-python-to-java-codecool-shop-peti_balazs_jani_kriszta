@@ -44,5 +44,7 @@ public class SiteController {
         return ProductPageController.renderReview(req, res);
     }
 
-
+    public static String saveReview(Request req, Response res){
+        return ProductPageController.saveReview(req, res);
+    }
 }

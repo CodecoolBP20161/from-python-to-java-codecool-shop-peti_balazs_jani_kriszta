@@ -23,6 +23,16 @@ public class ProductPageController {
     static CartController cartController = new CartController();
 
 
+    public static String saveReview(Request req, Response res) {
+        String body = req.body();
+        System.out.println(req.queryParams("comment"));
+        System.out.println(body);
+//        req.qoeryParams("name")
+//        ModeratorAPIController moderatorController = new ModeratorAPIController();
+//        moderatorController.saveReview(req);
+
+        return null;
+    }
 
     public static ModelAndView renderReview(Request req, Response res) throws IOException, URISyntaxException {
         cartController.setSession(req);
@@ -60,7 +70,7 @@ public class ProductPageController {
         }
     }
 
-    public static ArrayList parseReviews(String json) throws IOException {
+    private static ArrayList parseReviews(String json) throws IOException {
         HashMap<String, Object> result = new ObjectMapper().readValue(json, HashMap.class);
         ArrayList reviews = new ArrayList();
         for (Object element : result.values()) {
@@ -68,5 +78,6 @@ public class ProductPageController {
         }
         return reviews;
     }
+
 
 }

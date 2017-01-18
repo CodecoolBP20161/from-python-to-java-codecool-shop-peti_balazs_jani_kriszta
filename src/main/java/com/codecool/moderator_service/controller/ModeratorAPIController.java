@@ -1,6 +1,6 @@
 package com.codecool.moderator_service.controller;
 
-import com.codecool.review_service.service.APIService;
+import com.codecool.moderator_service.service.APIService;
 import spark.Request;
 import spark.Response;
 
@@ -28,6 +28,10 @@ public class ModeratorAPIController {
     public String getAllApprovedReviewsOfProduct(String productName, Request req, Response res) throws IOException, URISyntaxException {
         return apiService.getAllApprovedReviewsOfProduct(productName, req, res);
     }
+
+//    public String saveReview() {
+//
+//    }
 
     public String status(Request request, Response response) {
         return "ok";
