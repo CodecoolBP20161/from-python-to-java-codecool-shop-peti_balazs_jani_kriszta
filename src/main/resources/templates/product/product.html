@@ -51,16 +51,16 @@
     </form>
 
     <!--display local reviews-->
-    <div class="col-xs-6 col-lg-6" id="listing-reviews">
+    <div class="col-xs-6 col-lg-6" id="listing-reviews" th:each="review,iterStat : ${moderated}">
         <div class="list-group">
             <div class="col-xs-6 col-lg-6">
-                <h4 class="list-group-item-heading">Name</h4>
+                <h4 class="list-group-item-heading" th:text="${review.name}">Name</h4>
             </div>
             <div class="col-xs-6 col-lg-6">
-                <h4 class="list-group-item-heading">Ratings</h4>
+                <h4 class="list-group-item-heading" th:text="${review.rating}">Ratings</h4>
             </div>
             <div class="col-xs-12 col-lg-12">
-                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <p class="list-group-item-text" th:text="${review.comment}">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             </div>
         </div>
     </div>
