@@ -28,12 +28,16 @@ public class ProductPageController {
 
     public static String saveReview(Request req, Response res) throws IOException, URISyntaxException {
         String productName = req.params("productName");
+        String userName = req.queryParams("name");
+        String comment = req.queryParams("comment");
+        String ratings = req.queryParams("ratings");
+        logger.info("Start saving new review: Username: " + userName + ", Product name: " + productName + ", Comment: " + comment + ", Ratings: " + ratings);
 
         try {
             ModeratorAPIController moderatorController = new ModeratorAPIController();
             moderatorController.saveReview(productName, req, res);
         } catch (URISyntaxException e) {
-            logger.error("Caught URISyntaxException from Review Finder Service: " + e.getMessage());
+            logger.error("Caught URISyntaxException from HorseShoeReview Service: " + e.getMessage());
         }
 
         res.redirect("/reviewFinder/" + productName);
@@ -49,7 +53,7 @@ public class ProductPageController {
         int id = Integer.parseInt(req.params("id"));
         String productName = productDataStore.find(id).getName();
 
-        params.put("moderated", requestAllApprovedReviewsOfProduct(productName, req, res));
+//        params.put("moderated", requestAllApprovedReviewsOfProduct(productName, req, res));
         params.put("reviews", requestParsedReviews(productName, req, res));
         params.put("product", productDataStore.find(id));
         params.putAll(cartController.showShoppingCart(req));

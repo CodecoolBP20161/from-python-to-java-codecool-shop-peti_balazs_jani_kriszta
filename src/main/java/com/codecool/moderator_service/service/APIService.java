@@ -18,7 +18,7 @@ public class APIService {
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
     private static String port = "61000";
     private static final String API_URL = "http://localhost:" + port;
-    private static final String SHOP_API_KEY = "3682be4e-d207-48a5-9fbb-3db5a9abc00c";
+    private static final String SHOP_API_KEY = "7b2b7341-c97f-4680-8220-d056856aa7d0";
 
     private static APIService INSTANCE;
 
@@ -32,19 +32,20 @@ public class APIService {
     }
 
     public String newReview(String productName, spark.Request request, Response response) throws URISyntaxException, IOException {
-        logger.info("New review: ");
+        logger.info("Sending new review to Service... ");
+
+
         URIBuilder builder = new URIBuilder(API_URL + "/review");
         builder.addParameter("APIKey", SHOP_API_KEY);
-        builder.addParameter("productName", productName.replace(" ", "+"));
+        builder.addParameter("productName", productName.replace(" ", "%"));
 //        builder.addParameter("username", request.queryParams("name"));
         builder.addParameter("ratings", request.queryParams("ratings"));
-        logger.info("new review URI: "+builder);
-        String comment = request.queryParams("review");
+        String comment = request.queryParams("comment");
+        logger.info("URI for saving new review: " + builder);
         return executeNew(builder.build(), comment);
     }
 
     private String executeNew(URI uri, String comment) throws IOException {
-        logger.info("Execute request. URI: " + uri);
         return Post(uri)
                 .bodyString(comment, ContentType.APPLICATION_JSON)
                 .execute()
@@ -55,13 +56,11 @@ public class APIService {
     public String getAllApprovedReviewsOfProduct(String productName, spark.Request request, Response response) throws URISyntaxException, IOException {
         logger.info("Get all reviews of product: " + productName);
         URIBuilder builder = new URIBuilder(API_URL + "/allReviewOfProduct/" + SHOP_API_KEY + "/" + productName.replace(" ", ""));
-//        builder.addParameter("APIKey", SHOP_API_KEY);
-//        builder.addParameter("productName", productName);
+        logger.info("URI for getting all approved review of "+ productName + ": " + builder);
         return executeAll(builder.build());
     }
 
     private String executeAll(URI uri) throws IOException {
-        logger.info("Execute request at URI: " + uri);
         return Get(uri)
                 .execute()
                 .returnContent()
