@@ -53,7 +53,7 @@ public class ProductPageController {
         int id = Integer.parseInt(req.params("id"));
         String productName = productDataStore.find(id).getName();
 
-//        params.put("moderated", requestAllApprovedReviewsOfProduct(productName, req, res));
+        params.put("moderated", requestAllApprovedReviewsOfProduct(productName, req, res));
         params.put("reviews", requestParsedReviews(productName, req, res));
         params.put("product", productDataStore.find(id));
         params.putAll(cartController.showShoppingCart(req));
