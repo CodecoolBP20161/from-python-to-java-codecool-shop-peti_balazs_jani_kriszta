@@ -5,6 +5,7 @@ import com.codecool.review_service.controller.ReviewAPIController;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.database.ProductDaoJdbc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.HttpResponseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.ModelAndView;
@@ -26,11 +27,12 @@ public class ProductPageController {
     static CartController cartController = new CartController();
 
 
-    public static String saveReview(Request req, Response res) throws IOException, URISyntaxException {
+    public static String saveReview(Request req, Response res) throws IOException, URISyntaxException, HttpResponseException {
         String productName = req.params("productName");
         String userName = req.queryParams("name");
         String comment = req.queryParams("comment");
         String ratings = req.queryParams("ratings");
+        String id = req.queryParams("id");
         logger.info("Start saving new review: Username: " + userName + ", Product name: " + productName + ", Comment: " + comment + ", Ratings: " + ratings);
 
         try {
@@ -38,9 +40,10 @@ public class ProductPageController {
             moderatorController.saveReview(productName, req, res);
         } catch (URISyntaxException e) {
             logger.error("Caught URISyntaxException from HorseShoeReview Service: " + e.getMessage());
+        } catch (HttpResponseException u) {
+            logger.error("Caught HttpResponseException from HorseShoeReview Service: " + u.getMessage());
         }
-
-        res.redirect("/reviewFinder/" + productName);
+        res.redirect("/reviewFinder/" + id);
         return null;
     }
 
@@ -51,6 +54,7 @@ public class ProductPageController {
         Map params = new HashMap<>();
 
         int id = Integer.parseInt(req.params("id"));
+        logger.info("ID is: " + id);
         String productName = productDataStore.find(id).getName();
 
         params.put("moderated", requestAllApprovedReviewsOfProduct(productName, req, res));

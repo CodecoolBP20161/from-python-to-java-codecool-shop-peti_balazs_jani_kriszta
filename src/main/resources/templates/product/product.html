@@ -43,9 +43,10 @@
 
 
     <div class="form-group col-xs-6 col-lg-6">
-        <form th:action="'/newReview/' + ${product.name}" method="post">
+        <form th:action="'/newReview/' + ${product.name}" method="post"  th:object="${product.id}">
 
             <input type="text" id='title' name="name" placeholder="Name"/>
+            <input type="text" class="hidden" name="id" th:value="${product.id}"/>
 
             <textarea name="comment" placeholder="Your review..."></textarea>
 
@@ -58,7 +59,7 @@
                     <option value="5">5</option>
                 </select>
 
-            <button id="save" type="submit">Submit review</button>
+            <button name="id" id="save" type="submit">Submit review</button>
         </form>
     </div>
 

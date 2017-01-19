@@ -36,15 +36,7 @@ public class APIService {
         String ratings = request.queryParams("ratings");
         logger.info("Ratings: " + ratings);
         String comment = request.queryParams("comment");
-
-
         URIBuilder builder = new URIBuilder(API_URL + "/review/" + SHOP_API_KEY + "/" + productName.replace(" ", "") + "/" + ratings);
-
-
-//        builder.addParameter("APIKey", SHOP_API_KEY);
-//        builder.addParameter("productName", productName.replace(" ", "+"));
-//        builder.addParameter("username", request.queryParams("name"));
-//        builder.addParameter("ratings", request.queryParams("ratings"));
 
         logger.info("URI for saving new review: " + builder);
         return executeNew(builder.build(), comment);
