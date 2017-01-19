@@ -43,13 +43,13 @@
 
 
     <div class="form-group col-xs-6 col-lg-6">
-        <form th:action="'/newReview/' + ${product.name}" th:method="post">
+        <form th:action="'/newReview' + ${product.name}" th:method="post">
 
             <input th:type="text" id='title' th:name="name" placeholder="Name"/>
 
             <textarea th:name="comment" placeholder="Your review..."></textarea>
 
-                <select class="selectpicker" th:name="ratings">
+                <select class="selectpicker">
                     <option value="" disabled="true" selected="true">Rate</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -61,10 +61,6 @@
             <button id="save" th:type="submit">Submit review</button>
         </form>
     </div>
-
-
-
-
 
 
     <div class="item col-xs-12 col-lg-12">
