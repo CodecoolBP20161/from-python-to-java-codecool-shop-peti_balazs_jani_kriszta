@@ -221,3 +221,7 @@ th, td {
 #listing-reviews {
     word-wrap:break-word;
 }
+
+.submit-button {
+    float: right;
+}
