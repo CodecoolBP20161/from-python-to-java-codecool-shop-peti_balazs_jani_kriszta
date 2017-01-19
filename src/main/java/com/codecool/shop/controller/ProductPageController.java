@@ -77,11 +77,11 @@ public class ProductPageController {
         return null;
     }
 
-    private static String requestAllApprovedReviewsOfProduct(String productName, Request req, Response res) throws IOException, URISyntaxException{
+    private static ArrayList requestAllApprovedReviewsOfProduct(String productName, Request req, Response res) throws IOException, URISyntaxException{
         try {
             ModeratorAPIController moderatorController = new ModeratorAPIController();
             String reviewJson = moderatorController.getAllApprovedReviewsOfProduct(productName, req, res);
-            return reviewJson;
+            return parseReviews(reviewJson);
         }catch (URISyntaxException u){
             logger.error("Caught URISyntaxException from Horseshoe Review Service: " + u.getMessage());
         }catch (IOException e) {
@@ -99,6 +99,8 @@ public class ProductPageController {
         }
         return reviews;
     }
+
+
 
 
 
