@@ -40,9 +40,11 @@ public class SiteController {
         return CartController.renderCart(req, res);
     }
 
-    public static ModelAndView renderReview(Request req, Response res) throws IOException, URISyntaxException{
+    public static ModelAndView renderReview(Request req, Response res) throws URISyntaxException, IOException{
         return ProductPageController.renderReview(req, res);
     }
 
-
+    public static String saveReview(Request req, Response res) throws URISyntaxException, IOException{
+        return ProductPageController.saveReview(req, res);
+    }
 }

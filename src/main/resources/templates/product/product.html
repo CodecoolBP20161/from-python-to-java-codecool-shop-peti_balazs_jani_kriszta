@@ -23,23 +23,47 @@
             </div>
         </div>
     </div>
-    <form method="POST">
-        <div class="form-group col-xs-6 col-lg-6">
-            <input id="msg" type="text" class="form-control" name="name" placeholder="Name" value="Anonymous"></input>
-            <textarea class="form-control" rows="5" id="comment" name="review" placeholder="Write a review"></textarea>
-            <select class="selectpicker">
-                <option value="" disabled="true" selected="true">Rate</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <!--<a th:href="${'/newReview/'+item.productName}">-->
-                <!--<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>-->
-            <!--</a>-->
-        </div>
-    </form>
+    <!--<form method="POST">-->
+        <!--<div class="form-group col-xs-6 col-lg-6">-->
+            <!--<input id="msg" type="text" class="form-control" name="name" placeholder="Name" value="Anonymous"></input>-->
+            <!--<textarea class="form-control" rows="5" id="comment" name="review" placeholder="Write a review"></textarea>-->
+            <!--<select class="selectpicker">-->
+                <!--<option value="" disabled="true" selected="true">Rate</option>-->
+                <!--<option value="1">1</option>-->
+                <!--<option value="2">2</option>-->
+                <!--<option value="3">3</option>-->
+                <!--<option value="4">4</option>-->
+                <!--<option value="5">5</option>-->
+            <!--</select>-->
+            <!--&lt;!&ndash;<a th:href="${'/newReview/'+item.productName}">&ndash;&gt;-->
+                <!--&lt;!&ndash;<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</form>-->
+
+
+    <div class="form-group col-xs-6 col-lg-6">
+        <form th:action="'/newReview/' + ${product.name}" method="post"  th:object="${product.id}">
+
+            <input type="text" id='title' name="name" placeholder="Name"/>
+            <input type="text" class="hidden" name="id" th:value="${product.id}"/>
+
+            <textarea name="comment" placeholder="Your review..."></textarea>
+
+                <select class="selectpicker" name="ratings">
+                    <option value="" disabled="true" selected="true">Rate</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+            <button name="id" id="save" type="submit">Submit review</button>
+        </form>
+    </div>
+
+
     <div class="item col-xs-12 col-lg-12">
         <div class="row">
             <h3>Reviews:</h3>
