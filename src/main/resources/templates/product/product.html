@@ -6,7 +6,9 @@
     <!--Navbar-->
     <nav th:replace="product/fragments/navbar::reduced_navbar"></nav>
 </div>
+
 <div class="container">
+    <!-- display product -->
     <div class="item col-xs-8 col-lg-6">
         <div class="row">
         <div class="show_product">
@@ -23,34 +25,16 @@
             </div>
         </div>
     </div>
-    <!--<form method="POST">-->
-        <!--<div class="form-group col-xs-6 col-lg-6">-->
-            <!--<input id="msg" type="text" class="form-control" name="name" placeholder="Name" value="Anonymous"></input>-->
-            <!--<textarea class="form-control" rows="5" id="comment" name="review" placeholder="Write a review"></textarea>-->
-            <!--<select class="selectpicker">-->
-                <!--<option value="" disabled="true" selected="true">Rate</option>-->
-                <!--<option value="1">1</option>-->
-                <!--<option value="2">2</option>-->
-                <!--<option value="3">3</option>-->
-                <!--<option value="4">4</option>-->
-                <!--<option value="5">5</option>-->
-            <!--</select>-->
-            <!--&lt;!&ndash;<a th:href="${'/newReview/'+item.productName}">&ndash;&gt;-->
-                <!--&lt;!&ndash;<i class="fa fa-minus-square-o blackicon minus" aria-hidden="true"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;</a>&ndash;&gt;-->
-        <!--</div>-->
-    <!--</form>-->
 
-
-    <div class="form-group col-xs-6 col-lg-6">
-        <form th:action="'/newReview/' + ${product.name}" method="post"  th:object="${product.id}">
-
-            <input type="text" id='title' name="name" placeholder="Name"/>
-            <input type="text" class="hidden" name="id" th:value="${product.id}"/>
-
-            <textarea name="comment" placeholder="Your review..."></textarea>
-
-                <select class="selectpicker" name="ratings">
+    <!--display form-->
+    <form th:action="'/newReview/' + ${product.name}" method="post">
+        <div class="form-group col-xs-6 col-lg-6">
+            <div class="col-xs-6 col-md-6">
+                <input type="text" class="hidden" name="id" th:value="${product.id}"/>
+                <input id="msg" type="text" class="form-control" name="name" placeholder="Name" value="Anonymous"></input>
+            </div>
+            <div class="col-xs-6 col-lg-6">
+                <select class="form-control" name="ratings">
                     <option value="" disabled="true" selected="true">Rate</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -58,12 +42,30 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
+            </div>
+            <div class="form-group col-xs-12 col-lg-12">
+                <textarea class="form-control col-xs-1 col-md-1" rows="5" id="comment" name="comment" placeholder="Write a review"></textarea>
+            </div>
+            <button name="id" id="save" type="submit" class="btn btn-default submit-button">Submit review</button>
+        </div>
+    </form>
 
-            <button name="id" id="save" type="submit">Submit review</button>
-        </form>
+    <!--display local reviews-->
+    <div class="col-xs-6 col-lg-6" id="listing-reviews">
+        <div class="list-group">
+            <div class="col-xs-6 col-lg-6">
+                <h4 class="list-group-item-heading">Name</h4>
+            </div>
+            <div class="col-xs-6 col-lg-6">
+                <h4 class="list-group-item-heading">Ratings</h4>
+            </div>
+            <div class="col-xs-12 col-lg-12">
+                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            </div>
+        </div>
     </div>
 
-
+    <!--display reviews from google via finder service-->
     <div class="item col-xs-12 col-lg-12">
         <div class="row">
             <h3>Reviews:</h3>

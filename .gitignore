@@ -21,4 +21,4 @@ hs_err_pid*
 # Iml files
 *.iml
 my-app.iml
-connection.properties
+src/main/resources/connection.properties
