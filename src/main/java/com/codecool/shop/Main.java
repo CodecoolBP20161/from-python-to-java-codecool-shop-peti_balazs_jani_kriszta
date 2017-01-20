@@ -40,7 +40,7 @@ public class Main {
         get("/category/:id", SiteController::renderByFilter, tmp);
         get("/supplier/:id", SiteController::renderByFilter, tmp);
 
-        get("/tocart/:id", (request, response) -> SiteController.saveToCart(request, response));
+        get("/tocart/:id", SiteController::saveToCart);
         get("/showcart", SiteController::renderCart, tmp);
 
         get("/deleteItem/:productID", SiteController::deleteItem, tmp);
@@ -49,6 +49,7 @@ public class Main {
         get("/minus/:id", (request, response) -> SiteController.decrease(request, response));
 
         get("/reviewFinder/:id", SiteController::renderReview, tmp);
+        post("newReview/:productName", SiteController::saveReview);
 
         get("/hello", (req, res) -> "Hello World");
         get("/", SiteController::renderProducts, tmp);

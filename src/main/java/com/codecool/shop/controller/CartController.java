@@ -117,9 +117,5 @@ public class CartController extends ProductController {
                 sessionCart.removeFromCart(item.getProductID());
             }
         }
-
-
     }
-
-
 }
