@@ -216,5 +216,47 @@ th, td {
     /*color: #436060;*/
     color: #2f4f4f;
     display: inline-block;
+}
 
+#listing-reviews {
+    word-wrap:break-word;
+}
+
+.submit-button {
+    float: right;
+}
+
+.whitespace {
+    margin-top: 30px;
+}
+
+#form {
+    margin-top: 30px;
+}
+
+#comment {
+    margin-top: 10px;
+
+}
+
+.fromGoogle {
+    margin-top: 30px;
+}
+
+thead {
+    font-size: 18px;
+    line-height: 20px;
+    color: darkslategrey;
+}
+
+tbody {
+    line-height: 18px;
+}
+
+.lead {
+    margin-top: 30px;
+}
+
+.format-text {
+    text-align: left;
 }
