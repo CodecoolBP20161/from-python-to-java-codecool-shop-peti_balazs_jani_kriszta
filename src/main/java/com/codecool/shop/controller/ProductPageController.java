@@ -29,7 +29,7 @@ public class ProductPageController {
 
     public static String saveReview(Request req, Response res) throws IOException, URISyntaxException, HttpResponseException {
         String productName = req.params("productName");
-        String userName = req.queryParams("name");
+        String userName = req.queryParams("username");
         String comment = req.queryParams("comment");
         String ratings = req.queryParams("ratings");
         String id = req.queryParams("id");
@@ -99,6 +99,9 @@ public class ProductPageController {
         }
         return reviews;
     }
+
+
+
 
 
 }
